@@ -150,20 +150,9 @@ mark {
 
 code,
 kbd,
-pre,
 samp {
     font-family: monospace, serif;
     font-size: 1em;
-}
-
-/*
- * Improves readability of pre-formatted text in all browsers.
- */
-
-pre {
-    white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
 }
 
 /*
@@ -402,15 +391,20 @@ body {
 	margin: 0px;
 }
 
-h1 a, h1, h2, h3, h4, #side {
+h1, h2, h3, h4, #side {
 	font-family: 'museo_slab';
 	color: #808080;
 }
 
+h1, h2, h3, h4 {
+	margin-bottom: 40px;
+}
+
 p {
-	color: #808080;
-	font-family: Helvetica;
+	color: rgba(0,0,0, .7);
+	font-family: 'ABeeZee', sans-serif;
 	line-height: 24px;
+	margin-bottom: 40px;
 }
 
 a, a.visited, a.active, h1 a:hover {
@@ -424,16 +418,17 @@ a:hover {
 
 hr {
 	border: none;
-	border-top: 1px solid #aaa;
+	border-top: 1px solid rgba(0,0,0, .1);
 }
 
 pre { 
 	border: 1px solid #e0ded3;
 	border-radius: 4px;
-	margin: 10px;
+	margin: 10px 10px 40px 10px;
 	padding: 10px;
 	background-color: #f0efe8;
 	overflow: scroll;
+	font-size: 14px;
 }
 
 
@@ -442,6 +437,7 @@ pre {
  * ------
  */
 
+code { color: rgba(0,0,0, 1); }
 code .keyword              { font-weight: bold; color: #6089d4; }
 code .string, code .regexp { color: green }
 code .class, code .special { color: #6089d4 }
@@ -503,7 +499,6 @@ code .comment              { color: grey }
 
 #articles {
 	margin-left: 280px;
-	margin-bottom: 150px;
 	width: 50%;
 }
 
