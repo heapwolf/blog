@@ -495,7 +495,7 @@ code .comment              { color: grey }
 }
 
 #bio {
-	margin-top: 80px;
+	margin-top: 40px;
 	font-size: 25px;
 }
 
@@ -534,9 +534,7 @@ code .comment              { color: grey }
 #ribbon {
 	position: relative;
 	padding-top: 40px;
-	width: 181;
-	height: 350;
-	
+	height: 390px;
 	background-color: #b90000;
 	display: inline-block;
 	color: #ebead5;
@@ -545,8 +543,9 @@ code .comment              { color: grey }
 
 #ribbon:after {
 	content: url("../img/rbnbtm.png");
-	position: relative;
-	top: 52px;
+	position: absolute;
+	bottom: -5px;
+	left: 0px;
 	width: 181;
 	height: 153;
 	background: transparent;

@@ -123,12 +123,12 @@ http.createServer(function (req, res) {
   fs.stat(filepath, function (err, stat) {
     
     if (err && err.code === 'ENOENT') {
-        res.statusCode = 404;
+        res.writeHead(404, { 'Content-Type': 'plain/text' });
         res.end('not found');
     }
     else {
       if (!stat.isDirectory()) {
-        res.statusCode = 200;
+        res.writeHead(200, { 'Content-Type': mimetype });
         fs.createReadStream(filepath).pipe(res);
       }
     }
