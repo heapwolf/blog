@@ -73,7 +73,7 @@ filenames
 	  	var id = h1.replace(/ /g, '-');
 	  	
 	  	// add a link to the article to the table of contents.
-	  	toc.push('<a href="#' + id + '">' + h1 + '</a> <span class="date">' + date + '</span>');
+	  	toc.push('<div><a href="#' + id + '">' + h1 + '</a> <span class="date">' + date + '</span></div>');
 
 	  	// return the new version of the header.
 	  	return '<a id="' + id + '"><h1><a href="#' + id + '">' + h1 + '</a></h1>';
