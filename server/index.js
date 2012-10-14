@@ -9,25 +9,32 @@ var hljs = require('highlight.js');
 var mime = require('mime');
 
 var indexpath = path.join(__dirname, '..', 'public', 'index.html');
-var index = String(fs.readFileSync(indexpath));
-var content = [];
+var index = fs.readFileSync(indexpath, 'utf8');
+var content = [], toc = [];
 
 marked.setOptions({
   gfm: true,
   pedantic: false,
   sanitize: true,
   highlight: function(code, lang) {
-		return hljs.highlight(lang, code).value;
+  	var value;
+  	if (code && lang) {
+			return hljs.highlight(lang, code).value;
+  	}
+  	else {
+  		return code;
+  	}
   }
 });
 
-var files = fs.readdirSync(path.join(__dirname, '..', 'data'));
+var datapath = path.join(__dirname, '..', 'data');
+var filenames = fs.readdirSync(datapath);
 
-for (var i = 0, l = files.length; i<l; i++) {
-  files[i] = path.basename(files[i], '.md');
+for (var i = 0, l = filenames.length; i<l; i++) {
+  filenames[i] = path.basename(filenames[i], '.md');
 }
 
-files
+filenames
 	.sort(function (date1, date2) {
 		
 		//
@@ -46,24 +53,43 @@ files
 	  //
 	  // get each markdown file and convert it into html.
 	  //
+
+	  // the file name should be a parsable date.
+	  var date = name;
+
+	  //
+	  // add the file extension back since we now want to
+	  // read it from the disk.
+	  //
 	  name = path.join(__dirname, '..', 'data', name + '.md');
-	  var data = String(fs.readFileSync(name));
+	  var data = fs.readFileSync(name, 'utf8');
 
 	  //
 	  // change the headers to links to provide deep linking.
 	  //
 	  var markup = marked(data).replace(/<h1>(.*?)<\/h1>/, function(a, h1) {
+	  	
+			// turn the title into something that we can use as a link.
 	  	var id = h1.replace(/ /g, '-');
-	  	return "<a id='" + id + "'><h1><a href='#" + id + "'>" + h1 + "</a></h1>";
+	  	
+	  	// add a link to the article to the table of contents.
+	  	toc.push('<a href="#' + id + '">' + h1 + '</a> <span class="date">' + date + '</span>');
+
+	  	// return the new version of the header.
+	  	return '<a id="' + id + '"><h1><a href="#' + id + '">' + h1 + '</a></h1>';
 	  });
 
 	  content.push(markup);
 	});
 
+index = index.replace('<toc/>', toc.join('<br/>'));
 index = index.replace('<content/>', content.join('<br/><hr><br/>'));
 
 http.createServer(function (req, res) {
 
+	//
+	// a request without any specific files
+	//
   if (req.url === '/' || req.url === '/index.html') {
     res.statusCode = 200;
     res.writeHeader('Content-Type', 'test/html');
@@ -107,4 +133,4 @@ http.createServer(function (req, res) {
     }
   });
 
-}).listen(80);
+}).listen(8080);

@@ -57,6 +57,7 @@ pre {
 	margin: 10px;
 	padding: 10px;
 	background-color: #f0efe8;
+	overflow: scroll;
 }
 
 
@@ -83,16 +84,12 @@ code .comment              { color: grey }
 	float: left;
 	margin-top: -30px;
 	text-align: center;
+	position: fixed;
 }
 
 #bio {
 	margin-top: 80px;
 	font-size: 25px;
-}
-
-#bio img:first-child {
-	opacity: 0.8;
-	margin-bottom: 10px;
 }
 
 #bio img {
@@ -131,4 +128,19 @@ code .comment              { color: grey }
 #articles {
 	margin-left: 280px;
 	width: 50%;
+}
+
+#toc {
+	padding: 100px 0;
+	font-family: 'museo_slab';
+}
+
+#toc .date {
+	color: #808080;
+}
+
+#toc a {
+	font-size: 16px;
+	margin: 4px 0 4px;
+	display: inline-block;
 }
