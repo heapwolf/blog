@@ -1,0 +1,9 @@
+{
+	"name": "blog",
+	"description": "a minimalist blog",
+	"version": "0.0.1",
+	"dependencies": {
+		"marked": "*",
+		"mime": "*"
+	}
+}

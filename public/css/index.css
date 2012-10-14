@@ -1,0 +1,88 @@
+
+@font-face {
+  font-family: 'museo_slab';
+  src: url('../../fonts/museo-slab/museo-slab-webfont.eot');
+  src: url('../../fonts/museo-slab/museo-slab-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../../fonts/museo-slab/museo-slab-webfont.woff') format('woff'),
+       url('../../fonts/museo-slab/museo-slab-webfont.ttf') format('truetype'),
+       url('../../fonts/museo-slab/museo-slab-webfont.svg#museo_slab_500regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+h1, h2, h3, h4, #side {
+	font-family: 'museo_slab';
+	color: #808080;
+}
+
+p {
+	color: #808080;
+	font-family: Helvetica;
+}
+
+#side {
+	margin-left: 50px;
+	width: 181;
+	float: left;
+	margin-top: -30px;
+	text-align: center;
+}
+
+#bio {
+	margin-top: 80px;
+	font-size: 25px;
+}
+
+#bio img:first-child {
+	opacity: 0.8;
+	margin-bottom: 10px;
+}
+
+#bio img {
+	opacity: 0.5;
+}
+
+#bio img:hover {
+	opacity: 1;
+}
+
+#ribbon {
+	position: relative;
+	padding-top: 40px;
+	width: 181;
+	height: 350;
+	
+	background-color: #808080;
+	display: inline-block;
+	color: #ebead5;
+	line-height: 20px
+}
+
+#ribbon:after {
+	content: url("../img/rbnbtm.png");
+	position: relative;
+	top: 52px;
+	width: 181;
+	height: 153;
+	background: transparent;
+}
+
+#ribbon img {
+	margin: 13px;
+}
+
+#articles {
+	margin-left: 280px;
+	width: 50%;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #aaa;
+}
