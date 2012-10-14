@@ -462,7 +462,7 @@ pre {
 	margin: 10px 10px 40px 10px;
 	padding: 10px;
 	background-color: #f0efe8;
-	overflow: scroll;
+	overflow: auto;
 	font-size: 14px;
 }
 
