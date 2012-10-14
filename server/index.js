@@ -91,9 +91,9 @@ http.createServer(function (req, res) {
 	// a request without any specific files
 	//
   if (req.url === '/' || req.url === '/index.html') {
-    res.statusCode = 200;
-    res.writeHeader('Content-Type', 'text/html');
-    //res.writeHead(200, { 'Content-Type': 'text/html' });
+    //res.statusCode = 200;
+    //res.writeHeader('Content-Type', 'text/html');
+    res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(index);
     return;
   }
