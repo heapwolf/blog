@@ -24,6 +24,7 @@ h1, h2, h3, h4, #side {
 p {
 	color: #808080;
 	font-family: Helvetica;
+	line-height: 24px;
 }
 
 #side {
@@ -58,7 +59,7 @@ p {
 	width: 181;
 	height: 350;
 	
-	background-color: #808080;
+	background-color: #b90000;
 	display: inline-block;
 	color: #ebead5;
 	line-height: 20px

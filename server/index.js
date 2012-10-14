@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 
 var marked = require('marked');
-mime = require('mime');
+var mime = require('mime');
 
 var file = String(fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html')));
 var content = [];
@@ -16,15 +16,35 @@ marked.setOptions({
   sanitize: true
 });
 
-fs.readdirSync(path.join(__dirname, '..', 'data')).reverse().forEach(function (name) {
+var files = fs.readdirSync(path.join(__dirname, '..', 'data'));
 
-  //
-  // get each markdown file and convert it into html.
-  //
-  name = path.join(__dirname, '..', 'data', name);
-  var data = String(fs.readFileSync(name));
-  content.push(marked(data));
-});
+for (var i = 0, l = files.length; i<l; i++) {
+  files[i] = path.basename(files[i], '.md');
+}
+
+files
+	.sort(function (date1, date2) {
+		
+		//
+	  // This is a comparison function that will result in 
+	  // dates being sorted in descending order.
+	  //
+	  var date1 = new Date(Date.parse(date1));
+	  var date2 = new Date(Date.parse(date2));
+
+	  if (date1 > date2) return -1;
+	  if (date1 < date2) return 1;
+	  return 0;
+	})
+	.forEach(function (name) {
+
+	  //
+	  // get each markdown file and convert it into html.
+	  //
+	  name = path.join(__dirname, '..', 'data', name + '.md');
+	  var data = String(fs.readFileSync(name));
+	  content.push(marked(data));
+	});
 
 file = file.replace('<content/>', content.join('<br/><hr><br/>'));
 
@@ -74,9 +94,3 @@ http.createServer(function (req, res) {
   });
 
 }).listen(8080);
-
-
-
-
-
-
