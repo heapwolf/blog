@@ -1,4 +1,9 @@
 
+/* 
+ * Fonts
+ * -----
+ */
+
 @font-face {
   font-family: 'museo_slab';
   src: url('../../fonts/museo-slab/museo-slab-webfont.eot');
@@ -10,11 +15,16 @@
   font-style: normal;
 }
 
+
+/* 
+ * Resets
+ * ------
+ */
+
 body {
 	padding: 0px;
 	margin: 0px;
 }
-
 
 h1, h2, h3, h4, #side {
 	font-family: 'museo_slab';
@@ -26,6 +36,42 @@ p {
 	font-family: Helvetica;
 	line-height: 24px;
 }
+
+a {
+	text-decoration: none;
+	color: #b90000;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #aaa;
+}
+
+pre { 
+	border: 1px solid #e0ded3;
+	border-radius: 4px;
+	margin: 10px;
+	padding: 10px;
+	background-color: #f0efe8;
+}
+
+
+/* 
+ * Syntax
+ * ------
+ */
+
+code .keyword              { font-weight: bold; color: #6089d4; }
+code .string, code .regexp { color: green }
+code .class, code .special { color: #6089d4 }
+code .number               { color: red }
+code .comment              { color: grey }
+
+
+/* 
+ * Layouts
+ * -------
+ */
 
 #side {
 	margin-left: 50px;
@@ -81,9 +127,4 @@ p {
 #articles {
 	margin-left: 280px;
 	width: 50%;
-}
-
-hr {
-	border: none;
-	border-top: 1px solid #aaa;
 }

@@ -5,6 +5,7 @@ var fs = require('fs');
 var path = require('path');
 
 var marked = require('marked');
+var hljs = require('highlight.js');
 var mime = require('mime');
 
 var file = String(fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html')));
@@ -13,7 +14,10 @@ var content = [];
 marked.setOptions({
   gfm: true,
   pedantic: false,
-  sanitize: true
+  sanitize: true,
+  highlight: function(code, lang) {
+		return hljs.highlight(lang, code).value;
+  }
 });
 
 var files = fs.readdirSync(path.join(__dirname, '..', 'data'));
@@ -93,4 +97,4 @@ http.createServer(function (req, res) {
     }
   });
 
-}).listen(80);
+}).listen(8080);
