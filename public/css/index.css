@@ -393,7 +393,7 @@ body {
 
 h1, h2, h3, h4, #side {
 	font-family: 'museo_slab';
-	color: #808080;
+	color: #444;
 }
 
 h1, h2, h3, h4 {
@@ -466,6 +466,10 @@ code .comment              { color: grey }
 
 #bio img {
 	opacity: 0.5;
+}
+
+#bio img:first-child {
+	margin-bottom: 10px;
 }
 
 #bio img:hover {
