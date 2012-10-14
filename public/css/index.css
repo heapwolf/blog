@@ -26,7 +26,7 @@ body {
 	margin: 0px;
 }
 
-h1, h2, h3, h4, #side {
+h1 a, h1, h2, h3, h4, #side {
 	font-family: 'museo_slab';
 	color: #808080;
 }
@@ -37,9 +37,13 @@ p {
 	line-height: 24px;
 }
 
-a {
+a, a.visited, a.active, h1 a:hover {
 	text-decoration: none;
 	color: #b90000;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 hr {

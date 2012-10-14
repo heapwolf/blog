@@ -8,7 +8,8 @@ var marked = require('marked');
 var hljs = require('highlight.js');
 var mime = require('mime');
 
-var file = String(fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html')));
+var indexpath = path.join(__dirname, '..', 'public', 'index.html');
+var index = String(fs.readFileSync(indexpath));
 var content = [];
 
 marked.setOptions({
@@ -47,17 +48,26 @@ files
 	  //
 	  name = path.join(__dirname, '..', 'data', name + '.md');
 	  var data = String(fs.readFileSync(name));
-	  content.push(marked(data));
+
+	  //
+	  // change the headers to links to provide deep linking.
+	  //
+	  var markup = marked(data).replace(/<h1>(.*?)<\/h1>/, function(a, h1) {
+	  	var id = h1.replace(/ /g, '-');
+	  	return "<a id='" + id + "'><h1><a href='#" + id + "'>" + h1 + "</a></h1>";
+	  });
+
+	  content.push(markup);
 	});
 
-file = file.replace('<content/>', content.join('<br/><hr><br/>'));
+index = index.replace('<content/>', content.join('<br/><hr><br/>'));
 
 http.createServer(function (req, res) {
 
   if (req.url === '/' || req.url === '/index.html') {
     res.statusCode = 200;
     res.writeHeader('Content-Type', 'test/html');
-    res.end(file);
+    res.end(index);
     return;
   }
 
