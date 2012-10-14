@@ -92,7 +92,7 @@ http.createServer(function (req, res) {
 	//
   if (req.url === '/' || req.url === '/index.html') {
     res.statusCode = 200;
-    res.writeHeader('Content-Type', 'test/html');
+    res.writeHeader('Content-Type', 'text/html');
     res.end(index);
     return;
   }
