@@ -558,7 +558,7 @@ code .comment              { color: grey }
 
 #articles {
 	margin-left: 280px;
-	width: 50%;
+	margin-right: 50px;
 }
 
 #toc {
