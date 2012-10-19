@@ -511,7 +511,7 @@ code .comment              { color: grey }
 	opacity: 1;
 }
 
-#bio a, #bio a:hover {
+#bio a, #bio a:hover, #floating-head a, #floating-head a:hover {
 	font-family: 'FontAwesome';
 	font-size: 35px;
 	width: 25px;
@@ -519,15 +519,15 @@ code .comment              { color: grey }
 	text-decoration: none;
 }
 
-#github-link:after {
+.github-link:after {
 	content: "\f092";
 }
 
-#twitter-link:after {
+.twitter-link:after {
 	content: "\f081";
 }
 
-#linkedin-link:after {
+.linkedin-link:after {
 	content: "\f08c";
 }
 
@@ -556,9 +556,14 @@ code .comment              { color: grey }
 	margin-top: 50px;
 }
 
+#floating-head {
+  display: none;
+}
+
 #articles {
 	margin-left: 280px;
 	margin-right: 50px;
+  max-width: 700px;
 }
 
 #toc {
@@ -586,4 +591,38 @@ code .comment              { color: grey }
 	display: inline-block;
 	background-color: #fff;
 	padding-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+
+  #side {
+    display: none;
+  }
+
+  #articles {
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 700px;
+    overflow: hidden;
+  }
+
+  #floating-head {
+    font-family: 'museo_slab';
+    padding: 10px 0px 10px 20px;
+    line-height: 45px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background-color: #b90000;
+    color: #ebead5;
+    display: block;
+  }
+
+  #floating-head a {
+    margin-top: 5px;
+    float: right;
+    color: #fff;
+    margin-right: 20px;
+  }
+
 }
