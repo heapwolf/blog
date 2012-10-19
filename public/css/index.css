@@ -593,7 +593,9 @@ code .comment              { color: grey }
 	padding-right: 10px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px),
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
 
   #side {
     display: none;
