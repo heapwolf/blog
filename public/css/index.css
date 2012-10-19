@@ -609,22 +609,25 @@ only screen and (min-device-pixel-ratio : 1.5) {
   }
 
   #floating-head {
+    font-size: 25px;
     font-family: 'museo_slab';
-    padding: 10px 0px 10px 20px;
-    line-height: 45px;
-    position: absolute;
-    left: 0px;
-    right: 0px;
     background-color: #b90000;
-    color: #ebead5;
     display: block;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+  }
+
+  #floating-head p {
+    color: #ebead5;
+    margin: 0px;
+    padding: 10px 0 0;
   }
 
   #floating-head a {
-    margin-top: 5px;
-    float: right;
-    color: #fff;
-    margin-right: 20px;
+    
+    color: #ebead5;
+    margin: 0 10px 0;
   }
 }
 
@@ -635,6 +638,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
   #floating-head {
     text-align: center;
   }
+
+  #floating-head
 
   #floating-head a {
     float: none;
