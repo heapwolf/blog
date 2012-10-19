@@ -631,18 +631,3 @@ only screen and (min-device-pixel-ratio : 1.5) {
   }
 }
 
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
-
-  #floating-head {
-    text-align: center;
-  }
-
-  #floating-head
-
-  #floating-head a {
-    float: none;
-    margin: 10px;
-  }
-}
