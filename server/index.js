@@ -82,8 +82,8 @@ filenames
 	  content.push(markup);
 	});
 
-index = index.replace('<toc/>', toc.join('<br/>'));
-index = index.replace('<content/>', content.join('<br/><hr><br/>'));
+index = index.replace('<!-- toc -->', toc.join('<br/>'));
+index = index.replace('<!-- content -->', content.join('<br/><hr><br/>'));
 
 http.createServer(function (req, res) {
 
