@@ -207,6 +207,10 @@ code .comment              { color: grey }
   max-width: 700px;
 }
 
+#articles img {
+  width: 100%;
+}
+
 #toc {
 	padding: 100px 0;
 	font-family: 'museo_slab';
