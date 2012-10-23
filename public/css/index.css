@@ -57,14 +57,15 @@ h1 a {
 
 h1 a:hover:before {
 	position: absolute;
-	top: 5px;
+	top: 9px;
 	left: -30px;
 
-	content: "\f0c1";
+	content: "\f08d";
 	
 	font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
+  font-size: 25px;
   display: inline-block;
   text-decoration: inherit;
 }
