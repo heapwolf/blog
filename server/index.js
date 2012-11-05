@@ -37,6 +37,37 @@ var feed = new RSS({
   author: $('meta[name="author"]').attr("content") || 'Admin'
 });
 
+var generatefeed = function(host) {
+  if(feedgenerated) return; // feed already generated
+  
+  feed.site_url = 'http://' + host + '/'; // assuming http
+  feed.feed_url = url.resolve(feed.site_url, 'rss');
+  
+  for(var i = 0; i < feeditems.length; ++i) {
+    var $markup = cheerio.load(feeditems[i].description);
+    $markup('h1').remove(); // not needed. feed already has title
+    
+    // fixing all relative url
+    // note: all url like xpto.com/etc (without protocol) will be interpreted as relative. any ideas how to fix it?
+    $markup('a').each(function(idx, elem) {
+      var href = $markup(this).attr('href');
+      if(href && !url.parse(href).host) {
+        $markup(this).attr('href', url.resolve(feed.site_url, href));
+      }
+    });
+    
+    feed.item({
+      title:  feeditems[i].title,
+      description: $markup.html(),
+      url: url.resolve(feed.site_url, "#" + feeditems[i].id),
+      date: feeditems[i].date
+    });
+  }
+  
+  xml = feed.xml(); // rendering the xml
+  feedgenerated = true;
+}
+
 var datapath = path.join(__dirname, '..', 'data');
 var filenames = fs.readdirSync(datapath);
 
@@ -125,33 +156,7 @@ http.createServer(function (req, res) {
     if (feedgenerated === false) {
       // generating the feed here because we need the request host name
       // it's generated only once
-      
-      feed.site_url = 'http://' + req.headers.host + '/'; // assuming http
-      feed.feed_url = url.resolve(feed.site_url, 'rss');
-      
-      for(var i = 0; i < feeditems.length; ++i) {
-        var $markup = cheerio.load(feeditems[i].description);
-        $markup('h1').remove(); // not needed. feed already has title
-        
-        // fixing all relative url
-        // note: all url like xpto.com/etc (without protocol) will be interpreted as relative. any ideas how to fix it?
-        $markup('a').each(function(idx, elem) {
-          var href = $markup(this).attr('href');
-          if(href && !url.parse(href).host) {
-            $markup(this).attr('href', url.resolve(feed.site_url, href));
-          }
-        });
-        
-        feed.item({
-          title:  feeditems[i].title,
-          description: $markup.html(),
-          url: url.resolve(feed.site_url, "#" + feeditems[i].id),
-          date: feeditems[i].date
-        });
-      }
-      
-      xml = feed.xml(); // rendering the xml
-      feedgenerated = true;
+      generatefeed(req.headers.host);
     }
     res.writeHead(200, { 'Content-Type': 'application/rss+xml' });
     res.end(xml);
