@@ -5,6 +5,8 @@
 	"dependencies": {
 		"marked": "*",
 		"mime": "*",
-		"highlight.js": "*"
+		"highlight.js": "*",
+        "cheerio": "*",
+        "rss": "*"
 	}
 }
