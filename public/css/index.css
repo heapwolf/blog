@@ -101,6 +101,15 @@ pre {
 	font-size: 14px;
 }
 
+ol {
+  color: rgba(0,0,0, .7);
+  margin: -10px 0 40px;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+ol li { 
+  padding: 4px 0;
+}
 
 /* 
  * Syntax

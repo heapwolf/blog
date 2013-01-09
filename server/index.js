@@ -21,13 +21,13 @@ marked.setOptions({
   pedantic: false,
   sanitize: true,
   highlight: function(code, lang) {
-  	var value;
-  	if (code && lang) {
-			return hljs.highlight(lang, code).value;
-  	}
-  	else {
-  		return code;
-  	}
+    var value;
+    if (code && lang) {
+      return hljs.highlight(lang, code).value;
+    }
+    else {
+      return code;
+    }
   }
 });
 
@@ -76,53 +76,57 @@ for (var i = 0, l = filenames.length; i<l; i++) {
 }
 
 filenames
-	.sort(function (date1, date2) {
-		
-		//
-	  // This is a comparison function that will result in 
-	  // dates being sorted in descending order.
-	  //
-	  var date1 = new Date(Date.parse(date1));
-	  var date2 = new Date(Date.parse(date2));
+  .sort(function (date1, date2) {
+    
+    //
+    // This is a comparison function that will result in 
+    // dates being sorted in descending order.
+    //
+    var date1 = new Date(Date.parse(date1));
+    var date2 = new Date(Date.parse(date2));
 
-	  if (date1 > date2) return -1;
-	  if (date1 < date2) return 1;
-	  return 0;
-	})
-	.forEach(function (name) {
+    if (date1 > date2) return -1;
+    if (date1 < date2) return 1;
+    return 0;
+  })
+  .forEach(function (name) {
 
-	  //
-	  // get each markdown file and convert it into html.
-	  //
+    //
+    // get each markdown file and convert it into html.
+    //
 
-	  // the file name should be a parsable date.
-	  var date = name;
+    // the file name should be a parsable date.
+    var date = name;
     var id = '', title = '';
 
-	  //
-	  // add the file extension back since we now want to
-	  // read it from the disk.
-	  //
-	  name = path.join(__dirname, '..', 'data', name + '.md');
-	  var data = fs.readFileSync(name, 'utf8');
+    //
+    // add the file extension back since we now want to
+    // read it from the disk.
+    //
+    name = path.join(__dirname, '..', 'data', name + '.md');
+    var data = fs.readFileSync(name, 'utf8');
 
-	  //
-	  // change the headers to links to provide deep linking.
-	  //
-	  var markup = marked(data).replace(/<h1>(.*?)<\/h1>/, function(a, h1) {
+    //
+    // change the headers to links to provide deep linking.
+    //
+    var markup = marked(data).replace(/<h1>(.*?)<\/h1>/, function(a, h1) {
       title = h1;
-  	  	
-  		// turn the title into something that we can use as a link.
+        
+      // turn the title into something that we can use as a link.
       id = h1.replace(/ /g, '-');
-  	  	
-  	  // add a link to the article to the table of contents.
-  	  toc.push('<div><a href="#' + id + '">' + h1 + '</a> <span class="date">' + date + '</span></div>');
+        
+      // add a link to the article to the table of contents.
+      toc.push([
+        '<div><a href="#', id, '">', 
+        h1,
+        '</a> <span class="date">', date, '</span></div>'
+      ].join(''));
   
-  	  // return the new version of the header.
-  	  return '<a id="' + id + '"><h1><a href="#' + id + '">' + h1 + '</a></h1>';
+      // return the new version of the header.
+      return '<a id="' + id + '"><h1><a href="#' + id + '">' + h1 + '</a></h1>';
     });
 
-	  content.push(markup);
+    content.push(markup);
     
     feeditems.push({
       title:  title,
@@ -130,16 +134,16 @@ filenames
       id: id,
       date: date
     });
-	});
+  });
 
 index = index.replace('<!-- toc -->', toc.join('<br/>'));
 index = index.replace('<!-- content -->', content.join('<br/><hr><br/>'));
 
 http.createServer(function (req, res) {
 
-	//
-	// a request without any specific files
-	//
+  //
+  // a request without any specific files
+  //
   if (req.url === '/' || req.url === '/index.html') {
     //res.statusCode = 200;
     //res.writeHeader('Content-Type', 'text/html');
