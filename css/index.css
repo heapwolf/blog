@@ -78,42 +78,124 @@ body {
   margin: 0;
   color: #222627;
 }
+body header {
+  height: 750px;
+}
+body a {
+  font-weight: bold;
+  font-style: italic;
+  color: #222627;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #9e9ea0;
+  transition: all 0.2s;
+}
+body a:hover {
+  color: #434ea0;
+  border-bottom: 2px solid #434ea0;
+}
 body h1.title {
   font-family: 'FortescuePro-Bold', serif;
   text-align: center;
-  font-size: 1.75rem;
+  font-size: 2rem;
+  letter-spacing: 0.05rem;
+}
+body h1.title:after {
+  content: " ";
+  width: 75px;
+  height: 2px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #9e9ea0;
 }
 body p {
   font-size: 1rem;
-  line-height: 1.25rem;
+  line-height: 1.4rem;
   letter-spacing: 1px;
 }
 body #error {
   display: none;
 }
+body nav {
+  background-color: #f4f2ea;
+  height: 25px;
+  padding-top: 25px;
+  position: relative;
+  with: 100%;
+}
+body nav span {
+  display: block;
+  margin: 0 auto;
+  font-size: 1.75rem;
+  text-align: center;
+}
 body #posts {
   background-color: #f4f2ea;
+  padding-bottom: 50px;
 }
 body #posts .post {
   max-width: 650px;
   margin: 0 auto;
   padding: 20px;
 }
-body #posts .post p img {
-  max-width: 650px;
-  border: 10px solid #fff;
+body #posts .post .labels {
+  text-align: center;
+  margin: 50px 0;
 }
-body #posts .post blockquote {
+body #posts .post .labels span {
+  padding: 5px 10px 4px 10px;
+  border: 2px solid #222627;
+  margin: 5px;
   font-family: 'transcript_bold', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 0.7rem;
+  letter-spacing: 0.09rem;
+  transition: all 0.2s;
+  cursor: default;
+}
+body #posts .post .labels span:hover {
+  background-color: #222627;
+  color: #f4f2ea;
+}
+body #posts .post .body h1 {
   text-align: center;
-  padding: 20px;
+  font-size: 1.25rem;
+  font-family: 'FortescuePro-Bold', serif;
+  letter-spacing: 0.05rem;
+  margin: 60px 20px 30px 20px;
+}
+body #posts .post .body pre code {
+  background-color: #fff;
+  display: block;
+  padding: 20px 5px;
+  margin: 40px 20px;
+}
+body #posts .post .body p img {
+  max-width: 650px;
+  border: 10px solid #fff;
+  display: block;
+  margin: 0 auto;
+}
+body #posts .post .body blockquote {
+  font-family: 'transcript_bold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  padding: 10px 25px;
+  margin: 40px;
   line-height: 26px;
+}
+body #posts .post .body ul {
+  margin: 30px 0;
 }
 body #posts .post .user .avatar {
   background-size: cover;
   width: 75px;
   height: 75px;
   border-radius: 99em;
+}
+body #posts .post .summary {
+  text-align: center;
 }

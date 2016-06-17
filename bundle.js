@@ -2,7 +2,8 @@
 module.exports={
   "user": "0x00a",
   "repo": "blog",
-  "authors": ["0x00a"]
+  "authors": ["0x00a"],
+  "coloredLabels": false
 }
 
 },{}],2:[function(require,module,exports){
@@ -112,7 +113,9 @@ function render(data) {
     d.labels.map(function(data) {
       var label = document.createElement('span')
       label.textContent = data.name
-      label.style.backgroundColor = '#' + data.color
+      if (config.coloredLabels) {
+        label.style.backgroundColor = '#' + data.color
+      }
       labels.appendChild(label)
     })
 
@@ -120,7 +123,7 @@ function render(data) {
   })
 }
 
-},{"./config":1,"domready":3,"highlight.js":7,"marked":164,"xhr":167}],3:[function(require,module,exports){
+},{"./config":1,"domready":3,"highlight.js":7,"marked":164,"xhr":168}],3:[function(require,module,exports){
 /*!
   * domready (c) Dustin Diaz 2014 - License MIT
   */
@@ -16083,6 +16086,27 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],165:[function(require,module,exports){
+module.exports = once
+
+once.proto = once(function () {
+  Object.defineProperty(Function.prototype, 'once', {
+    value: function () {
+      return once(this)
+    },
+    configurable: true
+  })
+})
+
+function once (fn) {
+  var called = false
+  return function () {
+    if (called) return
+    called = true
+    return fn.apply(this, arguments)
+  }
+}
+
+},{}],166:[function(require,module,exports){
 var trim = require('trim')
   , forEach = require('for-each')
   , isArray = function(arg) {
@@ -16114,7 +16138,7 @@ module.exports = function (headers) {
 
   return result
 }
-},{"for-each":4,"trim":166}],166:[function(require,module,exports){
+},{"for-each":4,"trim":167}],167:[function(require,module,exports){
 
 exports = module.exports = trim;
 
@@ -16130,7 +16154,7 @@ exports.right = function(str){
   return str.replace(/\s*$/, '');
 };
 
-},{}],167:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 "use strict";
 var window = require("global/window")
 var once = require("once")
@@ -16351,28 +16375,7 @@ function _createXHR(options) {
 
 function noop() {}
 
-},{"global/window":5,"is-function":163,"once":168,"parse-headers":165,"xtend":169}],168:[function(require,module,exports){
-module.exports = once
-
-once.proto = once(function () {
-  Object.defineProperty(Function.prototype, 'once', {
-    value: function () {
-      return once(this)
-    },
-    configurable: true
-  })
-})
-
-function once (fn) {
-  var called = false
-  return function () {
-    if (called) return
-    called = true
-    return fn.apply(this, arguments)
-  }
-}
-
-},{}],169:[function(require,module,exports){
+},{"global/window":5,"is-function":163,"once":165,"parse-headers":166,"xtend":169}],169:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;

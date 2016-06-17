@@ -104,7 +104,9 @@ function render(data) {
     d.labels.map(function(data) {
       var label = document.createElement('span')
       label.textContent = data.name
-      label.style.backgroundColor = '#' + data.color
+      if (config.coloredLabels) {
+        label.style.backgroundColor = '#' + data.color
+      }
       labels.appendChild(label)
     })
 
