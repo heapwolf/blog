@@ -4,11 +4,10 @@
   "description": "blog",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/browserify index.js > ./static/js/index.js",
+    "build": "./node_modules/.bin/browserify index.js > ./bundle.js",
     "watch": "npm run watch:js & npm run watch:styles",
-    "watch:js": "watchify ./index.js -o ./static/js/index.js",
-    "watch:styles": "stylus --watch ./styles/index.styl -o ./static/css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch:js": "watchify ./index.js -o ./bundle.js",
+    "watch:styles": "stylus --watch ./styles/index.styl -o ./css"
   },
   "author": "",
   "license": "ISC",

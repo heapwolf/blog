@@ -33,7 +33,9 @@ config.authors = config.authors.map(function(author) {
 
 function update() {
   xhr('https://api.github.com/' + src, opts, function(err, data) {
-    if (err) return console.log(err)
+    if (err) {
+      return error(err)
+    }
 
     domready(function() {
       render(JSON.parse(data.body))
@@ -56,6 +58,11 @@ if (!localStorage.data) {
   } else {
     render(JSON.parse(localStorage.data))
   }
+}
+
+function error() {
+  var error = document.getElementById('error')
+  error.style.display = 'block'
 }
 
 function render(data) {
@@ -108,6 +115,7 @@ function render(data) {
       label.style.backgroundColor = '#' + data.color
       labels.appendChild(label)
     })
+
     posts.appendChild(post.firstElementChild)
   })
 }
