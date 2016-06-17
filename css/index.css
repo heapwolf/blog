@@ -1,0 +1,119 @@
+@font-face {
+  font-family: FortescuePro-Bold;
+  src: url("/fonts/FortescuePro-Bold.otf");
+}
+@font-face {
+  font-family: transcript_bold;
+  src: url("/fonts/transcript_bold.otf");
+}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #f0f0f0;
+}
+.hljs,
+.hljs-subst {
+  color: #444;
+}
+.hljs-comment {
+  color: #888;
+}
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+  font-weight: bold;
+}
+.hljs-type,
+.hljs-string,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+  color: #800;
+}
+.hljs-title,
+.hljs-section {
+  color: #800;
+  font-weight: bold;
+}
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #bc6060;
+}
+.hljs-literal {
+  color: #78a960;
+}
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+  color: #397300;
+}
+.hljs-meta {
+  color: #1f7199;
+}
+.hljs-meta-string {
+  color: #4d99bf;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
+}
+body {
+  background-color: #9e9ea0;
+  font-family: 'Averia Serif Libre', cursive;
+  margin: 0;
+  color: #222627;
+}
+body h1.title {
+  font-family: 'FortescuePro-Bold', serif;
+  text-align: center;
+  font-size: 1.75rem;
+}
+body p {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 1px;
+}
+body #error {
+  display: none;
+}
+body #posts {
+  background-color: #f4f2ea;
+}
+body #posts .post {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px;
+}
+body #posts .post p img {
+  max-width: 650px;
+  border: 10px solid #fff;
+}
+body #posts .post blockquote {
+  font-family: 'transcript_bold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 20px;
+  line-height: 26px;
+}
+body #posts .post .user .avatar {
+  background-size: cover;
+  width: 75px;
+  height: 75px;
+  border-radius: 99em;
+}
