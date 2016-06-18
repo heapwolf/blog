@@ -84,9 +84,9 @@ function render(data) {
 
     post.querySelector('.created_at').textContent = created
 
-    if (created !== updated) {
+    //if (created !== updated) {
       post.querySelector('.updated_at').textContent = updated
-    }
+    //}
 
     body.innerHTML = marked(d.body)
 
