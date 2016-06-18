@@ -92,7 +92,10 @@ function render(data) {
     var updated = new Date(Date.parse(d.updated_at)).toDateString()
 
     post.querySelector('.created_at').textContent = created
-    post.querySelector('.updated_at').textContent = updated
+
+    if (created !== updated) {
+      post.querySelector('.updated_at').textContent = updated
+    }
 
     body.innerHTML = marked(d.body)
 

@@ -30,24 +30,90 @@ body
   margin 0
   color $black
 
-  header
-    height 750px
+  ::-moz-selection
+    background $accent
+    color $white
+  ::selection
+    background $accent
+    color $white
 
   a
-    font-weight bold
-    font-style italic
     color $black
     text-decoration none
-    padding-bottom 2px
-    border-bottom 2px solid $gray
-    transition all 0.2s
+    transition color 0.2s
     &:hover
       color $accent
-      border-bottom 2px solid $accent
 
-  h1.title
+  h1
     font-family $display
     text-align center
+
+  header
+    height 750px
+    width 100%
+    position relative
+
+    .intro
+      padding 30px
+      box-sizing border-box
+      width 320px
+      height 380px
+      border 1px solid $black
+      position absolute
+      top 50%
+      left 50%
+      transform translateY(-50%) translateX(-50%)
+      text-align center
+
+      p:nth-child(1)
+        font-size 0.8rem
+        margin 0
+        letter-spacing 0.6rem
+        text-transform uppercase
+
+      p:nth-child(2)
+        font-size 0.7rem
+        letter-spacing 0.6rem
+        text-transform uppercase
+        margin 10px 10px 6px 10px
+
+      p.first-line
+        margin-top 25px
+        font-size 0.75rem
+        text-transform uppercase
+        letter-spacing 0.1rem
+
+      p:nth-child(5)
+        font-size 0.7rem
+        text-align left
+        line-height 0.9rem
+
+      p
+        a
+          font-style italic
+
+      h2
+        font-size 0.75rem
+        font-weight normal
+        text-transform uppercase
+        letter-spacing 0.3rem
+        margin-top 20px
+        &:before
+          content " "
+          width 100%
+          height 1px
+          background-color $black
+          display block
+          margin 2px 0 20px 0
+        a
+          font-style normal
+
+      h1
+        margin 0
+        font-size 3rem
+        line-height 2.5rem
+
+  h1.title
     font-size 2rem
     letter-spacing 0.05rem
     &:after
@@ -106,16 +172,22 @@ body
           transition all 0.2s
           cursor default
           &:hover
-            background-color $black
-            color $cream
+            border 2px solid $gray
+            color $gray
 
       .body
         h1
-          text-align center
           font-size 1.25rem
-          font-family $display
           letter-spacing 0.05rem
           margin 60px 20px 30px 20px
+
+        a
+          font-weight bold
+          font-style italic
+          padding-bottom 2px
+          border-bottom 2px solid $gray
+          &:hover
+            border-bottom 2px solid $accent
 
         pre
           code
@@ -139,16 +211,68 @@ body
           padding 10px 25px
           margin 40px
           line-height 26px
+          color $black
 
         ul
           margin 30px 0
 
-      .user
-        .avatar
-          background-size cover
-          width 75px
-          height 75px
-          border-radius 99em
-
       .summary
-        text-align center
+        position relative
+        border 1px solid $black
+        margin-top 50px
+        margin-bottom 40px
+
+        figure, .info
+          display inline-table
+          vertical-align middle
+
+        figure
+          text-align center
+          height 100%
+          border-right 1px solid $black
+          padding-right 40px
+          margin-right 0
+
+        .info
+          span
+            display inline-table
+
+          a.comments_url
+            position absolute
+            right 15px
+            top 15px
+            border-left 1px solid $black
+            display inline-table
+            padding 30px 10px 30px 30px
+            text-align center
+
+        .user
+          .avatar
+            background-size cover
+            width 75px
+            height 75px
+            border-radius 99em
+
+        .created_at, .updated_at
+          margin 20px
+
+        .created_at:before
+          content "Date Created"
+          display block
+          font-family $caption
+          text-transform uppercase
+          font-size 0.8rem
+          letter-spacing 0.05rem
+          margin 10px
+
+        .updated_at:before
+          content "Date Updated"
+          display block
+          font-family $caption
+          text-transform uppercase
+          font-size 0.8rem
+          letter-spacing 0.05rem
+          margin 10px
+
+        a.comments_url
+          display block

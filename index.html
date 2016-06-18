@@ -12,17 +12,19 @@
         <h1 class="title"></h1>
         <div class="body">
         </div>
-        <figure class="user">
-          <img class="avatar" src="" alt="">
-          <figcaption class="username"></figcaption>
-        </figure>
         <div class="summary">
-          <span class="created_at"></span>
-          <span class="updated_at"></span>
-          <a href="" class="comments_url">
-            <b class="comments"></b> comments
-          </a>
-          <div class="reactions"></div>
+          <figure class="user">
+            <img class="avatar" src="" alt="">
+            <figcaption class="username"></figcaption>
+          </figure>
+          <div class="info">
+            <span class="created_at"></span>
+            <span class="updated_at"></span>
+            <a href="" class="comments_url">
+              <b class="comments"></b><br/> comments
+            </a>
+            <div class="reactions"></div>
+          </div>
         </div>
       </div>
     </script>
@@ -34,7 +36,14 @@
     </script>
 
     <header>
-      <h1>Blog</h1>
+      <div class="intro">
+        <p>Hello, My Name</p>
+        <p>is</p>
+        <h1>Paolo Fragomeni</h1>
+        <p class="first-line">I write open source software.</p>
+        <p>I founded a few companies (Nodejitsu, Here is how, and <a href="https://voltra.co">Voltra Co</a>). I put on the Data Terra Nemo conference in Berlin, Germany in 2015. I’m also a musician and amateur photographer.</p>
+        <h2><a href="https://github.com/0x00a/">Code</a>, <a href="https://twitter.com/0x00A">Tweets</a>, <a href="#blog">Articles</a></h2>
+      </div>
     </header>
 
     <div role="main">
@@ -49,7 +58,7 @@
         The github API could not be reached.
       </section>
 
-      <section id="posts">
+      <section id="posts" name="blog">
       </section>
 
     </div>
