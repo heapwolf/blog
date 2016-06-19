@@ -38,6 +38,7 @@ body
     color $white
 
   a
+    outline none
     color $black
     text-decoration none
     transition color 0.2s
@@ -109,10 +110,31 @@ body
         font-size 3rem
         line-height 2.5rem
 
+  .link
+    display block
+    padding-top 25px
+    text-decoration none
+    color $black
+    cursor pointer
+
   h1.title
     font-size 2rem
     line-height 2.5rem
     letter-spacing 0.05rem
+    position relative
+
+    &:before
+      content '⫗'
+      position absolute
+      opacity 0
+      transition opacity 0.2s
+      left 50%
+      margin-left -12px
+      top -35px
+
+    &:hover:before
+      opacity 1
+
     &:after
       content " "
       width 75px

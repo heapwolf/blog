@@ -78,7 +78,13 @@ function render(data) {
     }
 
     var post = post_template.cloneNode(true)
-    post.querySelector('.post').setAttribute('data-post', d.number)
+    var inner = post.querySelector('.post')
+    var link = post.querySelector('.link')
+
+    inner.setAttribute('data-post', d.number)
+    link.id = d.title.replace(/ /g, '-')
+    link.setAttribute('href', '#' + d.title.replace(/ /g, '-'))
+
     var body = post.querySelector('.body')
 
     post.querySelector('.title').textContent = d.title
