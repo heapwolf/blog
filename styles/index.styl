@@ -111,6 +111,7 @@ body
 
   h1.title
     font-size 2rem
+    line-height 2.5rem
     letter-spacing 0.05rem
     &:after
       content " "
@@ -207,11 +208,15 @@ body
           &:hover
             border-bottom 2px solid $accent
 
+        code
+          background $white
+          padding 2px
+
         pre
           code
             background-color $white
             display block
-            padding 20px 5px
+            padding 20px
             margin 40px 0
 
         p
