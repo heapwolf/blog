@@ -99,13 +99,13 @@ body h1 {
   text-align: center;
 }
 body header {
-  height: 750px;
+  height: 800px;
   width: 100%;
   position: relative;
 }
 body header .intro {
-  padding: 30px;
   box-sizing: border-box;
+  padding: 30px;
   width: 320px;
   height: 380px;
   border: 1px solid #222627;
@@ -137,9 +137,6 @@ body header .intro p:nth-child(5) {
   font-size: 0.7rem;
   text-align: left;
   line-height: 0.9rem;
-}
-body header .intro p a {
-  font-style: italic;
 }
 body header .intro h2 {
   font-size: 0.75rem;
@@ -178,10 +175,37 @@ body h1.title:after {
   margin-bottom: 50px;
   background-color: #9e9ea0;
 }
-body p {
+body p,
+body ul {
   font-size: 1rem;
   line-height: 1.4rem;
-  letter-spacing: 1px;
+}
+body li {
+  margin-bottom: 8px;
+}
+body .reactions {
+  text-align: center;
+  margin: 30px 0;
+}
+body .reactions div {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 0 25px;
+}
+body .reactions div:before {
+  content: attr(data-count);
+  width: 25px;
+  height: 25px;
+  text-align: left;
+  display: inline-block;
+  position: relative;
+  left: -25px;
+  top: 5px;
+}
+body .reactions div:first-child {
+  display: none;
 }
 body #error {
   display: none;
@@ -201,12 +225,12 @@ body nav span {
 }
 body #posts {
   background-color: #f4f2ea;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 body #posts .post {
   max-width: 650px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px 20px 20px 20px;
 }
 body #posts .post .labels {
   text-align: center;
@@ -234,7 +258,6 @@ body #posts .post .body h1 {
 }
 body #posts .post .body a {
   font-weight: bold;
-  font-style: italic;
   padding-bottom: 2px;
   border-bottom: 2px solid #9e9ea0;
 }
@@ -245,10 +268,11 @@ body #posts .post .body pre code {
   background-color: #fff;
   display: block;
   padding: 20px 5px;
-  margin: 40px 20px;
+  margin: 40px 0;
 }
 body #posts .post .body p img {
   max-width: 650px;
+  width: 100%;
   border: 10px solid #fff;
   display: block;
   margin: 0 auto;
@@ -271,6 +295,7 @@ body #posts .post .summary {
   border: 1px solid #222627;
   margin-top: 50px;
   margin-bottom: 40px;
+  height: 160px;
 }
 body #posts .post .summary figure,
 body #posts .post .summary .info {
@@ -279,32 +304,36 @@ body #posts .post .summary .info {
 }
 body #posts .post .summary figure {
   text-align: center;
-  height: 100%;
   border-right: 1px solid #222627;
-  padding-right: 40px;
-  margin-right: 0;
+  margin: 0;
+  height: 160px;
+  width: 160px;
 }
 body #posts .post .summary .info span {
   display: inline-table;
 }
-body #posts .post .summary .info a.comments_url {
+body #posts .post .summary .comment_box {
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 0px;
+  top: 0px;
   border-left: 1px solid #222627;
   display: inline-table;
-  padding: 30px 10px 30px 30px;
+  height: 160px;
+  width: 160px;
+  padding-top: 60px;
   text-align: center;
+  box-sizing: border-box;
 }
 body #posts .post .summary .user .avatar {
   background-size: cover;
-  width: 75px;
-  height: 75px;
+  width: 95px;
+  height: 95px;
   border-radius: 99em;
+  margin-top: 20px;
 }
 body #posts .post .summary .created_at,
 body #posts .post .summary .updated_at {
-  margin: 20px;
+  margin: 22px;
 }
 body #posts .post .summary .created_at:before {
   content: "Date Created";
@@ -326,4 +355,25 @@ body #posts .post .summary .updated_at:before {
 }
 body #posts .post .summary a.comments_url {
   display: block;
+}
+@media (max-width: 768px) {
+  body header {
+    height: 600px;
+  }
+  body #posts .post .summary {
+    border: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 50px;
+  }
+  body #posts .post .summary .info {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  body #posts .post .summary .user,
+  body #posts .post .summary .comment_box,
+  body #posts .post .summary .reactions {
+    display: none;
+  }
 }

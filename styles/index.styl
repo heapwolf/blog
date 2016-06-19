@@ -49,13 +49,13 @@ body
     text-align center
 
   header
-    height 750px
+    height 800px
     width 100%
     position relative
 
     .intro
-      padding 30px
       box-sizing border-box
+      padding 30px
       width 320px
       height 380px
       border 1px solid $black
@@ -87,10 +87,6 @@ body
         font-size 0.7rem
         text-align left
         line-height 0.9rem
-
-      p
-        a
-          font-style italic
 
       h2
         font-size 0.75rem
@@ -126,11 +122,34 @@ body
       margin-bottom 50px
       background-color $gray
 
-  p
+  p, ul
     font-size 1rem
     line-height 1.4rem
-    letter-spacing 1px
 
+  li
+    margin-bottom 8px
+
+  .reactions
+    text-align center
+    margin 30px 0
+
+  .reactions div
+    width 30px
+    height 30px
+    background-repeat no-repeat
+    display inline-block
+    margin 0 25px
+    &:before
+      content attr(data-count)
+      width 25px
+      height 25px
+      text-align left
+      display inline-block
+      position relative
+      left -25px
+      top 5px
+    &:first-child
+      display none
 
   #error
     display none
@@ -150,12 +169,12 @@ body
 
   #posts
     background-color $cream
-    padding-bottom 50px
+    padding-bottom 100px
 
     .post
       max-width 650px
       margin 0 auto
-      padding 20px
+      padding 60px 20px 20px 20px
 
       .labels
         text-align center
@@ -183,7 +202,6 @@ body
 
         a
           font-weight bold
-          font-style italic
           padding-bottom 2px
           border-bottom 2px solid $gray
           &:hover
@@ -194,11 +212,12 @@ body
             background-color $white
             display block
             padding 20px 5px
-            margin 40px 20px
+            margin 40px 0
 
         p
           img
             max-width 650px
+            width 100%
             border 10px solid $white
             display block
             margin 0 auto
@@ -221,6 +240,7 @@ body
         border 1px solid $black
         margin-top 50px
         margin-bottom 40px
+        height 160px
 
         figure, .info
           display inline-table
@@ -228,33 +248,37 @@ body
 
         figure
           text-align center
-          height 100%
           border-right 1px solid $black
-          padding-right 40px
-          margin-right 0
+          margin 0
+          height 160px
+          width 160px
 
         .info
           span
             display inline-table
 
-          a.comments_url
-            position absolute
-            right 15px
-            top 15px
-            border-left 1px solid $black
-            display inline-table
-            padding 30px 10px 30px 30px
-            text-align center
+        .comment_box
+          position absolute
+          right 0px
+          top 0px
+          border-left 1px solid $black
+          display inline-table
+          height 160px
+          width 160px
+          padding-top 60px
+          text-align center
+          box-sizing border-box
 
         .user
           .avatar
             background-size cover
-            width 75px
-            height 75px
+            width 95px
+            height 95px
             border-radius 99em
+            margin-top 20px
 
         .created_at, .updated_at
-          margin 20px
+          margin 22px
 
         .created_at:before
           content "Date Created"
@@ -276,3 +300,20 @@ body
 
         a.comments_url
           display block
+
+@media (max-width: 768px)
+  body
+    header
+      height 600px
+    #posts .post .summary
+      border none
+      margin-top 0px
+      margin-bottom 0px
+      height 50px
+      .info
+        width 100%
+        text-align center
+        // border-top 1px solid $black
+        margin-top 20px
+      .user, .comment_box, .reactions
+        display none

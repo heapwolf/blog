@@ -96,7 +96,7 @@ function render(data) {
     if (d.reactions) {
       Object.keys(d.reactions).map(function(key) {
         if (key === 'url') return
-
+console.log(d.reactions)
         var reaction = document.createElement('div')
         reaction.style.backgroundImage = 'url("/images/' + key + '.svg")'
         reaction.setAttribute('data-count', d.reactions[key])
