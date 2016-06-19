@@ -276,6 +276,7 @@ body #posts .post .body p img {
   border: 10px solid #fff;
   display: block;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 body #posts .post .body blockquote {
   font-family: 'transcript_bold', sans-serif;
@@ -360,6 +361,9 @@ body #posts .post .summary a.comments_url {
   body header {
     height: 600px;
   }
+  body #posts .post .body blockquote {
+    margin: 0;
+  }
   body #posts .post .summary {
     border: none;
     margin-top: 0px;
@@ -370,6 +374,9 @@ body #posts .post .summary a.comments_url {
     width: 100%;
     text-align: center;
     margin-top: 20px;
+  }
+  body #posts .post .summary .info span {
+    margin: 12px;
   }
   body #posts .post .summary .user,
   body #posts .post .summary .comment_box,

@@ -221,6 +221,7 @@ body
             border 10px solid $white
             display block
             margin 0 auto
+            box-sizing border-box
 
         blockquote
           font-family $caption
@@ -305,15 +306,20 @@ body
   body
     header
       height 600px
-    #posts .post .summary
-      border none
-      margin-top 0px
-      margin-bottom 0px
-      height 50px
-      .info
-        width 100%
-        text-align center
-        // border-top 1px solid $black
-        margin-top 20px
-      .user, .comment_box, .reactions
-        display none
+    #posts .post
+      .body
+        blockquote
+          margin 0
+      .summary
+        border none
+        margin-top 0px
+        margin-bottom 0px
+        height 50px
+        .info
+          width 100%
+          text-align center
+          margin-top 20px
+          span
+            margin 12px
+        .user, .comment_box, .reactions
+          display none
