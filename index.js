@@ -77,7 +77,7 @@ function render(data) {
 
     post.querySelector('.username').textContent = d.user.login
     post.querySelector('.avatar').src = d.user.avatar_url
-    post.querySelector('.comments_url').src = d.comments_url
+    post.querySelector('.comments_url').href = d.html_url
 
     var created = new Date(Date.parse(d.created_at)).toDateString()
     var updated = new Date(Date.parse(d.updated_at)).toDateString()
@@ -96,7 +96,7 @@ function render(data) {
     if (d.reactions) {
       Object.keys(d.reactions).map(function(key) {
         if (key === 'url') return
-console.log(d.reactions)
+
         var reaction = document.createElement('div')
         reaction.style.backgroundImage = 'url("/images/' + key + '.svg")'
         reaction.setAttribute('data-count', d.reactions[key])
