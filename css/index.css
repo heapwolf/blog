@@ -163,6 +163,7 @@ body header .intro h1 {
 }
 body h1.title {
   font-size: 2rem;
+  line-height: 2.5rem;
   letter-spacing: 0.05rem;
 }
 body h1.title:after {
@@ -264,10 +265,14 @@ body #posts .post .body a {
 body #posts .post .body a:hover {
   border-bottom: 2px solid #434ea0;
 }
+body #posts .post .body code {
+  background: #fff;
+  padding: 2px;
+}
 body #posts .post .body pre code {
   background-color: #fff;
   display: block;
-  padding: 20px 5px;
+  padding: 20px;
   margin: 40px 0;
 }
 body #posts .post .body p img {
