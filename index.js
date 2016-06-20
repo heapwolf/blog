@@ -121,4 +121,9 @@ function render(data) {
 
     posts.appendChild(post.firstElementChild)
   })
+
+  if (location.hash) {
+    var active = document.getElementById(location.hash.slice(1))
+    if (active) window.scrollTo(0, active.offsetTop)
+  }
 }

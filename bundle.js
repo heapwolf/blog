@@ -130,6 +130,11 @@ function render(data) {
 
     posts.appendChild(post.firstElementChild)
   })
+
+  if (location.hash) {
+    var active = document.getElementById(location.hash.slice(1))
+    if (active) window.scrollTo(0, active.offsetTop)
+  }
 }
 
 },{"./config":1,"domready":3,"highlight.js":7,"marked":164,"xhr":168}],3:[function(require,module,exports){

@@ -169,23 +169,14 @@ body .link {
   color: #222627;
   cursor: pointer;
 }
+body .link:hover {
+  color: #222627;
+}
 body h1.title {
   font-size: 2rem;
   line-height: 2.5rem;
   letter-spacing: 0.05rem;
   position: relative;
-}
-body h1.title:before {
-  content: '⫗';
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.2s;
-  left: 50%;
-  margin-left: -12px;
-  top: -35px;
-}
-body h1.title:hover:before {
-  opacity: 1;
 }
 body h1.title:after {
   content: " ";
