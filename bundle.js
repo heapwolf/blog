@@ -20,7 +20,6 @@ marked.setOptions({
 
 var opts = {
   headers: {
-    'user-agent': 'javascript',
     'Accept': 'application/vnd.github.squirrel-girl-preview'
   },
   withCredentials: false
