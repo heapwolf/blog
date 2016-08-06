@@ -1,3 +1,6 @@
+
+// Font Variables
+
 @font-face
   font-family FortescuePro-Bold
   src url(/fonts/FortescuePro-Bold.otf)
@@ -6,10 +9,8 @@
   font-family transcript_bold
   src url(/fonts/transcript_bold.otf)
 
-// Font Variables
-
-$body = 'Averia Serif Libre', cursive
-$display = 'FortescuePro-Bold', serif
+$body = 'Merriweather', serif; //'Averia Serif Libre', cursive
+$display = 'Poly'; // 'FortescuePro-Bold', serif
 $caption = 'transcript_bold', sans-serif
 
 // Colours
@@ -18,14 +19,14 @@ $black = #222627
 $gray = #9E9EA0
 $cream = #F4F2EA
 $white = #FFFFFF
-$accent = #434EA0
+$accent = #4d99bf
 
 @require './hljs.styl'
 
 // Styling
 
 body
-  background-color #9E9EA0
+  background-color $cream
   font-family $body
   margin 0
   color $black
@@ -58,7 +59,7 @@ body
       box-sizing border-box
       padding 30px
       width 320px
-      height 380px
+      height 410px
       border 1px solid $black
       position absolute
       top 50%
@@ -69,7 +70,7 @@ body
       p:nth-child(1)
         font-size 0.8rem
         margin 0
-        letter-spacing 0.6rem
+        letter-spacing 0.45rem
         text-transform uppercase
 
       p:nth-child(2)
@@ -82,7 +83,8 @@ body
         margin-top 25px
         font-size 0.75rem
         text-transform uppercase
-        letter-spacing 0.1rem
+        text-align justify 
+        letter-spacing .05em
 
       p:nth-child(5)
         font-size 0.7rem
@@ -94,6 +96,7 @@ body
         font-weight normal
         text-transform uppercase
         letter-spacing 0.3rem
+        line-height 2em
         margin-top 20px
         &:before
           content " "
@@ -106,9 +109,9 @@ body
           font-style normal
 
       h1
-        margin 0
+        margin .8em 0
         font-size 3rem
-        line-height 2.5rem
+        line-height 1em
 
   .link
     display block
@@ -121,6 +124,7 @@ body
       color $black
 
   h1.title
+    text-transform uppercase
     font-size 2rem
     line-height 2.5rem
     letter-spacing 0.05rem
@@ -129,7 +133,7 @@ body
     &:after
       content " "
       width 75px
-      height 2px
+      height 1px
       display block
       margin 0 auto
       margin-top 50px
@@ -182,13 +186,26 @@ body
       text-align center
 
   #posts
-    background-color $cream
+    background-color white
     padding-bottom 100px
 
     .post
+      position relative
       max-width 650px
       margin 0 auto
-      padding 60px 20px 20px 20px
+      padding 60px 20px 100px 20px
+
+      &:not(:first-of-type):after
+        bottom 100%
+        left 50%
+        border solid transparent
+        content "♠"
+        height 20px
+        width 20px
+        margin-left -10px
+        position absolute
+        pointer-events none
+        border none
 
       .labels
         text-align center
@@ -208,18 +225,21 @@ body
             border 2px solid $gray
             color $gray
 
+
       .body
+        p
+          line-height 1.5em
         h1
           font-size 1.25rem
           letter-spacing 0.05rem
           margin 60px 20px 30px 20px
 
         a
-          font-weight bold
-          padding-bottom 2px
-          border-bottom 2px solid $gray
+          font-weight normal
+          padding-bottom 1px
+          border-bottom 1px solid $gray
           &:hover
-            border-bottom 2px solid $accent
+            border-bottom 1px solid $accent
 
         code
           background $white
@@ -227,10 +247,11 @@ body
 
         pre
           code
-            background-color $white
+            background-color $cream
             overflow auto
             display block
             padding 20px
+            line-height 1.6em
             margin 40px 0
 
         p

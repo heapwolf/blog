@@ -78,7 +78,7 @@ function render(data) {
     var body = post.querySelector('.body')
 
     post.querySelector('.title').textContent = d.title
-    post.querySelector('.comments').textContent = d.comments
+    /* post.querySelector('.comments').textContent = d.comments
 
     post.querySelector('.username').textContent = d.user.login
     post.querySelector('.avatar').src = d.user.avatar_url
@@ -91,11 +91,12 @@ function render(data) {
 
     //if (created !== updated) {
       post.querySelector('.updated_at').textContent = updated
-    //}
+    //}*/
 
     body.innerHTML = marked(d.body)
 
     var labels = post.querySelector('.labels')
+    /*
     var reactions = post.querySelector('.reactions')
 
     if (d.reactions) {
@@ -108,6 +109,7 @@ function render(data) {
         reactions.appendChild(reaction)
       })
     }
+    */
 
     d.labels.map(function(data) {
       var label = document.createElement('span')

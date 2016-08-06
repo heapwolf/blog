@@ -35,7 +35,7 @@
 .hljs-quote,
 .hljs-template-tag,
 .hljs-deletion {
-  color: #800;
+  color: #bc6060;
 }
 .hljs-title,
 .hljs-section {
@@ -52,19 +52,19 @@
   color: #bc6060;
 }
 .hljs-literal {
-  color: #78a960;
+  color: #bc6060;
 }
 .hljs-built_in,
 .hljs-bullet,
 .hljs-code,
 .hljs-addition {
-  color: #397300;
+  color: #4d99bf;
 }
 .hljs-meta {
   color: #1f7199;
 }
 .hljs-meta-string {
-  color: #4d99bf;
+  color: #bc6060;
 }
 .hljs-emphasis {
   font-style: italic;
@@ -73,17 +73,17 @@
   font-weight: bold;
 }
 body {
-  background-color: #9e9ea0;
-  font-family: 'Averia Serif Libre', cursive;
+  background-color: #f4f2ea;
+  font-family: 'Merriweather', serif;
   margin: 0;
   color: #222627;
 }
 body ::-moz-selection {
-  background: #434ea0;
+  background: #4d99bf;
   color: #fff;
 }
 body ::selection {
-  background: #434ea0;
+  background: #4d99bf;
   color: #fff;
 }
 body a {
@@ -93,10 +93,10 @@ body a {
   transition: color 0.2s;
 }
 body a:hover {
-  color: #434ea0;
+  color: #4d99bf;
 }
 body h1 {
-  font-family: 'FortescuePro-Bold', serif;
+  font-family: 'Poly';
   text-align: center;
 }
 body header {
@@ -108,7 +108,7 @@ body header .intro {
   box-sizing: border-box;
   padding: 30px;
   width: 320px;
-  height: 380px;
+  height: 410px;
   border: 1px solid #222627;
   position: absolute;
   top: 50%;
@@ -119,7 +119,7 @@ body header .intro {
 body header .intro p:nth-child(1) {
   font-size: 0.8rem;
   margin: 0;
-  letter-spacing: 0.6rem;
+  letter-spacing: 0.45rem;
   text-transform: uppercase;
 }
 body header .intro p:nth-child(2) {
@@ -132,7 +132,8 @@ body header .intro p.first-line {
   margin-top: 25px;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
+  text-align: justify;
+  letter-spacing: 0.05em;
 }
 body header .intro p:nth-child(5) {
   font-size: 0.7rem;
@@ -144,6 +145,7 @@ body header .intro h2 {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.3rem;
+  line-height: 2em;
   margin-top: 20px;
 }
 body header .intro h2:before {
@@ -158,9 +160,9 @@ body header .intro h2 a {
   font-style: normal;
 }
 body header .intro h1 {
-  margin: 0;
+  margin: 0.8em 0;
   font-size: 3rem;
-  line-height: 2.5rem;
+  line-height: 1em;
 }
 body .link {
   display: block;
@@ -173,6 +175,7 @@ body .link:hover {
   color: #222627;
 }
 body h1.title {
+  text-transform: uppercase;
   font-size: 2rem;
   line-height: 2.5rem;
   letter-spacing: 0.05rem;
@@ -181,7 +184,7 @@ body h1.title {
 body h1.title:after {
   content: " ";
   width: 75px;
-  height: 2px;
+  height: 1px;
   display: block;
   margin: 0 auto;
   margin-top: 50px;
@@ -237,13 +240,26 @@ body nav span {
   text-align: center;
 }
 body #posts {
-  background-color: #f4f2ea;
+  background-color: #fff;
   padding-bottom: 100px;
 }
 body #posts .post {
+  position: relative;
   max-width: 650px;
   margin: 0 auto;
-  padding: 60px 20px 20px 20px;
+  padding: 60px 20px 100px 20px;
+}
+body #posts .post:not(:first-of-type):after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "♠";
+  height: 20px;
+  width: 20px;
+  margin-left: -10px;
+  position: absolute;
+  pointer-events: none;
+  border: none;
 }
 body #posts .post .labels {
   text-align: center;
@@ -264,28 +280,32 @@ body #posts .post .labels span:hover {
   border: 2px solid #9e9ea0;
   color: #9e9ea0;
 }
+body #posts .post .body p {
+  line-height: 1.5em;
+}
 body #posts .post .body h1 {
   font-size: 1.25rem;
   letter-spacing: 0.05rem;
   margin: 60px 20px 30px 20px;
 }
 body #posts .post .body a {
-  font-weight: bold;
-  padding-bottom: 2px;
-  border-bottom: 2px solid #9e9ea0;
+  font-weight: normal;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #9e9ea0;
 }
 body #posts .post .body a:hover {
-  border-bottom: 2px solid #434ea0;
+  border-bottom: 1px solid #4d99bf;
 }
 body #posts .post .body code {
   background: #fff;
   padding: 2px;
 }
 body #posts .post .body pre code {
-  background-color: #fff;
+  background-color: #f4f2ea;
   overflow: auto;
   display: block;
   padding: 20px;
+  line-height: 1.6em;
   margin: 40px 0;
 }
 body #posts .post .body p img {
