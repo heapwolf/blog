@@ -20,6 +20,49 @@
 
       <section id="posts" name="blog">
         
+  <div class="post" id="Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
+    <a class="link" href="#Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
+      <div class="labels"><span>JavaScript</span> <span>Programming</span> <span>Swift</span></div>
+      <h1 class="title">Swift for Javascripters: Super powered If statements (Part 1)</h1>
+    </a>
+    <div class="body">
+      <p>First, a little bit about nothing... In JavaScript, you have the primitive type: <code>undefined</code> which indicates that a variable or constant has never been initialized (or simply does not exist). You also have an entirely different type: <code>null</code>, which can be used to communicate intent: a value has been intentionally set to nothing.</p>
+<p>To handle the absence of a value, Swift has the type <code>Optional</code>. It either contains a value and has a specific type or it will be <code>nil</code>.</p>
+<p>Swift also has a feature called <code>optional binding</code>. This is like an <code>if</code> statement, but with more features. As with normal <code>if</code> statements, you can check that boolean expressions evaluate to true. But this syntax will also allow you to declare variables (and/or constants) that must result in non-<code>nil</code> values before the statement will execute the associated code block. If the block is executed, the variables that are declared can be used, but only inside that block.</p>
+<p>Consider a hypothetical function that takes an array of numbers and returns their <code>min</code> and <code>max</code> values...</p>
+<pre><code class="lang-swift"><span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> bounds = minMax(array: [<span class="hljs-number">8</span>, -<span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">109</span>, <span class="hljs-number">3</span>, <span class="hljs-number">71</span>]) {
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">"min is <span class="hljs-subst">\(bounds.<span class="hljs-built_in">min</span>)</span> and max is <span class="hljs-subst">\(bounds.<span class="hljs-built_in">max</span>)</span>"</span>)
+}
+</code></pre>
+<p>The JS equivalent…</p>
+<pre><code class="lang-js">{
+  const bounds = mixMax([<span class="hljs-number">8</span>, <span class="hljs-number">-6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">109</span>, <span class="hljs-number">3</span>, <span class="hljs-number">71</span>])
+
+  if (<span class="hljs-name">bounds</span>) {
+    console.log(`min is ${bounds.min} and max is ${bounds.max}`)
+  }
+}
+</code></pre>
+<p>It is also possible to check multiple values and/or booleans at once...</p>
+<pre><code class="lang-swift"><span class="hljs-keyword">if</span> let <span class="hljs-selector-tag">a</span> = Int(<span class="hljs-string">"1"</span>), let <span class="hljs-selector-tag">b</span> = Int(<span class="hljs-string">"1"</span>), <span class="hljs-selector-tag">a</span> == <span class="hljs-selector-tag">b</span> {
+  print(<span class="hljs-string">"a: \(a) is equal to b: \(b)"</span>)
+}
+</code></pre>
+<p>The JS equivalent…</p>
+<pre><code class="lang-js">{
+  const a = parseInt(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
+  const b = parseInt(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
+
+  if (<span class="hljs-name">a</span> &amp;&amp; b &amp;&amp; a === b) {
+    console.log(`a: ${a} is equal to b: ${b}`)
+  }
+}
+</code></pre>
+
+    </div>
+  </div>
+
+
   <div class="post" id="Async/await-without-Promises">
     <a class="link" href="#Async/await-without-Promises">
       <div class="labels"><span>idea</span> <span>Programming</span></div>
