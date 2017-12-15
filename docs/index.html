@@ -81,28 +81,26 @@ main()
     </a>
     <div class="body">
       <p><img src="https://cloud.githubusercontent.com/assets/136109/20865895/3bb07ace-ba1e-11e6-9294-75b98219b660.png" alt="image">
-Working on <a href="https://voltra.co.">Voltra Co.</a>, I’ve needed a lot of data models. I’ve tried some pretty clever solutions for validating and describing data. But after working daily with these libraries, I’ve found that the javascript just gets in the way. Too much syntax, too much boiler plate, etc. 50+ models with 30+ entities can become a nightmare to read and maintain.</p>
+Working on <a href="https://voltra.co.">Voltra Co.</a>, I’ve needed to validate a lot of data. I’ve tried some pretty clever solutions for validating and describing data. But after working daily with these libraries, I’ve found that the javascript just gets in the way. Too much syntax, too much boiler plate, etc. 50+ models with 30+ entities can become a nightmare to read and maintain.</p>
 <p>Anyway, after much GTD I took a break to put together <a href="http://voltraco.github.io/dml/">DML</a>. DML is a simple language with the goal of making your data models readable and maintainable. The javascript implementation is only a few hundred lines. The documentation is a work in progress at the moment but the syntax looks like this…</p>
-<pre><code class="lang-js"><span class="hljs-comment">/*
- * An example data model
- */</span>
+<pre><code class="lang-js"><span class="hljs-comment">//</span>
+<span class="hljs-comment">// An example data model</span>
+<span class="hljs-comment">//</span>
 
 <span class="hljs-built_in">Date</span> created
 Number id
 
-<span class="hljs-built_in">String</span> name {
-  required <span class="hljs-literal">true</span> <span class="hljs-comment">// this is a comment</span>
+<span class="hljs-built_in">String</span> name
+  <span class="hljs-keyword">require</span> <span class="hljs-literal">true</span> <span class="hljs-string">"a name is required"</span> <span class="hljs-comment">// this is a comment</span>
   <span class="hljs-literal">gt</span> <span class="hljs-number">2</span> <span class="hljs-string">"Must be greater than 2 characters"</span>
   <span class="hljs-literal">lte</span> <span class="hljs-number">256</span> <span class="hljs-string">"Must be less than or equal to 256 characters"</span>
-}
 
-<span class="hljs-built_in">String</span> bio <span class="hljs-string">"A bio must be a string"</span> {
+<span class="hljs-built_in">String</span> bio
   <span class="hljs-literal">lte</span> <span class="hljs-number">140</span> <span class="hljs-string">"A bio must fit into a tweet"</span>
-}
 
 <span class="hljs-built_in">Boolean</span> accountType
 </code></pre>
-<p>This is in the very early stages. Visit the project on <a href="https://github.com/voltraco/dml">Github</a>.</p>
+<p>Visit the project on <a href="https://github.com/voltraco/dml">Github</a>.</p>
 
     </div>
   </div>
@@ -221,52 +219,6 @@ x.<span class="hljs-built_in">num</span> = <span class="hljs-number">50</span> <
 <p>Now the magic! we see this <code>const [statError, s] = yield fs.stat(&#39;./index.js&#39;)</code>. We are destructuring an array of values that is returned by the <code>stat</code> function. But notice how we don&#39;t need to pas the callback to the <code>stat</code> function! Instead, we use the <code>yield</code> keyword. The yield keyword is used to pause and resume a generator function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield"><code>3</code></a>.</p>
 <p>The performance impact is negligible, it&#39;s been a while since i&#39;ve looked. But if you are worried about it, measure the performance or just don&#39;t use generators in your hot path.</p>
 <p>In <code>es7</code> you will get the <code>async</code> and <code>await</code> keywords which could provide a similar service combined with destructuring. I&#39;ll do a post on that when they get closer to being implemented.</p>
-
-    </div>
-  </div>
-
-
-  <div class="post" id="Git-Commit-Script">
-    <a class="link" href="#Git-Commit-Script">
-      <div class="labels"><span>idea</span> <span>Programming</span></div>
-      <h1 class="title">Git Commit Script</h1>
-    </a>
-    <div class="body">
-      <p>Most of the time, after I work on a coding task, I type a series of the same commands, usually they look something like...</p>
-<pre><code>git commit -m <span class="hljs-string">"..."</span> -a
-git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master
-</code></pre><p>For fun I decided to bash a script together for making this procedure interactive. It looks something like this...</p>
-<pre><code class="lang-bash"><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">commit</span></span>() {
-  <span class="hljs-built_in">local</span> b
-  <span class="hljs-built_in">local</span> r
-
-  b=$(git rev-parse --abbrev-ref HEAD)
-  r=$(git remote)
-
-  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Message:"</span> msg
-  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Branch [<span class="hljs-variable">${b}</span>]:"</span> branch
-  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Remote [<span class="hljs-variable">${r}</span>]:"</span> remote
-
-  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$msg</span>"</span> ]]; <span class="hljs-keyword">then</span>
-    msg=<span class="hljs-string">"Update..."</span>
-  <span class="hljs-keyword">fi</span>
-
-  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$branch</span>"</span> ]]; <span class="hljs-keyword">then</span>
-    branch=<span class="hljs-variable">$b</span>
-  <span class="hljs-keyword">fi</span>
-
-  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$remote</span>"</span> ]]; <span class="hljs-keyword">then</span>
-    remote=<span class="hljs-variable">$r</span>
-  <span class="hljs-keyword">fi</span>
-
-  {
-    git add -A .
-    git commit -m <span class="hljs-string">"<span class="hljs-variable">$msg</span>"</span>
-    git push <span class="hljs-variable">$remote</span> <span class="hljs-variable">$branch</span>
-  } &gt; /dev/null
-}
-</code></pre>
-<p>I&#39;ve used git completion. Yes I&#39;ve used oh-my-zsh. This is interactive, but not as heavy as a full GUI. Something lite and interactive seems like it could reduce the cognitive switch required when going from code to source control. Ideas? Would love to hear yours.</p>
 
     </div>
   </div>
