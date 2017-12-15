@@ -5,6 +5,7 @@ const { parse } = require('stream-body')
 const { request } = require('https')
 
 const config = require('../config')
+const root = `${__dirname}/..`
 
 const opts = {
   hostname: 'api.github.com',
@@ -45,32 +46,48 @@ marked.setOptions({
 })
 
 async function main () {
-  let [err, articles] = await update
-  if (err) return console.error(err)
+  //
+  // Build Articles
+  //
+  {
+    let [err, articles] = await update
+    if (err) return console.error(err)
 
-  articles = articles.map(d => {
-    const login = d.user.login.toLowerCase()
+    articles = articles.map(d => {
+      const login = d.user.login.toLowerCase()
 
-    if (!authors.includes(login)) return
+      if (!authors.includes(login)) return
 
-    d.id = d.title.replace(/ /g, '-')
-    d.slug = '#' + d.id
-    d.body = marked(d.body)
+      d.id = d.title.replace(/ /g, '-')
+      d.slug = '#' + d.id
+      d.body = marked(d.body)
 
-    d.labels = d.labels.map(data => {
-      return `<span>${data.name}</span>`
-    }).join(' ')
+      d.labels = d.labels.map(data => {
+        return `<span>${data.name}</span>`
+      }).join(' ')
 
-    return createPost(d)
-  })
+      return createPost(d)
+    })
 
-  const root = `${__dirname}/..`
-  const src = `${root}/src/template.html`
-  const dest = `${root}/docs/index.html`
+    const src = `${root}/src/posts.html`
+    const dest = `${root}/docs/index.html`
 
-  const template = fs.readFileSync(src, 'utf8')
-  const str = articles.join('\n')
-  fs.writeFileSync(dest, template.replace('<posts/>', str))
+    const template = fs.readFileSync(src, 'utf8')
+    const str = articles.join('\n')
+    fs.writeFileSync(dest, template.replace('<posts/>', str))
+  }
+
+  //
+  // Build CV
+  //
+  {
+    const src = `${root}/src/cv.html`
+    const dest = `${root}/docs/cv.html`
+
+    const template = fs.readFileSync(src, 'utf8')
+    const str = marked(fs.readFileSync(`${root}/src/markdown/cv.md`, 'utf8'))
+    fs.writeFileSync(dest, template.replace('<document/>', str))
+  }
 }
 
 main()

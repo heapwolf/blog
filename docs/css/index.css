@@ -78,6 +78,21 @@ body {
   margin: 0;
   color: #222627;
 }
+body #cv {
+  padding: 100px 20%;
+}
+body #cv h1,
+body #cv h2,
+body #cv h3 {
+  text-transform: uppercase;
+}
+body #cv h1 {
+  text-align: left;
+}
+body #cv h2,
+body #cv h3 {
+  padding-top: 40px;
+}
 body ::-moz-selection {
   background: #4d99bf;
   color: #fff;
@@ -398,6 +413,12 @@ body #posts .post .summary a.comments_url {
 @media (max-width: 768px) {
   body header {
     height: 600px;
+  }
+  body #cv {
+    padding: 5%;
+  }
+  body #cv h1 {
+    text-align: left;
   }
   body #posts .post .body blockquote {
     margin: 0;

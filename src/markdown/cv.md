@@ -1,19 +1,21 @@
 # Curriculum Vitae
-
-## Candidate
 Paolo Fragomeni, Software Engineer
 
 
 ## Personal
 Nationality: American
+
 Date of Birth: May 27th, 1979
+
 Languages: English (Fluent), German (Elementary), Dutch (Elementary)
 
 
 ## Contact
-Email: hello@paolo.fr
-Web: paolo.fr
-Twitter: twitter.com/0x00A
+Email: paolo at async.ly
+
+Web: http://paolo.fr
+
+Twitter: https://twitter.com/0x00A
 
 
 ## Summary
@@ -25,19 +27,22 @@ Mic). I am currently VPoE at Voltra Co.
 ## Expertise
 Computer Science Research. Software Engineering: programming design and
 engineering, concurrent and distributed programming, metaprogramming,
-functional programming and ECMAScript (Javascript). Key-Value store
+functional programming and ECMAScript (Javascript). Relational and
+Semi-stuctured data.
 
 
-## Experience
+## Professional Experience
 
 ### Software Engineer, Technical Lead, VP of Engineering at Voltra Co.
 January 2016 - Present (2 years)
 
-Voltra Co. is a cloud storage service and platform for artists to sell their
-music. Voltra's desktop and mobile players sync so you can stream your music
-from anywhere. The only ad-free fully hi-res platform. On this project I
-worked with Electron, JavaScript, Node.js, C++, CSS3, HTML5, Stylus, Jade,
-Webpack, React, React-Native, and Amazon Web Services.
+Voltra Co. is a platform for artists to sell their music. Voltra Co. offers
+Stream-to-own. For music consumers this is a low-risk path to purchasing
+music. Voltra's desktop and mobile players sync so that listeners can
+stream their music from anywhere. It is the only ad-free, fully hi-res,
+cross-platform service. On this project I work with Electron, JavaScript,
+Node.js, C++, CSS3, HTML5, Stylus, Jade, Webpack, React, React-Native, and
+Amazon Web Services.
 
 
 ### Engineer, Sr. Engineer, VP of Engineering at Now Secure
