@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="./css/index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Poly" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <div class="intro">
+        <p>Hello, My Name is</p>
+        <h1>Paolo Fragomeni</h1>
+        <p class="first-line">I write software and create products. This journal contains brief technical notes and ideas.</p>
+        <h2><a href="https://github.com/0x00a/">Code</a>, <a href="https://twitter.com/0x00A">Tweets</a> &amp; <a href="#blog">Articles</a></h2>
+      </div>
+    </header>
+
+    <div id="blog" role="main">
+
+      <section id="posts" name="blog">
+        
+  <div class="post" id="Async/await-without-Promises">
+    <a class="link" href="#Async/await-without-Promises">
+      <div class="labels"><span>idea</span> <span>Programming</span></div>
+      <h1 class="title">Async/await without Promises</h1>
+    </a>
+    <div class="body">
+      <p>A while ago I posted about using generators and destructuring assignments for flow control. Now that <code>async</code> has landed and its usable everywhere, I almost always use <code>async/await</code>.</p>
+<p>I&#39;ve never really liked promises. In many ways, they are just as bad as callbacks but with more moving parts. Luckily, promises aren&#39;t really a requirement for using <code>async/await</code>. In fact, you can bypass the promise constructor entirely. Just create a <code>then-able</code>. A <code>then-able</code> is any function, object or class that implements a <code>then</code> function (or member, respectively). For example...</p>
+<h2 id="await-able-classes">Await-able Classes</h2>
+<p>To create an async class, just implement a then method on it!</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+  then (success, fail) {
+    success(<span class="hljs-number">42</span>)
+  }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+}
+main()
+</code></pre>
+<h2 id="awaitable-objects">Awaitable Objects</h2>
+<p>You can just do the same thing with an object.</p>
+<pre><code class="lang-js">const Foo = {
+  <span class="hljs-keyword">then</span> (<span class="hljs-keyword">done</span>) {
+    <span class="hljs-keyword">done</span> (await request(<span class="hljs-string">'https://foo.com'</span>))
+  }
+}
+</code></pre>
+<h2 id="await-inside-then-ables">Await inside then-ables</h2>
+<p>Object and class methods can use the async keyword, just like functions.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
+  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">done</span>) </span>{
+    done(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
+  }
+}
+</code></pre>
+<p>And finally here is something really contentious for all you dare devils out there. You can use destructuring assignments to return multiple values, which could be handy when you are doing async things…</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+  then (done) {
+    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done([err, res]))
+  }
+}
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> [err, res] = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+}
+main()
+</code></pre>
+<p>Sure some people might argue that C-style error passing is error-prone. But, bubbling is just as susceptible to mishandling. Choose your poison.</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Data-Modeling-in-Javascript">
+    <a class="link" href="#Data-Modeling-in-Javascript">
+      <div class="labels"><span>Programming</span></div>
+      <h1 class="title">Data Modeling in Javascript</h1>
+    </a>
+    <div class="body">
+      <p><img src="https://cloud.githubusercontent.com/assets/136109/20865895/3bb07ace-ba1e-11e6-9294-75b98219b660.png" alt="image">
+Working on <a href="https://voltra.co.">Voltra Co.</a>, I’ve needed a lot of data models. I’ve tried some pretty clever solutions for validating and describing data. But after working daily with these libraries, I’ve found that the javascript just gets in the way. Too much syntax, too much boiler plate, etc. 50+ models with 30+ entities can become a nightmare to read and maintain.</p>
+<p>Anyway, after much GTD I took a break to put together <a href="http://voltraco.github.io/dml/">DML</a>. DML is a simple language with the goal of making your data models readable and maintainable. The javascript implementation is only a few hundred lines. The documentation is a work in progress at the moment but the syntax looks like this…</p>
+<pre><code class="lang-js"><span class="hljs-comment">/*
+ * An example data model
+ */</span>
+
+<span class="hljs-built_in">Date</span> created
+Number id
+
+<span class="hljs-built_in">String</span> name {
+  required <span class="hljs-literal">true</span> <span class="hljs-comment">// this is a comment</span>
+  <span class="hljs-literal">gt</span> <span class="hljs-number">2</span> <span class="hljs-string">"Must be greater than 2 characters"</span>
+  <span class="hljs-literal">lte</span> <span class="hljs-number">256</span> <span class="hljs-string">"Must be less than or equal to 256 characters"</span>
+}
+
+<span class="hljs-built_in">String</span> bio <span class="hljs-string">"A bio must be a string"</span> {
+  <span class="hljs-literal">lte</span> <span class="hljs-number">140</span> <span class="hljs-string">"A bio must fit into a tweet"</span>
+}
+
+<span class="hljs-built_in">Boolean</span> accountType
+</code></pre>
+<p>This is in the very early stages. Visit the project on <a href="https://github.com/voltraco/dml">Github</a>.</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Beautiful-Nerd-Tree">
+    <a class="link" href="#Beautiful-Nerd-Tree">
+      <div class="labels"><span>Programming</span></div>
+      <h1 class="title">Beautiful Nerd Tree</h1>
+    </a>
+    <div class="body">
+      <p><img src="https://cloud.githubusercontent.com/assets/136109/20639266/dc9e8f22-b3be-11e6-8800-a2bc19c72274.png" alt="image"></p>
+<p>Recently i cleaned up my <a href="https://github.com/0x00A/dotfiles/blob/master/.vimrc">.vimrc</a> file. I stopped using some plugins and made my setup a little simpler. Here&#39;s how i got NERDTree looking so good.</p>
+<pre><code class="lang-vim"><span class="hljs-type">Plugin</span> <span class="hljs-symbol">'ryanoasis</span>/vim-devicons'
+<span class="hljs-type">Plugin</span> <span class="hljs-symbol">'Xuyuanp</span>/nerdtree-git-plugin'
+</code></pre>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Photo-Sharing">
+    <a class="link" href="#Photo-Sharing">
+      <div class="labels"><span>Photography</span></div>
+      <h1 class="title">Photo Sharing</h1>
+    </a>
+    <div class="body">
+      <p><img src="https://cloud.githubusercontent.com/assets/136109/20639024/7fa69cb6-b3b8-11e6-89b1-18c740850652.png" alt="image"></p>
+<p>Recently I started adding photos to Instagram. Instagram has a cool hidden feature that will render your photo as ascii art. If you inspect the url of an image and add <code>.html</code> or <code>.txt</code> to the filename you get something like what you&#39;re seeing in this picture (original is <a href="https://www.instagram.com/p/BNPklBngVTI/?taken-by=paolofragomeni">here</a>).</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Amsterdam">
+    <a class="link" href="#Amsterdam">
+      <div class="labels"><span>Travel</span></div>
+      <h1 class="title">Amsterdam</h1>
+    </a>
+    <div class="body">
+      <h1 id="if-you-are-in-amsterdam-">If you are in Amsterdam...</h1>
+<p><img src="https://cloud.githubusercontent.com/assets/136109/17458765/b0bf36ca-5beb-11e6-9a3f-65976ddfc7fb.png" alt="image"></p>
+<p>I&#39;m living in the city. So if you are in town, message me on <a href="https://twitter.com/0x00a">twitter</a> or comment <a href="https://github.com/0x00A/blog/issues/9">here</a> on github. Let&#39;s ride bikes, write code or play music!</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Github-is-a-CMS">
+    <a class="link" href="#Github-is-a-CMS">
+      <div class="labels"><span>idea</span></div>
+      <h1 class="title">Github is a CMS</h1>
+    </a>
+    <div class="body">
+      <p>Github is basically a big content management system. So, here is an attempt to leverage it as a writing and publishing platform! Issues allow any number of authorized users to publish to the same page, hello painless collaborative blogging!</p>
+<p><a href="https://github.com/0x00A/blog">This project</a>, the blog you are reading, was co-designed and co-developed by @aprileelcich and myself. If you like it, it&#39;s MIT licensed, so fork it if you want to! There are only a few things you need to do in order to get it working for yourself...</p>
+<ul>
+<li>Change the <a href="https://github.com/0x00A/blog/blob/gh-pages/CNAME"><code>CNAME</code></a> file to include the correct domain (and obviously your DNS settings to add a CNAME record).</li>
+<li>Change the <a href="https://github.com/0x00A/blog/blob/gh-pages/config.json"><code>config.json</code></a> file to reflect the correct username and repository. Also make sure you add yourself to the authors array!</li>
+<li>Edit the static HTML, some of this is specific to me and you will want to change that.</li>
+</ul>
+<p>Happy writing and if you have any questions feel free to ask them on <a href="https://twitter.com/0x00a">twitter</a> or here in the comments section. Ciao. &primes;</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Cleaner-javascript-programs-using-generators-and-destructuring">
+    <a class="link" href="#Cleaner-javascript-programs-using-generators-and-destructuring">
+      <div class="labels"><span>idea</span> <span>Programming</span></div>
+      <h1 class="title">Cleaner javascript programs using generators and destructuring</h1>
+    </a>
+    <div class="body">
+      <p>Two of my favorite things to come out of <a href="">es6</a> were <code>destructuring</code>, an expression that makes it possible to extract data from arrays or objects into distinct variables <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"><code>1</code></a> and <code>generators</code>, functions which can be exited and later re-entered <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*"><code>2</code></a>. Together these two features can flatten asynchronous flow control.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> { run, wrap } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'yl'</span>)
+<span class="hljs-keyword">const</span> fs = wrap(<span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>))
+<span class="hljs-keyword">const</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">'assert'</span>)
+
+run(<span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
+
+  <span class="hljs-keyword">const</span> [statError, s] = <span class="hljs-keyword">yield</span> fs.stat(<span class="hljs-string">'./index.js'</span>)
+  <span class="hljs-keyword">const</span> [readError, f] = <span class="hljs-keyword">yield</span> fs.readFile(<span class="hljs-string">'./index.js'</span>)
+
+  assert.equal(f.length, s.size)
+})
+</code></pre>
+<p>The above code uses a tiny library called <a href="https://github.com/0x00A/yl">yl</a>. You could write this yourself easily in under 15 lines of code. If you can make it smaller, send me a pull request! The really nice thing about this code is that you can use it <em>today</em> without the need for a massive tool chain or huge compiler like <a href="https://babeljs.io/">babel</a>.</p>
+<p>You already know about <a href="http://callbackhell.com/">calback hell</a>. But for context, here is the <code>es5</code> version.</p>
+<pre><code class="lang-js"><span class="hljs-selector-tag">var</span> yl = require(<span class="hljs-string">'yl'</span>)
+<span class="hljs-selector-tag">var</span> run = yl<span class="hljs-selector-class">.run</span>
+<span class="hljs-selector-tag">var</span> wrap = yl<span class="hljs-selector-class">.wrap</span>
+<span class="hljs-selector-tag">var</span> fs = wrap(require(<span class="hljs-string">'fs'</span>))
+<span class="hljs-selector-tag">var</span> assert = require(<span class="hljs-string">'assert'</span>)
+
+fs.stat(<span class="hljs-string">'./index.js'</span>, function (statError, s) {
+  fs.readFile(<span class="hljs-string">'./index.js'</span>, function (readError, f) {
+    assert.equal(f<span class="hljs-selector-class">.length</span>, s.size)
+  })
+})
+</code></pre>
+<h2 id="code-walk-through">Code walk through</h2>
+<p>Line 1 is a Destructuring assignment. When working with node or electron, I use <code>const</code> exclusively in place of <code>var</code>. IMHO, <code>const</code> is poorly named. You might expect it to give you a constant, it actually just ensures the variable identifier can&#39;t be reassigned. This is still good though, it will save you from stomping on any of your prior declarations. Let me elaborate...</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> x = { <span class="hljs-built_in">num</span>: <span class="hljs-number">100</span> }
+x = { str: <span class="hljs-string">'hello'</span> } <span class="hljs-comment">// type error! you can't assign to "constant" variable.</span>
+x.<span class="hljs-built_in">num</span> = <span class="hljs-number">50</span> <span class="hljs-comment">// no problem, man.</span>
+</code></pre>
+<p>So back to the actual line of code. We are cherry picking some of the members on the object returned by the <code>require</code> function. The equivalent in <code>es5</code> would be...</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> yl = require(<span class="hljs-string">'yl'</span>)
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">run</span> = yl.<span class="hljs-built_in">run</span>
+<span class="hljs-keyword">const</span> wrap = yl.wrap
+</code></pre>
+<p>The next line of code uses the <a href="https://github.com/0x00A/yl/blob/master/yl.js#L15-L27"><code>wrap</code></a> function that we imported from <code>yl</code>. This will make some changes to the functions that are import from the <code>fs</code> object. </p>
+<p>Basically <code>wrap</code> puts a <a href="https://github.com/0x00A/yl/blob/master/yl.js#L23"><code>closure</code></a> around some of the functions. We can determine that these methods are <a href="https://github.com/0x00A/yl/blob/master/yl.js#L2"><code>not generator functions</code></a> so we can return a function, that when called by the generator, its arguments will be <a href="https://github.com/0x00A/yl/blob/master/yl.js#L2-L5"><code>applied to the original function</code></a>.</p>
+<p>You don&#39;t <em>need</em> to do this wrapping. You could wrap any function individually (see <a href="https://github.com/0x00A/yl#example"><code>this example</code></a>).</p>
+<p>Next we see <code>run(function* () { /* ... */ }</code>. Here we&#39;re passing a generator function into the <code>run</code> method that we imported. Why? A <code>function* () {}</code> indicates that we will be able to <code>yield</code> control flow to asynchronous functions. The <a href="https://github.com/0x00A/yl/blob/master/yl.js#L7-L12"><code>run</code></a> function will handle calling the callback and passing the arguments returned to the generator so they can be returned by the <code>yield</code> statement.</p>
+<p>Now the magic! we see this <code>const [statError, s] = yield fs.stat(&#39;./index.js&#39;)</code>. We are destructuring an array of values that is returned by the <code>stat</code> function. But notice how we don&#39;t need to pas the callback to the <code>stat</code> function! Instead, we use the <code>yield</code> keyword. The yield keyword is used to pause and resume a generator function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield"><code>3</code></a>.</p>
+<p>The performance impact is negligible, it&#39;s been a while since i&#39;ve looked. But if you are worried about it, measure the performance or just don&#39;t use generators in your hot path.</p>
+<p>In <code>es7</code> you will get the <code>async</code> and <code>await</code> keywords which could provide a similar service combined with destructuring. I&#39;ll do a post on that when they get closer to being implemented.</p>
+
+    </div>
+  </div>
+
+
+  <div class="post" id="Git-Commit-Script">
+    <a class="link" href="#Git-Commit-Script">
+      <div class="labels"><span>idea</span> <span>Programming</span></div>
+      <h1 class="title">Git Commit Script</h1>
+    </a>
+    <div class="body">
+      <p>Most of the time, after I work on a coding task, I type a series of the same commands, usually they look something like...</p>
+<pre><code>git commit -m <span class="hljs-string">"..."</span> -a
+git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master
+</code></pre><p>For fun I decided to bash a script together for making this procedure interactive. It looks something like this...</p>
+<pre><code class="lang-bash"><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">commit</span></span>() {
+  <span class="hljs-built_in">local</span> b
+  <span class="hljs-built_in">local</span> r
+
+  b=$(git rev-parse --abbrev-ref HEAD)
+  r=$(git remote)
+
+  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Message:"</span> msg
+  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Branch [<span class="hljs-variable">${b}</span>]:"</span> branch
+  <span class="hljs-built_in">read</span> <span class="hljs-_">-e</span> -p <span class="hljs-string">"Remote [<span class="hljs-variable">${r}</span>]:"</span> remote
+
+  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$msg</span>"</span> ]]; <span class="hljs-keyword">then</span>
+    msg=<span class="hljs-string">"Update..."</span>
+  <span class="hljs-keyword">fi</span>
+
+  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$branch</span>"</span> ]]; <span class="hljs-keyword">then</span>
+    branch=<span class="hljs-variable">$b</span>
+  <span class="hljs-keyword">fi</span>
+
+  <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$remote</span>"</span> ]]; <span class="hljs-keyword">then</span>
+    remote=<span class="hljs-variable">$r</span>
+  <span class="hljs-keyword">fi</span>
+
+  {
+    git add -A .
+    git commit -m <span class="hljs-string">"<span class="hljs-variable">$msg</span>"</span>
+    git push <span class="hljs-variable">$remote</span> <span class="hljs-variable">$branch</span>
+  } &gt; /dev/null
+}
+</code></pre>
+<p>I&#39;ve used git completion. Yes I&#39;ve used oh-my-zsh. This is interactive, but not as heavy as a full GUI. Something lite and interactive seems like it could reduce the cognitive switch required when going from code to source control. Ideas? Would love to hear yours.</p>
+
+    </div>
+  </div>
+
+      </section>
+
+    </div>
+
+    <script src="./index.js"></script>
+
+  </body>
+</html>
