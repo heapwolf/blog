@@ -50,11 +50,13 @@
 </code></pre>
 <p>The JS equivalent…</p>
 <pre><code class="lang-js">{
-  const a = parseInt(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
-  const b = parseInt(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
+  <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
 
-  if (<span class="hljs-name">a</span> &amp;&amp; b &amp;&amp; a === b) {
-    console.log(`a: ${a} is equal to b: ${b}`)
+  <span class="hljs-keyword">if</span> (a) { <span class="hljs-comment">// ...don't evaluate `b` if `a` is not valid.</span>
+   <span class="hljs-keyword">const</span> b = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
+
+   <span class="hljs-keyword">if</span> (b &amp;&amp; a === b) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`a: <span class="hljs-subst">${a}</span> is equal to b: <span class="hljs-subst">${b}</span>`</span>)
   }
 }
 </code></pre>
