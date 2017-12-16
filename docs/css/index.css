@@ -72,6 +72,10 @@
 .hljs-strong {
   font-weight: bold;
 }
+html,
+body {
+  height: 100%;
+}
 body {
   background-color: #f4f2ea;
   font-family: 'Merriweather', serif;
@@ -84,6 +88,7 @@ body #cv {
 body #cv h1,
 body #cv h2,
 body #cv h3 {
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 body #cv h1 {
@@ -115,9 +120,7 @@ body h1 {
   text-align: center;
 }
 body header {
-  height: 800px;
-  width: 100%;
-  position: relative;
+  height: 100%;
 }
 body header .intro {
   box-sizing: border-box;
@@ -132,13 +135,13 @@ body header .intro {
   text-align: center;
 }
 body header .intro p:nth-child(1) {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin: 0;
-  letter-spacing: 0.4rem;
+  letter-spacing: 0.3rem;
   text-transform: uppercase;
 }
 body header .intro p:nth-child(2) {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.6rem;
   text-transform: uppercase;
   margin: 10px 10px 6px 10px;
@@ -148,7 +151,7 @@ body header .intro p.first-line {
   font-size: 0.75rem;
   text-transform: uppercase;
   text-align: justify;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 body header .intro p:nth-child(5) {
   font-size: 0.7rem;
@@ -159,7 +162,7 @@ body header .intro h2 {
   font-size: 0.75rem;
   font-weight: normal;
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.2rem;
   line-height: 2em;
   margin-top: 20px;
 }
@@ -169,13 +172,13 @@ body header .intro h2:before {
   height: 1px;
   background-color: #222627;
   display: block;
-  margin: 2px 0 20px 0;
+  margin: 2px 0 22px 0;
 }
 body header .intro h2 a {
   font-style: normal;
 }
 body header .intro h1 {
-  margin: 0.8em 0;
+  margin: 0.7em 0;
   font-size: 3rem;
   line-height: 1em;
 }
@@ -208,7 +211,10 @@ body h1.title:after {
 }
 body p,
 body ul {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.5em;
+  letter-spacing: 0.01em;
+  font-family: Poly, monospace;
   line-height: 1.4rem;
 }
 body li {
@@ -312,8 +318,8 @@ body #posts .post .body a:hover {
   border-bottom: 1px solid #4d99bf;
 }
 body #posts .post .body code {
-  background: #fff;
-  padding: 2px;
+  background: #f4f2ea;
+  padding: 4px;
 }
 body #posts .post .body pre code {
   background-color: #f4f2ea;
@@ -411,9 +417,6 @@ body #posts .post .summary a.comments_url {
   display: block;
 }
 @media (max-width: 768px) {
-  body header {
-    height: 600px;
-  }
   body #cv {
     padding: 5%;
   }

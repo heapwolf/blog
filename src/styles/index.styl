@@ -25,6 +25,9 @@ $accent = #4d99bf
 
 // Styling
 
+html, body
+  height 100%
+
 body
   background-color $cream
   font-family $body
@@ -35,6 +38,7 @@ body
     padding 100px 20%
 
     h1, h2, h3
+      letter-spacing .05em
       text-transform uppercase
 
     h1
@@ -63,9 +67,7 @@ body
     text-align center
 
   header
-    height 800px
-    width 100%
-    position relative
+    height 100%
 
     .intro
       box-sizing border-box
@@ -80,13 +82,13 @@ body
       text-align center
 
       p:nth-child(1)
-        font-size 0.8rem
+        font-size 0.7rem
         margin 0
-        letter-spacing 0.4rem
+        letter-spacing 0.3rem
         text-transform uppercase
 
       p:nth-child(2)
-        font-size 0.7rem
+        font-size 0.75rem
         letter-spacing 0.6rem
         text-transform uppercase
         margin 10px 10px 6px 10px
@@ -96,7 +98,7 @@ body
         font-size 0.75rem
         text-transform uppercase
         text-align justify 
-        letter-spacing .05em
+        letter-spacing .06em
 
       p:nth-child(5)
         font-size 0.7rem
@@ -107,7 +109,7 @@ body
         font-size 0.75rem
         font-weight normal
         text-transform uppercase
-        letter-spacing 0.3rem
+        letter-spacing 0.2rem
         line-height 2em
         margin-top 20px
         &:before
@@ -116,12 +118,12 @@ body
           height 1px
           background-color $black
           display block
-          margin 2px 0 20px 0
+          margin 2px 0 22px 0
         a
           font-style normal
 
       h1
-        margin .8em 0
+        margin .7em 0
         font-size 3rem
         line-height 1em
 
@@ -153,7 +155,10 @@ body
       background-color $gray
 
   p, ul
-    font-size 1rem
+    font-size 1.1rem
+    line-height 1.5em
+    letter-spacing .01em
+    font-family Poly, monospace
     line-height 1.4rem
 
   li
@@ -254,8 +259,8 @@ body
             border-bottom 1px solid $accent
 
         code
-          background $white
-          padding 2px
+          background #f4f2ea
+          padding 4px
 
         pre
           code
@@ -356,8 +361,7 @@ body
 
 @media (max-width: 768px)
   body
-    header
-      height 600px
+
     #cv
       padding 5%
 
