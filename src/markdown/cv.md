@@ -27,30 +27,29 @@ Mic). I am currently VPoE at Voltra Co.
 ## Expertise
 Computer Science Research. Software Engineering: programming design and
 engineering, concurrent and distributed programming, metaprogramming,
-functional programming and ECMAScript (Javascript). Relational and
-Semi-stuctured data.
+functional programming and ECMAScript (Javascript), relational and
+semi-stuctured data.
 
 
 ## Professional Experience
 
-### Software Engineer, Technical Lead, VP of Engineering at Voltra Co.
+### Software Engineer, VP of Engineering, Cofounder at Voltra Co.
 January 2016 - Present (2 years)
 
-Voltra Co. is a platform for artists to sell their music. Voltra Co. offers
-Stream-to-own. For music consumers this is a low-risk path to purchasing
-music. Voltra's desktop and mobile players sync so that listeners can
-stream their music from anywhere. It is the only ad-free, fully hi-res,
-cross-platform service. On this project I work with Electron, JavaScript,
-Node.js, C++, CSS3, HTML5, Stylus, Jade, Webpack, React, React-Native, and
+Voltra Co. has a digital music store offering downloads and stream-to-own.
+For music consumers this means low-risk discovery with an easier path to
+purchasing. Voltra's desktop and mobile players sync so that listeners can
+stream all their music from anywhere. On this project I work with Electron,
+JavaScript, Node.js, C++, CSS3, HTML5, Webpack, React, React-Native, and
 Amazon Web Services.
 
 
 ### Engineer, Sr. Engineer, VP of Engineering at Now Secure
 November 2014 - January 2016 (1 year 3 months)
 
-Built engineering and security research teams. Coordinated engineering and
-research teams. Set technical goals, worked hands on on lots of projects.
-On this project I worked primarily with C, C++, JavaScript, Node.js, HTML5.
+Built and coordinated engineering and security research teams. Set technical
+goals, coded and managed several projects. I worked primarily with C++,
+JavaScript, HTML5, Node.js, REST and Electron.
 
 
 ### Engineer, CTO at Mic
