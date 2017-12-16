@@ -244,24 +244,6 @@ fs.stat(<span class="hljs-string">'./index.js'</span>, function (statError, s) {
   })
 })
 </code></pre>
-<h2 id="code-walk-through">Code walk through</h2>
-<p>Line 1 is a Destructuring assignment. When working with node or electron, I use <code>const</code> exclusively in place of <code>var</code>. IMHO, <code>const</code> is poorly named. You might expect it to give you a constant, it actually just ensures the variable identifier can&#39;t be reassigned. This is still good though, it will save you from stomping on any of your prior declarations. Let me elaborate...</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> x = { <span class="hljs-built_in">num</span>: <span class="hljs-number">100</span> }
-x = { str: <span class="hljs-string">'hello'</span> } <span class="hljs-comment">// type error! you can't assign to "constant" variable.</span>
-x.<span class="hljs-built_in">num</span> = <span class="hljs-number">50</span> <span class="hljs-comment">// no problem, man.</span>
-</code></pre>
-<p>So back to the actual line of code. We are cherry picking some of the members on the object returned by the <code>require</code> function. The equivalent in <code>es5</code> would be...</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> yl = require(<span class="hljs-string">'yl'</span>)
-<span class="hljs-keyword">const</span> <span class="hljs-built_in">run</span> = yl.<span class="hljs-built_in">run</span>
-<span class="hljs-keyword">const</span> wrap = yl.wrap
-</code></pre>
-<p>The next line of code uses the <a href="https://github.com/0x00A/yl/blob/master/yl.js#L15-L27"><code>wrap</code></a> function that we imported from <code>yl</code>. This will make some changes to the functions that are import from the <code>fs</code> object. </p>
-<p>Basically <code>wrap</code> puts a <a href="https://github.com/0x00A/yl/blob/master/yl.js#L23"><code>closure</code></a> around some of the functions. We can determine that these methods are <a href="https://github.com/0x00A/yl/blob/master/yl.js#L2"><code>not generator functions</code></a> so we can return a function, that when called by the generator, its arguments will be <a href="https://github.com/0x00A/yl/blob/master/yl.js#L2-L5"><code>applied to the original function</code></a>.</p>
-<p>You don&#39;t <em>need</em> to do this wrapping. You could wrap any function individually (see <a href="https://github.com/0x00A/yl#example"><code>this example</code></a>).</p>
-<p>Next we see <code>run(function* () { /* ... */ }</code>. Here we&#39;re passing a generator function into the <code>run</code> method that we imported. Why? A <code>function* () {}</code> indicates that we will be able to <code>yield</code> control flow to asynchronous functions. The <a href="https://github.com/0x00A/yl/blob/master/yl.js#L7-L12"><code>run</code></a> function will handle calling the callback and passing the arguments returned to the generator so they can be returned by the <code>yield</code> statement.</p>
-<p>Now the magic! we see this <code>const [statError, s] = yield fs.stat(&#39;./index.js&#39;)</code>. We are destructuring an array of values that is returned by the <code>stat</code> function. But notice how we don&#39;t need to pas the callback to the <code>stat</code> function! Instead, we use the <code>yield</code> keyword. The yield keyword is used to pause and resume a generator function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield"><code>3</code></a>.</p>
-<p>The performance impact is negligible, it&#39;s been a while since i&#39;ve looked. But if you are worried about it, measure the performance or just don&#39;t use generators in your hot path.</p>
-<p>In <code>es7</code> you will get the <code>async</code> and <code>await</code> keywords which could provide a similar service combined with destructuring. I&#39;ll do a post on that when they get closer to being implemented.</p>
 
     </div>
   </div>
