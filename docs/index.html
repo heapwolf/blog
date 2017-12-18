@@ -20,6 +20,87 @@
 
       <section id="posts" name="blog">
         
+  <div class="post" id="Swift-for-Javascripters:-Lambda-Capture">
+    <a class="link" href="#Swift-for-Javascripters:-Lambda-Capture">
+      <div class="labels"></div>
+      <h1 class="title">Swift for Javascripters: Lambda Capture</h1>
+    </a>
+    <div class="body">
+      <p>Sometimes you want to capture the state of a variable in a function&#39;s
+closure for later use. In JavaScript you could do that like this...</p>
+<pre><code class="lang-js">let <span class="hljs-selector-tag">a</span> = <span class="hljs-number">0</span>
+let <span class="hljs-selector-tag">b</span> = <span class="hljs-number">0</span>
+
+const closure = (<span class="hljs-selector-tag">a</span> =&gt; () =&gt; {
+  console.log(<span class="hljs-selector-tag">a</span>, b)
+})(a)
+
+<span class="hljs-selector-tag">a</span> = <span class="hljs-number">10</span>
+<span class="hljs-selector-tag">b</span> = <span class="hljs-number">10</span>
+<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
+</code></pre>
+<pre><code><span class="hljs-symbol">0 </span><span class="hljs-number">10</span>
+</code></pre><p>In Swift, a closure (or lambda function) looks like this (and here&#39;s a nice troll; Swift&#39;s <code>let</code> is JavaScript&#39;s <code>const</code> and Swift&#39;s <code>var</code> is JavaScript&#39;s <code>let</code>. And Swift has no equivalent of JavaScript&#39;s <code>var</code>)...</p>
+<pre><code class="lang-swift">let closure = {
+  print(<span class="hljs-string">"hello"</span>)
+}
+
+<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
+</code></pre>
+<pre><code>hello
+</code></pre><p>Simple! But it has more features. You can pass it a list of parameters. You
+can optionally specify a return type. And if your lambda function contains a
+single expression, it will implicitly return that value, just like JavaScript.</p>
+<pre><code class="lang-swift">{ <span class="hljs-function"><span class="hljs-params">(parameters)</span> -&gt;</span> returntype <span class="hljs-keyword">in</span>
+    statements
+}
+</code></pre>
+<p>Here&#39;s a more concrete example of a function that takes two strings and joins
+them. In many cases, Swift can figure out the return type for you. But in this
+case we specify the return type to avoid ambiguity with the <code>+</code> operator.</p>
+<pre><code class="lang-swift">let fn = { (<span class="hljs-selector-tag">a</span>, b) -&gt; String <span class="hljs-keyword">in</span>
+  <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">fn</span><span class="hljs-params">(<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>)</span></span>
+</code></pre>
+<pre><code><span class="hljs-string">"helloworld"</span>
+</code></pre><p>If we want, we can also tell Swift what kinds of parameters the lambda
+function will receive!</p>
+<pre><code class="lang-swift">let fn = { (<span class="hljs-selector-tag">a</span>: Int, <span class="hljs-selector-tag">b</span>: Int) -&gt; Int <span class="hljs-keyword">in</span>
+  <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">fn</span><span class="hljs-params">(<span class="hljs-number">100</span>, <span class="hljs-number">1</span>)</span></span>
+</code></pre>
+<pre><code>101
+</code></pre><p>You can also pass what is called a <code>capture list</code>. A capture list can
+contain multiple values separated by commas. It&#39;s also not limited to
+values, it can contain expressions.</p>
+<pre><code class="lang-swift">{ [captures] (<span class="hljs-name">parameters</span>) -&gt; returntype in
+    statements
+}
+</code></pre>
+<p>And finally, here is an example of how a variable in your program might
+change, but the lambda can capture its value so it is retained for later
+use.</p>
+<pre><code class="lang-swift"><span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">a</span> = <span class="hljs-number">0</span>
+<span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">b</span> = <span class="hljs-number">0</span>
+
+let closure = { [a] <span class="hljs-keyword">in</span>
+  print(<span class="hljs-selector-tag">a</span>, b)
+}
+
+<span class="hljs-selector-tag">a</span> = <span class="hljs-number">10</span>
+<span class="hljs-selector-tag">b</span> = <span class="hljs-number">10</span>
+<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
+</code></pre>
+<pre><code><span class="hljs-symbol">0 </span><span class="hljs-number">10</span>
+</code></pre>
+    </div>
+  </div>
+
+
   <div class="post" id="Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
     <a class="link" href="#Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
       <div class="labels"><span>JavaScript</span> <span>Programming</span> <span>Swift</span></div>
