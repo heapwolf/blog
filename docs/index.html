@@ -108,8 +108,21 @@ main()
     request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done([err, res]))
   }
 }
+
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> [err, res] = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+}
+main()
+</code></pre>
+<p>And, there is of course more than one way to return more than one value!</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+  then (done) {
+    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done({ err, res }))
+  }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
 }
 main()
 </code></pre>
