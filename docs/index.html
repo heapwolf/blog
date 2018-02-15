@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="./css/index.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather|Poly" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Poly|Anonymous+Pro" rel="stylesheet">
   </head>
 
   <body>
@@ -148,34 +148,53 @@ let closure = { [a] <span class="hljs-keyword">in</span>
 
   <div class="post" id="Async/await-without-Promises">
     <a class="link" href="#Async/await-without-Promises">
-      <div class="labels"><span>idea</span> <span>Programming</span></div>
+      <div class="labels"><span>Programming</span> <span>idea</span></div>
       <h1 class="title">Async/await without Promises</h1>
     </a>
     <div class="body">
       <p>A while ago I posted about using generators and destructuring assignments for flow control. Now that <code>async</code> has landed and its usable everywhere, I almost always use <code>async/await</code>.</p>
-<p>I&#39;ve never really liked promises. In many ways, they are just as bad as callbacks but with more moving parts. Luckily, promises aren&#39;t really a requirement for using <code>async/await</code>. In fact, you can bypass the promise constructor entirely. Just create a <code>then-able</code>. A <code>then-able</code> is any function, object or class that implements a <code>then</code> function (or member, respectively). For example...</p>
+<p>I&#39;ve never liked promises. In many ways, they are just as bad as callbacks but with more moving parts. Luckily, promises aren&#39;t really a requirement for using <code>async/await</code>. In fact, you can bypass the promise constructor and most of its ceremony entirely. Just create a <code>then-able</code>! A <code>then-able</code> is any function, object or class that implements a <code>then</code> function (or member, respectively). For example...</p>
 <h2 id="await-able-classes">Await-able Classes</h2>
-<p>To create an async class, just implement a then method on it!</p>
+<p>To create an async class, just implement a <code>then</code> method on it!</p>
 <pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
-  then (success, fail) {
-    success(<span class="hljs-number">42</span>)
+  then (resolve, reject) {
+    resolve(<span class="hljs-number">42</span>)
   }
 }
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+  <span class="hljs-comment">// answer === 42</span>
 }
 main()
 </code></pre>
-<h2 id="awaitable-objects">Awaitable Objects</h2>
-<p>You can just do the same thing with an object.</p>
-<pre><code class="lang-js">const Foo = {
-  <span class="hljs-keyword">then</span> (<span class="hljs-keyword">done</span>) {
-    <span class="hljs-keyword">done</span> (await request(<span class="hljs-string">'https://foo.com'</span>))
+<h2 id="await-able-objects">Await-able Objects</h2>
+<p>You can just do the same thing with an object. You can name the callback functions whatever you want. Also, you aren&#39;t required to use or care about the <code>rejection</code> callback.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
+  then (done) {
+    setTimeout(() =&gt; done(<span class="hljs-number">42</span>), <span class="hljs-number">1024</span>)
   }
 }
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo
+  <span class="hljs-comment">// answer === 42</span>
+}
+main()
 </code></pre>
-<h2 id="await-inside-then-ables">Await inside then-ables</h2>
+<h2 id="await-able-object-factories">Await-able object factories</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-built_in">num</span> =&gt; ({
+  then (done) {
+    setTimeout(() =&gt; done(<span class="hljs-built_in">num</span>), <span class="hljs-number">1024</span>)
+  }
+})
+
+<span class="hljs-keyword">async</span> function main () {
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo(<span class="hljs-number">42</span>)
+}
+main()
+</code></pre>
+<h2 id="async-then-ables">Async then-ables</h2>
 <p>Object and class methods can use the async keyword, just like functions.</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
   <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">done</span>) </span>{
@@ -183,7 +202,7 @@ main()
   }
 }
 </code></pre>
-<p>And finally here is something really contentious for all you dare devils out there. You can use destructuring assignments to return multiple values, which could be handy when you are doing async things…</p>
+<p>You don&#39;t need to wrap everything in a <code>try/catch</code> blocks if you want to inform the caller about failures. Destructuring assignments provide a way to return multiple values…</p>
 <pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
   then (done) {
     request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done([err, res]))
@@ -204,10 +223,15 @@ main()
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+
+  <span class="hljs-comment">// More than one err? Remember, const and let are block-scoped!</span>
+  {
+    <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+  }
 }
 main()
 </code></pre>
-<p>Sure some people might argue that C-style error passing is error-prone. But, bubbling is just as susceptible to mishandling. Choose your poison.</p>
+<p>Sure some people might argue that C-style error passing is subject to mishandling. But so is error-bubbling. Choose your poison.</p>
 
     </div>
   </div>
@@ -293,7 +317,7 @@ Number id
 
   <div class="post" id="Asynchronous-flow-control-using-generators-and-destructuring">
     <a class="link" href="#Asynchronous-flow-control-using-generators-and-destructuring">
-      <div class="labels"><span>idea</span> <span>Programming</span></div>
+      <div class="labels"><span>Programming</span> <span>idea</span></div>
       <h1 class="title">Asynchronous flow control using generators and destructuring</h1>
     </a>
     <div class="body">

@@ -320,9 +320,12 @@ body #posts .post .body a:hover {
 body #posts .post .body code {
   background: #f4f2ea;
   padding: 4px;
+  font-size: 14px;
+  font-family: 'Anonymous Pro', monospace;
 }
 body #posts .post .body pre code {
   background-color: #f4f2ea;
+  font-family: 'Anonymous Pro', monospace;
   overflow: auto;
   display: block;
   padding: 20px;
