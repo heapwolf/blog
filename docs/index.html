@@ -247,7 +247,45 @@ main()
 main()
 </code></pre>
 <p>Sure some people might argue that C-style error passing is subject to mishandling. But so is error-bubbling. Choose your poison.</p>
+<h2 id="then-ables-are-faster-than-promises-">Then-ables are faster than promises.</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> Benchmark = <span class="hljs-built_in">require</span>(<span class="hljs-string">'benchmark'</span>)
 
+<span class="hljs-keyword">const</span> suite = <span class="hljs-keyword">new</span> Benchmark.Suite()
+
+suite.on(<span class="hljs-string">'cycle'</span>, event =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">String</span>(event.target)))
+<span class="hljs-keyword">const</span> add = (name, fn) =&gt; suite.add(name, fn, { defer: <span class="hljs-literal">true</span> })
+
+add(<span class="hljs-string">'p'</span>, complete =&gt; {
+  <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>((resolve, reject) =&gt; {
+      resolve()
+    }).then(() =&gt; {})
+
+    <span class="hljs-keyword">await</span> p
+    complete.resolve()
+  }
+
+  test()
+})
+
+add(<span class="hljs-string">'t'</span>, complete =&gt; {
+  <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> t = {
+      then: (done) =&gt; done()
+    }
+    <span class="hljs-keyword">await</span> t
+    complete.resolve()
+  }
+
+  test()
+})
+
+suite.run({ <span class="hljs-string">'async'</span>: <span class="hljs-literal">true</span> })
+</code></pre>
+<p>Since more moving parts are required in the JavaScript engine to make promises work, the results are as you would expect, promises are slower.</p>
+<pre><code>p x <span class="hljs-number">340</span>,<span class="hljs-number">087</span> ops/sec ±<span class="hljs-number">2.43</span><span class="hljs-meta">%</span> <span class="hljs-comment">(76 runs sampled)</span>
+t x <span class="hljs-number">509</span>,<span class="hljs-number">813</span> ops/sec ±<span class="hljs-number">1.25</span><span class="hljs-meta">%</span> <span class="hljs-comment">(73 runs sampled)</span>
+</code></pre>
     </div>
   </div>
 
