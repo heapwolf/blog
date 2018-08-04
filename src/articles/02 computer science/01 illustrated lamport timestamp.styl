@@ -1,0 +1,85 @@
+#lamport-timestamp
+  height 250px
+  width 100%
+
+  .timeline
+    position relative
+    height 33.3%
+    margin 10px 0
+    border-bottom 1px dotted $black
+
+    &:after
+      position absolute
+      content attr(data-name)
+      text-transform uppercase
+      font-size 12px
+      bottom 10px
+      left 10px
+      color $gray
+
+    .event
+      position absolute
+      bottom -6px
+      border-radius 99em
+      height 12px
+      width 12px
+      background $black
+      font-size 14px
+      line-height 24px
+      text-align center
+
+      &:hover
+        .clock
+          opacity 1
+          z-index 1
+
+      .clock
+        position absolute
+        opacity 0
+        z-index -1
+        color white
+        font-size 12px
+        border-radius 2px
+        bottom 20px
+        height 25px
+        background #313131
+        width 100px
+        transition opacity .3s, z-index .3s
+        transform translateX(-44px)
+
+        &.show
+          opacity 1
+          z-index 1
+
+        &:after
+          top 100%
+          left 50%
+          border solid transparent
+          content " "
+          height 0
+          width 0
+          position absolute
+          pointer-events none
+          border-color rgba(49, 49, 49, 0)
+          border-top-color $black
+          border-width 5px
+          margin-left -5px
+        
+
+#node-event-links
+  text-align center
+  margin-bottom 50px
+
+  & > div
+    user-select none
+    display inline-block
+    text-transform uppercase
+    margin 8px
+    font-size 12px
+    cursor pointer
+    padding-bottom 2px
+    border-bottom 1px solid $black
+
+    &:hover
+      color $accent
+      border-bottom 1px solid $accent

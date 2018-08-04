@@ -3,174 +3,98 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="./css/index.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather|Poly|Anonymous+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,700" rel="stylesheet">
+    <!-- link href="https://fonts.googleapis.com/css?family=Merriweather|Poly" rel="stylesheet" -->
   </head>
 
   <body>
-    <header>
-      <div class="intro">
-        <p>Hello, My Name is</p>
-        <h1>Paolo Fragomeni</h1>
-        <p class="first-line">I write software and create products. This is a journal of brief technical notes and random ideas.</p>
-        <h2><a href="https://github.com/0x00a/">Code</a>, <a href="https://twitter.com/0x00A">Tweets</a> &amp; <a href="/cv.html">Curriculum Vitae</a></h2>
-      </div>
-    </header>
+    <aside>
+      <h3>01 programming</h3>
 
-    <div id="blog" role="main">
+        <a class="link" href="#post-01-bet-on-the-web---and-web-components">
+          01 bet on the web - and web components
+        </a>
+        <br>
+      
 
-      <section id="posts" name="blog">
-        
-  <div class="post" id="How-to-pronounce-my-name">
-    <a class="link" href="#How-to-pronounce-my-name">
-      <div class="labels"><span>Fact</span></div>
-      <h1 class="title">How to pronounce my name</h1>
-    </a>
-    <div class="body">
-      <p><img src="https://user-images.githubusercontent.com/136109/36275391-feaf8d42-128a-11e8-9104-049ec13e88e1.png" alt="image"></p>
-<p>I have an Italian name. A lot of english speakers ask me how to pronounce it. This may help.</p>
-<pre><code><span class="hljs-built_in">Pow</span>-Low Fray-Go-Many
-</code></pre><p>Wow. You&#39;re good at that. You should visit Italy one day.</p>
 
-    </div>
+        <a class="link" href="#post-02-what-are-javascript-then-ables">
+          02 what are javascript then-ables
+        </a>
+        <br>
+      <h3>02 computer science</h3>
+
+        <a class="link" href="#post-01-illustrated-lamport-timestamp">
+          01 illustrated lamport timestamp
+        </a>
+        <br>
+      <h3>03 other</h3>
+
+        <a class="link" href="#post-01-code">
+          01 code
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-02-curriculum-vitae">
+          02 curriculum vitae
+        </a>
+        <br>
+      
+    </aside>
+
+    <div id="posts" role="main">
+      <section class="post" id="post-01-bet-on-the-web---and-web-components">
+  <h1 id="bet-on-the-web-and-web-components">bet on the web - and web components</h1>
+<h3 id="2018-08-02">2018-08-02</h3>
+<p>I don&#39;t use frameworks, so React appeals to me. I like how it organizes ideas.
+I like its top-down, one-way flow of data. But I also think some of its
+usefulness is debatable. It has a big island of tooling that&#39;s going in a
+very different direction than the rest of the web. Like Coffeescript or jQuery,
+in 5 years it will probably inspire standards bodies with its best features.</p>
+<p>I also like Web Components, they&#39;re great because they offer true, native
+encapsulation &nbsp;&mdash;&nbsp; no hacks. They are mostly the result of
+consensus among the web&#39;s working groups. They&#39;re pretty awkward, like most of
+the web&#39;s native APIs &nbsp;&mdash;&nbsp; but a foundation to build on.</p>
+<p><img src="https://raw.githubusercontent.com/hxoht/tonic/addimage/readme-tonic.png" alt="img"></p>
+<p>I&#39;d like to introduce Tonic. It&#39;s about 125 lines of code. It&#39;s much less
+opinionated than React. It shares some of the same goals; though its main goal
+is to provide the <em>minimum</em> of what is needed to organize code, the flow of
+data and create component based architecture. Most importantly, it&#39;s built on
+the platform of the future, the web.</p>
+<p>You can find the project <a href="https://github.com/hxoht/tonic/">here</a> on Github.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
   </div>
-
-
-  <div class="post" id="Swift-for-Javascripters:-Lambda-Capture">
-    <a class="link" href="#Swift-for-Javascripters:-Lambda-Capture">
-      <div class="labels"><span>JavaScript</span> <span>Programming</span> <span>Swift</span></div>
-      <h1 class="title">Swift for Javascripters: Lambda Capture</h1>
-    </a>
-    <div class="body">
-      <p>Sometimes you want to capture the state of a variable in a function&#39;s
-closure for later use. In JavaScript you could do that like this...</p>
-<pre><code class="lang-js">let <span class="hljs-selector-tag">a</span> = <span class="hljs-number">0</span>
-let <span class="hljs-selector-tag">b</span> = <span class="hljs-number">0</span>
-
-const closure = (<span class="hljs-selector-tag">a</span> =&gt; () =&gt; {
-  console.log(<span class="hljs-selector-tag">a</span>, b)
-})(a)
-
-<span class="hljs-selector-tag">a</span> = <span class="hljs-number">10</span>
-<span class="hljs-selector-tag">b</span> = <span class="hljs-number">10</span>
-<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
-</code></pre>
-<pre><code><span class="hljs-symbol">0 </span><span class="hljs-number">10</span>
-</code></pre><p>In Swift, a closure (or lambda function) looks like this (and here&#39;s a nice troll; Swift&#39;s <code>let</code> is JavaScript&#39;s <code>const</code> and Swift&#39;s <code>var</code> is JavaScript&#39;s <code>let</code>. And Swift has no equivalent of JavaScript&#39;s <code>var</code>)...</p>
-<pre><code class="lang-swift">let closure = {
-  print(<span class="hljs-string">"hello"</span>)
+</section>
+,<section class="post" id="post-02-what-are-javascript-then-ables">
+  <h1 id="what-are-javascript-then-ables">What are javascript then-ables</h1>
+<p><em>async / await</em> improves program flow and reduces the number of callbacks in
+your code. The <code>await</code> keyword can be used to pause the current code path and
+wait for an async function to return a value without blocking the <a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">event loop</a>.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'started'</span>)
+  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">100</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'finished'</span>)
 }
 
-<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
+main()
 </code></pre>
-<pre><code>hello
-</code></pre><p>Simple! But it has more features. You can pass it a list of parameters. You
-can optionally specify a return type. And if your lambda function contains a
-single expression, it will implicitly return that value, just like JavaScript.</p>
-<pre><code class="lang-swift">{ <span class="hljs-function"><span class="hljs-params">(parameters)</span> -&gt;</span> returntype <span class="hljs-keyword">in</span>
-    statements
-}
+<p>An implementation for the <code>sleep</code> function might look like this...</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> setTimeout(r, n))
 </code></pre>
-<p>Here&#39;s a more concrete example of a function that takes two strings and joins
-them. In many cases, Swift can figure out the return type for you. But in this
-case we specify the return type to avoid ambiguity with the <code>+</code> operator.</p>
-<pre><code class="lang-swift">let fn = { (<span class="hljs-selector-tag">a</span>, b) -&gt; String <span class="hljs-keyword">in</span>
-  <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
-}
-
-<span class="hljs-function"><span class="hljs-title">fn</span><span class="hljs-params">(<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>)</span></span>
-</code></pre>
-<pre><code><span class="hljs-string">"helloworld"</span>
-</code></pre><p>If we want, we can also tell Swift what kinds of parameters the lambda
-function will receive!</p>
-<pre><code class="lang-swift">let fn = { (<span class="hljs-selector-tag">a</span>: Int, <span class="hljs-selector-tag">b</span>: Int) -&gt; Int <span class="hljs-keyword">in</span>
-  <span class="hljs-selector-tag">a</span> + <span class="hljs-selector-tag">b</span>
-}
-
-<span class="hljs-function"><span class="hljs-title">fn</span><span class="hljs-params">(<span class="hljs-number">100</span>, <span class="hljs-number">1</span>)</span></span>
-</code></pre>
-<pre><code>101
-</code></pre><p>You can also pass what is called a <code>capture list</code>. A capture list can
-contain multiple values separated by commas. It&#39;s also not limited to
-values, it can contain expressions.</p>
-<pre><code class="lang-swift">{ [captures] (<span class="hljs-name">parameters</span>) -&gt; returntype in
-    statements
-}
-</code></pre>
-<p>And finally, here is an example of how a variable in your program might
-change, but the lambda can capture its value so it is retained for later
-use.</p>
-<pre><code class="lang-swift"><span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">a</span> = <span class="hljs-number">0</span>
-<span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">b</span> = <span class="hljs-number">0</span>
-
-let closure = { [a] <span class="hljs-keyword">in</span>
-  print(<span class="hljs-selector-tag">a</span>, b)
-}
-
-<span class="hljs-selector-tag">a</span> = <span class="hljs-number">10</span>
-<span class="hljs-selector-tag">b</span> = <span class="hljs-number">10</span>
-<span class="hljs-function"><span class="hljs-title">closure</span><span class="hljs-params">()</span></span>
-</code></pre>
-<pre><code><span class="hljs-symbol">0 </span><span class="hljs-number">10</span>
-</code></pre>
-    </div>
-  </div>
-
-
-  <div class="post" id="Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
-    <a class="link" href="#Swift-for-Javascripters:-Super-powered-If-statements-(Part-1)">
-      <div class="labels"><span>JavaScript</span> <span>Programming</span> <span>Swift</span></div>
-      <h1 class="title">Swift for Javascripters: Super powered If statements (Part 1)</h1>
-    </a>
-    <div class="body">
-      <p>First, a little bit about nothing... In JavaScript, you have the primitive type: <code>undefined</code> which indicates that a variable has never been initialized (or simply does not exist). You also have an entirely different type: <code>null</code>, which can be used to communicate intent: a value has been intentionally set to nothing.</p>
-<p>To handle the absence of a value, Swift has the type <code>Optional</code>. It either contains a value and has a specific type or it will be <code>nil</code>.</p>
-<p>Swift also has a feature called <code>optional binding</code>. This is like an <code>if</code> statement, but with more features. As with normal <code>if</code> statements, you can check that boolean expressions evaluate to true. But this syntax will also allow you to declare variables (and/or constants) that must result in non-<code>nil</code> values before the statement will execute the associated code block. If the block is executed, the variables that are declared can be used, but only inside that block.</p>
-<p>Consider a hypothetical function that takes an array of numbers and returns their <code>min</code> and <code>max</code> values...</p>
-<pre><code class="lang-swift"><span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> bounds = minMax(array: [<span class="hljs-number">8</span>, -<span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">109</span>, <span class="hljs-number">3</span>, <span class="hljs-number">71</span>]) {
-  <span class="hljs-built_in">print</span>(<span class="hljs-string">"min is <span class="hljs-subst">\(bounds.<span class="hljs-built_in">min</span>)</span> and max is <span class="hljs-subst">\(bounds.<span class="hljs-built_in">max</span>)</span>"</span>)
-}
-</code></pre>
-<p>The JS equivalent…</p>
-<pre><code class="lang-js">{
-  const bounds = mixMax([<span class="hljs-number">8</span>, <span class="hljs-number">-6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">109</span>, <span class="hljs-number">3</span>, <span class="hljs-number">71</span>])
-
-  if (<span class="hljs-name">bounds</span>) {
-    console.log(`min is ${bounds.min} and max is ${bounds.max}`)
-  }
-}
-</code></pre>
-<p>It is also possible to check multiple values and/or booleans at once...</p>
-<pre><code class="lang-swift"><span class="hljs-keyword">if</span> let <span class="hljs-selector-tag">a</span> = Int(<span class="hljs-string">"1"</span>), let <span class="hljs-selector-tag">b</span> = Int(<span class="hljs-string">"1"</span>), <span class="hljs-selector-tag">a</span> == <span class="hljs-selector-tag">b</span> {
-  print(<span class="hljs-string">"a: \(a) is equal to b: \(b)"</span>)
-}
-</code></pre>
-<p>The JS equivalent…</p>
-<pre><code class="lang-js">{
-  <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
-
-  <span class="hljs-keyword">if</span> (a) { <span class="hljs-comment">// ...don't evaluate `b` if `a` is not valid.</span>
-   <span class="hljs-keyword">const</span> b = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"1"</span>, <span class="hljs-number">10</span>)
-
-   <span class="hljs-keyword">if</span> (b &amp;&amp; a === b) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`a: <span class="hljs-subst">${a}</span> is equal to b: <span class="hljs-subst">${b}</span>`</span>)
-  }
-}
-</code></pre>
-
-    </div>
-  </div>
-
-
-  <div class="post" id="Async/await-without-Promises">
-    <a class="link" href="#Async/await-without-Promises">
-      <div class="labels"><span>Programming</span> <span>idea</span></div>
-      <h1 class="title">Async/await without Promises</h1>
-    </a>
-    <div class="body">
-      <p>A while ago I posted about using generators and destructuring assignments for flow control. Now that <code>async</code> has landed and its usable everywhere, I almost always use <code>async/await</code>.</p>
-<p>I&#39;ve never liked promises. In many ways, they are just as bad as callbacks but with more moving parts. Luckily, promises aren&#39;t really a requirement for using <code>async/await</code>. In fact, you can bypass the promise constructor and most of its ceremony entirely. Just create a <code>then-able</code>! A <code>then-able</code> is any function, object or class that implements a <code>then</code> function (or member, respectively). For example...</p>
-<h2 id="await-able-classes">Await-able Classes</h2>
-<p>To create an async class, just implement a <code>then</code> method on it!</p>
+<p>However, as this example demonstrates, the code in the promise starts executing
+immediately. Promises are eager (as opposed to being <em>lazy</em>), and sometimes we
+want them to be lazy, for example, to reusable tasks. <a href="https://staltz.com/promises-are-not-neutral-enough.html">Here</a> is a detailed
+explaination of why an eager promise may not be what you want.</p>
+<p>A then-able is lazy. It has no constructor. It&#39;s any function, object or class
+that implements a <code>then</code> method.</p>
+<h3 id="await-able-classes">Await-able Classes</h3>
+<p>To create an async class, implement a <code>then</code> method on it!</p>
 <pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
   then (resolve, reject) {
     resolve(<span class="hljs-number">42</span>)
@@ -178,16 +102,18 @@ let closure = { [a] <span class="hljs-keyword">in</span>
 }
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo()
   <span class="hljs-comment">// answer === 42</span>
 }
 main()
 </code></pre>
-<h2 id="await-able-objects">Await-able Objects</h2>
-<p>You can just do the same thing with an object. You can name the callback functions whatever you want. Also, you aren&#39;t required to use or care about the <code>rejection</code> callback.</p>
+<h3 id="await-able-objects">Await-able Objects</h3>
+<p>You can do the same thing with an object. You can name the callback
+functions whatever you want. Also, you aren&#39;t required to use or care
+about the <code>rejection</code> callback.</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
-  then (done) {
-    setTimeout(() =&gt; done(<span class="hljs-number">42</span>), <span class="hljs-number">1024</span>)
+  then (resolve) {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(<span class="hljs-number">42</span>), <span class="hljs-number">1024</span>)
   }
 }
 
@@ -197,181 +123,305 @@ main()
 }
 main()
 </code></pre>
-<h2 id="await-able-object-factories">Await-able object factories</h2>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-built_in">num</span> =&gt; ({
-  then (done) {
-    setTimeout(() =&gt; done(<span class="hljs-built_in">num</span>), <span class="hljs-number">1024</span>)
+<h3 id="await-able-object-factories">Await-able object factories</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> ({
+  then (resolve) {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(num), <span class="hljs-number">1024</span>)
   }
 })
 
-<span class="hljs-keyword">async</span> function main () {
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo(<span class="hljs-number">42</span>)
 }
 main()
 </code></pre>
-<h2 id="async-then-ables">Async then-ables</h2>
+<h3 id="async-then-ables">Async then-ables</h3>
 <p>Object and class methods can use the async keyword, just like functions.</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
-  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">done</span>) </span>{
-    done(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
+  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">resolve</span>) </span>{
+    resolve(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
   }
 }
 </code></pre>
-<p>You don&#39;t need to wrap everything in a <code>try/catch</code> blocks if you want to inform the caller about failures. Destructuring assignments provide a way to return multiple values…</p>
+<p>Destructuring assignments provide a way to return multiple values...</p>
 <pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
-  then (done) {
-    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done([err, res]))
-  }
-}
-
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> [err, res] = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
-}
-main()
-</code></pre>
-<p>And, there is of course more than one way to return more than one value!</p>
-<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
-  then (done) {
-    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; done({ err, res }))
+  then (resolve) {
+    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; resolve({ err, res }))
   }
 }
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
 
-  <span class="hljs-comment">// More than one err? Remember, const and let are block-scoped!</span>
+  <span class="hljs-comment">// More than one err? Const is block-scoped!</span>
   {
     <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
   }
+
+  <span class="hljs-comment">// Destructured values can also be aliased.</span>
+  <span class="hljs-keyword">const</span> { <span class="hljs-attr">err</span>: namedError, <span class="hljs-attr">res</span>: namedResponse } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
 }
 main()
 </code></pre>
-<p>Sure some people might argue that C-style error passing is subject to mishandling. But so is error-bubbling. Choose your poison.</p>
 
-    </div>
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
   </div>
+</section>
+<section class="post" id="post-01-illustrated-lamport-timestamp">
+  <h1 id="illustrated-lamport-timestamp">illustrated lamport timestamp</h1>
+<p>A <em>Lamport Timestamp</em> can be used to determine the order of events in a
+distributed system. They are a useful primative when you&#39;re building
+peer-to-peer applications and you want to thread together datasets from
+different sources.</p>
+<h3 id="clocks-vs-logical-clocks">Clocks vs. Logical Clocks</h3>
+<p>Why don&#39;t we use regular time stamps? Most clocks count time at different rates
+and experience failures that require resynchronization. This means they are
+reliably unreliable for determining ordering of events.</p>
+<p>Lamport Timestamps use a <em>Logical Clock</em> to keep track of the order of events
+on each node. A logical clock is not a clock that keeps track of the time, it&#39;s
+a <a href="https://en.wikipedia.org/wiki/Monotonic_function">monotonically increasing</a> counter. So, when a node in a network receives a message, it
+re-synchronizes its counter (its clock) with the node that sent the message.</p>
+<h3 id="example">Example</h3>
+<p>Node <code>A</code> increments its clock before each event that hapens. An event is
+something meaningful, like when it creates some data. When node <code>A</code>
+eventually sends its payload over the network, it will include the current
+value of its clock.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> clock = <span class="hljs-number">0</span>
 
-
-  <div class="post" id="Data-Modeling-in-Javascript">
-    <a class="link" href="#Data-Modeling-in-Javascript">
-      <div class="labels"><span>Programming</span></div>
-      <h1 class="title">Data Modeling in Javascript</h1>
-    </a>
-    <div class="body">
-      <p><img src="https://cloud.githubusercontent.com/assets/136109/20865895/3bb07ace-ba1e-11e6-9294-75b98219b660.png" alt="image">
-Working on <a href="https://voltra.co.">Voltra Co.</a>, I’ve needed to validate a lot of data. I’ve tried some pretty clever solutions for validating and describing data. But after working daily with these libraries, I’ve found that the javascript just gets in the way. Too much syntax, too much boiler plate, etc. 50+ models with 30+ entities can become a nightmare to read and maintain.</p>
-<p>Anyway, after much GTD I took a break to put together <a href="http://voltraco.github.io/dml/">DML</a>. DML is a simple language with the goal of making your data models readable and maintainable. The javascript implementation is only a few hundred lines. The documentation is a work in progress at the moment but the syntax looks like this…</p>
-<pre><code class="lang-js"><span class="hljs-comment">//</span>
-<span class="hljs-comment">// An example data model</span>
 <span class="hljs-comment">//</span>
+<span class="hljs-comment">// A thread-safe, monotonically increasing function.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createTimeStamp</span> (<span class="hljs-params"></span>) </span>{
+  clock += <span class="hljs-number">1</span>
+  <span class="hljs-keyword">return</span> clock 
+}
 
-<span class="hljs-built_in">Date</span> created
-Number id
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span> (<span class="hljs-params">data</span>) </span>{
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// Do something with some data.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">return</span> {
+    data,
+    <span class="hljs-attr">clock</span>: createTimeStamp()
+  }
+}
 
-<span class="hljs-built_in">String</span> name
-  <span class="hljs-keyword">require</span> <span class="hljs-literal">true</span> <span class="hljs-string">"a name is required"</span> <span class="hljs-comment">// this is a comment</span>
-  <span class="hljs-literal">gt</span> <span class="hljs-number">2</span> <span class="hljs-string">"Must be greater than 2 characters"</span>
-  <span class="hljs-literal">lte</span> <span class="hljs-number">256</span> <span class="hljs-string">"Must be less than or equal to 256 characters"</span>
-
-<span class="hljs-built_in">String</span> bio
-  <span class="hljs-literal">lte</span> <span class="hljs-number">140</span> <span class="hljs-string">"A bio must fit into a tweet"</span>
-
-<span class="hljs-built_in">Boolean</span> accountType
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Eventually send the data to the network.</span>
+<span class="hljs-comment">//</span>
+sendToNetworkQueue(doSomething({ ... }))
 </code></pre>
-<p>Visit the project on <a href="https://github.com/voltraco/dml">Github</a>.</p>
+<p>When node <code>B</code> receives a message from node <code>A</code>, it will decide how to set
+its own clock. If the clock value in the message is greater than its own
+value, it will use the value in the message. Otherwise it will use its own
+value. In either case, it will also increment its own clock by <code>1</code>.</p>
+<pre><code class="lang-js">let clock = <span class="hljs-number">0</span>
 
-    </div>
-  </div>
-
-
-  <div class="post" id="Photo-Sharing">
-    <a class="link" href="#Photo-Sharing">
-      <div class="labels"><span>Photography</span></div>
-      <h1 class="title">Photo Sharing</h1>
-    </a>
-    <div class="body">
-      <p><img src="https://cloud.githubusercontent.com/assets/136109/20639024/7fa69cb6-b3b8-11e6-89b1-18c740850652.png" alt="image"></p>
-<p>Instagram has a cool hidden feature that will render your photo as ascii art. If you inspect the url of an image and add <code>.html</code> or <code>.txt</code> to the filename you get something like what you&#39;re seeing in this picture.</p>
-
-    </div>
-  </div>
-
-
-  <div class="post" id="Amsterdam">
-    <a class="link" href="#Amsterdam">
-      <div class="labels"><span>Travel</span></div>
-      <h1 class="title">Amsterdam</h1>
-    </a>
-    <div class="body">
-      <h1 id="if-you-are-in-amsterdam-">If you are in Amsterdam...</h1>
-<p><img src="https://cloud.githubusercontent.com/assets/136109/17458765/b0bf36ca-5beb-11e6-9a3f-65976ddfc7fb.png" alt="image"></p>
-<p>I&#39;m living in the city. So if you are in town, message me on <a href="https://twitter.com/0x00a">twitter</a> or comment <a href="https://github.com/0x00A/blog/issues/9">here</a> on github. Let&#39;s ride bikes, write code or play music!</p>
-
-    </div>
-  </div>
-
-
-  <div class="post" id="Github-is-a-CMS">
-    <a class="link" href="#Github-is-a-CMS">
-      <div class="labels"><span>idea</span></div>
-      <h1 class="title">Github is a CMS</h1>
-    </a>
-    <div class="body">
-      <p>Github is basically a big content management system. So, here is an attempt to leverage it as a writing and publishing platform! Issues allow any number of authorized users to publish to the same page, hello painless collaborative blogging!</p>
-<p><a href="https://github.com/0x00A/blog">This project</a>, the blog you are reading, was co-designed and co-developed by @aprileelcich and myself. If you like it, it&#39;s MIT licensed, so fork it if you want to! There are only a few things you need to do in order to get it working for yourself...</p>
-<ul>
-<li>Change the <a href="https://github.com/0x00A/blog/blob/gh-pages/CNAME"><code>CNAME</code></a> file to include the correct domain (and obviously your DNS settings to add a CNAME record).</li>
-<li>Change the <a href="https://github.com/0x00A/blog/blob/gh-pages/config.json"><code>config.json</code></a> file to reflect the correct username and repository. Also make sure you add yourself to the authors array!</li>
-<li>Edit the static HTML, some of this is specific to me and you will want to change that.</li>
-</ul>
-<p>Happy writing and if you have any questions feel free to ask them on <a href="https://twitter.com/0x00a">twitter</a> or here in the comments section. Ciao. &primes;</p>
-
-    </div>
-  </div>
-
-
-  <div class="post" id="Asynchronous-flow-control-using-generators-and-destructuring">
-    <a class="link" href="#Asynchronous-flow-control-using-generators-and-destructuring">
-      <div class="labels"><span>Programming</span> <span>idea</span></div>
-      <h1 class="title">Asynchronous flow control using generators and destructuring</h1>
-    </a>
-    <div class="body">
-      <p>Two of my favorite things to come out of <a href="">es6</a> were <code>destructuring</code>, an expression that makes it possible to extract data from arrays or objects into distinct variables <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"><code>1</code></a> and <code>generators</code>, functions which can be exited and later re-entered <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*"><code>2</code></a>. Together these two features can flatten asynchronous flow control.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> { run, wrap } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'yl'</span>)
-<span class="hljs-keyword">const</span> fs = wrap(<span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>))
-<span class="hljs-keyword">const</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">'assert'</span>)
-
-run(<span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
-
-  <span class="hljs-keyword">const</span> [statError, s] = <span class="hljs-keyword">yield</span> fs.stat(<span class="hljs-string">'./index.js'</span>)
-  <span class="hljs-keyword">const</span> [readError, f] = <span class="hljs-keyword">yield</span> fs.readFile(<span class="hljs-string">'./index.js'</span>)
-
-  assert.equal(f.length, s.size)
-})
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Eventually receive some data from the network.</span>
+<span class="hljs-comment">//</span>
+receiveFromNetworkQueue (<span class="hljs-class"><span class="hljs-keyword">message</span>) {</span>
+  clock = Math.max(<span class="hljs-class"><span class="hljs-keyword">message</span>.<span class="hljs-title">clock</span>, clock) + 1
+}</span>
 </code></pre>
-<p>The above code uses a tiny library called <a href="https://github.com/0x00A/yl">yl</a>. You could write this yourself easily in under 15 lines of code. If you can make it smaller, send me a pull request! The really nice thing about this code is that you can use it <em>today</em> without the need for a massive tool chain or huge compiler like <a href="https://babeljs.io/">babel</a>.</p>
-<p>You already know about <a href="http://callbackhell.com/">calback hell</a>. But for context, here is the <code>es5</code> version.</p>
-<pre><code class="lang-js"><span class="hljs-selector-tag">var</span> yl = require(<span class="hljs-string">'yl'</span>)
-<span class="hljs-selector-tag">var</span> run = yl<span class="hljs-selector-class">.run</span>
-<span class="hljs-selector-tag">var</span> wrap = yl<span class="hljs-selector-class">.wrap</span>
-<span class="hljs-selector-tag">var</span> fs = wrap(require(<span class="hljs-string">'fs'</span>))
-<span class="hljs-selector-tag">var</span> assert = require(<span class="hljs-string">'assert'</span>)
+<p>Here we semi-randomly fail to always tell the other node about the event that
+happened, illustrating what happens when a node is eventually synchronized.</p>
+<div id="lamport-timestamp">
+  <div id="timeline-node-a" class="timeline"></div>
+  <div id="timeline-node-b" class="timeline"></div>
+</div>
 
-fs.stat(<span class="hljs-string">'./index.js'</span>, function (statError, s) {
-  fs.readFile(<span class="hljs-string">'./index.js'</span>, function (readError, f) {
-    assert.equal(f<span class="hljs-selector-class">.length</span>, s.size)
-  })
-})
-</code></pre>
+<div id="node-event-links">
+  <div data-name="a">Fire event on node A</div>
+  <div data-name="b">Fire event on node B</div>
+</div>
 
-    </div>
+<p>This may not be the correct primative for all your use cases. For example,
+Lamport Timestamps don&#39;t express causality, meaning, the <em>reason</em> why one
+event happened before another isn&#39;t in scope of this soluton, but that is
+something that can be achieved using a <a href="https://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>.</p>
+<script>
+
+  function ready () {
+    const timelineA = document.getElementById('timeline-node-a')
+    timelineA.dataset.name = "node a"
+
+    const timelineB = document.getElementById('timeline-node-b')
+    timelineB.dataset.name = "node b"
+
+    let clockA = 0
+    let clockB = 0
+
+    function reset () {
+      clockA = 0
+      clockB = 0
+      while(timelineA.firstChild) timelineA.firstChild.remove()
+      while(timelineB.firstChild) timelineB.firstChild.remove()
+    }
+
+    let timer = null
+
+    function createEvent (timeline, clock) {
+      if (clock === 25) {
+        clock = 1
+        reset()
+      }
+
+      [...timeline.querySelectorAll('.clock')].map(el => {
+        el.classList.remove('show')
+      })
+
+      const event = document.createElement('div')
+      event.classList.add('event')
+
+      const tooltip = document.createElement('div')
+      tooltip.className = 'clock show'
+      tooltip.textContent = `Clock = ${clock}`
+
+      event.style.left = `${clock * 25}px`
+      event.appendChild(tooltip)
+
+      timeline.appendChild(event)
+      timer = setTimeout(() => {
+        tooltip.classList.remove('show')
+      }, 2048)
+    }
+
+    function nodeA (n) {
+      if (n > 0) {
+        clockA = Math.max(n, clockA) + 1
+      } else {
+        clockA++
+
+        if (Math.floor(Math.random() * 100) % 2 === 0) {
+          nodeB(clockA)
+        }
+      }
+      createEvent(timelineA, clockA)
+    }
+
+    function nodeB (n) {
+      if (n > 0) {
+        clockB = Math.max(n, clockB) + 1
+      } else {
+        clockB++
+
+        if (Math.floor(Math.random() * 100) % 2 === 0) {
+          nodeA(clockB)
+        }
+      }
+
+      createEvent(timelineB, clockB)
+    }
+
+    const links = document.getElementById('node-event-links')
+
+    links.addEventListener('click', ({ target }) => {
+      switch (target.dataset.name) {
+        case 'a':
+          nodeA()
+          break;
+        case 'b':
+          nodeB()
+          break;
+      }
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', ready)
+
+</script>
+
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
   </div>
+</section>
+<section class="post" id="post-01-code">
+  <h1 id="code">CODE</h1>
+<h2 id="github">GITHUB</h2>
+<p><a href="https://github.com/hxoht">https://github.com/hxoht</a></p>
+<h2 id="public-key">PUBLIC KEY</h2>
+<pre>
+<textarea spellcheck="false" disabled resize="false">
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+akORhccxOBxXHKTb3p1CEIUg+/rFxcckARqZ2F3qBOpYzUEPII7aGWwnexgnTLtuaLb0pujFcawne+z/c8mFFnrxc99gG76cRKUsDLcdNXEa3kCBrQG3dXf+J8mIbzIFaabreP0fQAqwI9hbM/SUFwrPbCbfTcZcpn4pgbCSDxLXC0qb1Zh9UkcV4RP3A9r8sy92PrmtUmJTXWdZE043eAXpgerhRkHC38BL2JsmVf6/nOonlHfJiue7nowUaA7bvaA8GGlJRFaNhoFfTYIkMv9pOGaNpTtdK+UpOOO1U8MBlWPI86VOY/0VQj1pZOc8r0hqd3o+ALg9TKtkZKfSgZs4JQRRul4Zvmmc/mJfVJ9x/2rLdSnR19swSkJkyXZh/Q2/4u/Zp1J0+JuWMugLQzkJIfYMEeOm6Z3dk8O3Br1aMA+HPiDLgJjeV5SZm6is+DXdPA9s6CyQ2F3oazD1g1k/34W2p3+dnpAQU6W/73sxzyteUo7FNkGw7uGi7a5Gowmn6VtcoBDyY8QUUduUoCx747DZ61UTFPtesDc2HvPoemH8PYXjduA93CGtdh8ir7HsO9J0uzhC1FqrGskRpjNVZWWo6jERYamnbzYUs4VVy7qxcBy7skAe9JtGq3+MMjt6mvt9doxOAazUiAd/I9YWBCkWk/gwvy1qHa7R/w== hi@hx.ht
+</textarea>
+</pre>
 
-      </section>
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+,<section class="post" id="post-02-curriculum-vitae">
+  <h1 id="curriculum-vitae">Curriculum Vitae</h1>
+<div class="avatar"></div>
+
+<h2 id="personal">Personal</h2>
+<p>Name: Paolo Fragomeni, Software Engineer</p>
+<p>Nationality: American</p>
+<p>Date of Birth: May 27th, 1979</p>
+<p>Languages: English (Fluent), German (Elementary), Dutch (Elementary)</p>
+<h2 id="contact">Contact</h2>
+<p>Email: <a href="mailto:hello@hx.ht">hello@hx.ht</a></p>
+<p>Web: <a href="https://hx.ht">https://hx.ht</a></p>
+<p>Twitter: <a href="https://twitter.com/hxoht">https://twitter.com/hxoht</a></p>
+<p>Github: <a href="https://github.com/hxoht">https://github.com/hxoht</a></p>
+<h2 id="summary">Summary</h2>
+<p>I Left MIT in 2010 to co-found Nodejitsu (a PaaS, since integrated with
+GoDaddy). Most recently I founded Voltra Co. (entertainment software) which
+joined Conductor Lab. In addition to being a technical founder, CTO and engineer
+I have worked in the infosec space.</p>
+<h2 id="expertise">Expertise</h2>
+<p>Computer Science Research. Software Engineering: programming design and
+engineering, concurrent and distributed programming, metaprogramming,
+functional programming and ECMAScript (Javascript). Key-Value store</p>
+<h2 id="experience">Experience</h2>
+<h3 id="cto-cofounder-at-voltra-co-">CTO, Cofounder at Voltra Co.</h3>
+<p>January 2016 - Augest 2018 (2.5 years)</p>
+<p>Voltra Co. was a cloud storage service and set of audio products. Voltra&#39;s
+desktop and mobile players sync so you can stream your music from anywhere.
+The only ad-free fully hi-res platform. On this project I worked with
+Electron, JavaScript, Node.js, C++, CSS3, HTML5, Stylus, Jade, Webpack,
+React, React-Native, and Amazon Web Services. Voltra joined Conductor Lab
+in Augest 2018.</p>
+<h3 id="vp-of-engineering-at-now-secure">VP of Engineering at Now Secure</h3>
+<p>November 2014 - January 2016 (1 year 3 months)</p>
+<p>Built engineering and security research teams. Coordinated engineering and
+research teams. Set technical goals, worked hands on on lots of projects.
+On this project I worked primarily with C, C++, JavaScript, Node.js, HTML5.</p>
+<h3 id="engineer-cto-at-mic">Engineer, CTO at Mic</h3>
+<p>January 2014 - November 2014 (11 months)</p>
+<p>Hereishow.to joined mic.com where I served as CTO. Built an engineering team
+and integrated components of Here Is How into existing products. On this
+project I worked with Amazon Web Services, Node.js JavaScript, HTML5, CSS3.</p>
+<h3 id="engineer-cto-cofounder-at-here-is-how">Engineer, CTO, Cofounder at Here Is How</h3>
+<p>November 2012 - January 2014 (1 year 3 months)</p>
+<p>A CMS for technical writing, a web based interface similar to Medium.com.
+This project was acqui-hired by mic.com On this project I worked with Docker,
+JavaScript, Node.js, Websockets, C, C++, HTML5, CSS3.</p>
+<h3 id="engineer-cto-cofounder-at-nodejitsu">Engineer, CTO, Cofounder at Nodejitsu</h3>
+<p>September 2010 - December 2012 (2 years 4 months)</p>
+<p>Co-Founder, Chief Technology Officer. Lots of R&amp;D. Conceptualized and
+implemented products that simplify and manage application deployments
+for the node.js platform.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
 
     </div>
 
-    <script src="./index.js"></script>
+    <script src="./bundle.js"></script>
 
   </body>
 </html>
