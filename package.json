@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "blog",
   "scripts": {
-    "build": "node ./bin/build.js && stylus ./src/styles/index.styl -o ./docs/css",
+    "dev": "npm run build && ./bin/server",
+    "build": "npm test && node ./bin/build.js && npm run build:js && npm run build:styl",
+    "build:js": "browserify ./docs/index.js > ./docs/bundle.js",
+    "build:styl": "stylus ./src/styles/index.styl -o ./docs/css",
+    "deploy": "npm run build && npm run bucket:sync && npm run bucket:invalidate",
+    "bucket:sync": "aws s3 sync docs s3://hxht --delete",
+    "bucket:invalidate": "aws cloudfront create-invalidation --distribution-id E3UG3GDNGCJ4N3 --paths '/*'",
     "test": "standard"
   },
   "author": "Paolo Fragomeni <paolo@paolo.fr>",
@@ -12,9 +18,14 @@
   "dependencies": {
     "highlight.js": "^9.4.0",
     "marked": "^0.3.5",
-    "stream-body": "^1.0.5"
+    "scrolltoy": "github:voltraco/scrolltoy",
+    "stream-body": "^1.0.5",
+    "txl": "^1.0.0"
   },
   "devDependencies": {
-    "standard": "^10.0.3"
+    "browserify": "^16.2.2",
+    "send": "^0.16.2",
+    "standard": "^10.0.3",
+    "stylus": "^0.54.5"
   }
 }

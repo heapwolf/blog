@@ -1,25 +1,32 @@
 # Curriculum Vitae
 
-## Candidate
-Paolo Fragomeni, Software Engineer
-
+<div class="avatar"></div>
 
 ## Personal
+Name: Paolo Fragomeni, Software Engineer
+
 Nationality: American
+
 Date of Birth: May 27th, 1979
+
 Languages: English (Fluent), German (Elementary), Dutch (Elementary)
 
 
 ## Contact
-Email: hello@paolo.fr
-Web: paolo.fr
-Twitter: twitter.com/0x00A
+Email: hello@hx.ht
+
+Web: https://hx.ht
+
+Twitter: https://twitter.com/hxoht
+
+Github: https://github.com/hxoht
 
 
 ## Summary
-I Left MIT in 2010 to co-found Nodejitsu (since integrated with GoDaddy). In
-2013 I founded hereishow.to (a CMS for technical writing, since integrated with
-Mic). I am currently VPoE at Voltra Co.
+I Left MIT in 2010 to co-found Nodejitsu (a PaaS, since integrated with
+GoDaddy). Most recently I founded Voltra Co. (entertainment software) which
+joined Conductor Lab. In addition to being a technical founder, CTO and engineer
+I have worked in the infosec space.
 
 
 ## Expertise
@@ -30,17 +37,18 @@ functional programming and ECMAScript (Javascript). Key-Value store
 
 ## Experience
 
-### Software Engineer, Technical Lead, VP of Engineering at Voltra Co.
-January 2016 - Present (2 years)
+### CTO, Cofounder at Voltra Co.
+January 2016 - Augest 2018 (2.5 years)
 
-Voltra Co. is a cloud storage service and platform for artists to sell their
-music. Voltra's desktop and mobile players sync so you can stream your music
-from anywhere. The only ad-free fully hi-res platform. On this project I
-worked with Electron, JavaScript, Node.js, C++, CSS3, HTML5, Stylus, Jade,
-Webpack, React, React-Native, and Amazon Web Services.
+Voltra Co. was a cloud storage service and set of audio products. Voltra's
+desktop and mobile players sync so you can stream your music from anywhere.
+The only ad-free fully hi-res platform. On this project I worked with
+Electron, JavaScript, Node.js, C++, CSS3, HTML5, Stylus, Jade, Webpack,
+React, React-Native, and Amazon Web Services. Voltra joined Conductor Lab
+in Augest 2018.
 
 
-### Engineer, Sr. Engineer, VP of Engineering at Now Secure
+### VP of Engineering at Now Secure
 November 2014 - January 2016 (1 year 3 months)
 
 Built engineering and security research teams. Coordinated engineering and
@@ -56,7 +64,7 @@ and integrated components of Here Is How into existing products. On this
 project I worked with Amazon Web Services, Node.js JavaScript, HTML5, CSS3.
 
 
-### Engineer, Cofounder at Here Is How
+### Engineer, CTO, Cofounder at Here Is How
 November 2012 - January 2014 (1 year 3 months)
 
 A CMS for technical writing, a web based interface similar to Medium.com.

@@ -1,32 +1,23 @@
 
-// Font Variables
-
-@font-face
-  font-family FortescuePro-Bold
-  src url(/fonts/FortescuePro-Bold.otf)
-
-@font-face
-  font-family transcript_bold
-  src url(/fonts/transcript_bold.otf)
-
-$body = 'Merriweather', serif; //'Averia Serif Libre', cursive
+$body = 'IBM Plex Mono', monospace; // 'Merriweather', serif; //'Averia Serif Libre', cursive
 $display = 'Poly'; // 'FortescuePro-Bold', serif
 $caption = 'transcript_bold', sans-serif
 
 // Colours
 
-$black = #222627
+$black = #313131
 $gray = #9E9EA0
-$cream = #F4F2EA
+$lightgray = #f0f0f057
 $white = #FFFFFF
 $accent = #4d99bf
 
 @require './hljs.styl'
+@require './src/articles/**/*.styl'
 
 // Styling
 
 body
-  background-color $cream
+  background $black
   font-family $body
   margin 0
   color $black
@@ -38,107 +29,62 @@ body
     background $accent
     color $white
 
+  .avatar
+    width 200px
+    height 200px
+    background-image url('../images/avatar.png')
+    background-size contain
+    background-position center
+    background-repeat no-repeat
+    filter grayscale(1)
+
   a
     outline none
     color $black
     text-decoration none
-    transition color 0.2s
+    transition all 0.2s
+
     &:hover
       color $accent
 
+  #posts
+    a
+      font-weight normal
+      padding-bottom 1px
+      border-bottom 1px solid $gray
+
+      &:hover
+        border-bottom 1px solid $accent
+
   h1
-    font-family $display
-    text-align center
+    font-size 30px
 
-  header
-    height 800px
-    width 100%
-    position relative
-
-    .intro
-      box-sizing border-box
-      padding 30px
-      width 320px
-      height 410px
-      border 1px solid $black
-      position absolute
-      top 50%
-      left 50%
-      transform translateY(-50%) translateX(-50%)
-      text-align center
-
-      p:nth-child(1)
-        font-size 0.8rem
-        margin 0
-        letter-spacing 0.4rem
-        text-transform uppercase
-
-      p:nth-child(2)
-        font-size 0.7rem
-        letter-spacing 0.6rem
-        text-transform uppercase
-        margin 10px 10px 6px 10px
-
-      p.first-line
-        margin-top 25px
-        font-size 0.75rem
-        text-transform uppercase
-        text-align justify 
-        letter-spacing .05em
-
-      p:nth-child(5)
-        font-size 0.7rem
-        text-align left
-        line-height 0.9rem
-
-      h2
-        font-size 0.75rem
-        font-weight normal
-        text-transform uppercase
-        letter-spacing 0.3rem
-        line-height 2em
-        margin-top 20px
-        &:before
-          content " "
-          width 100%
-          height 1px
-          background-color $black
-          display block
-          margin 2px 0 20px 0
-        a
-          font-style normal
-
-      h1
-        margin .8em 0
-        font-size 3rem
-        line-height 1em
-
-  .link
-    display block
-    padding-top 25px
-    text-decoration none
-    color $black
-    cursor pointer
-
-    &:hover
-      color $black
-
-  h1.title
+  h1, h2, h3, h4
+    margin-top 40px
+    font-weight 700
     text-transform uppercase
-    font-size 2rem
-    line-height 2.5rem
-    letter-spacing 0.05rem
-    position relative
 
-    &:after
-      content " "
-      width 75px
-      height 1px
-      display block
-      margin 0 auto
-      margin-top 50px
-      margin-bottom 50px
-      background-color $gray
+  aside
+    color $gray
+    position relative
+    max-width 650px
+    margin 0 auto
+    margin-bottom 100px
+    padding 20px
+    padding-top 100px
+
+    a
+      color $gray
+      display inline-block
+      margin-bottom 10px
+
+      &:hover
+        color white
+
+  em
+    background #444
+    color white
+    padding 2px 6px
 
   p, ul
     font-size 1rem
@@ -146,44 +92,6 @@ body
 
   li
     margin-bottom 8px
-
-  .reactions
-    text-align center
-    margin 30px 0
-
-  .reactions div
-    width 30px
-    height 30px
-    background-repeat no-repeat
-    display inline-block
-    margin 0 25px
-    &:before
-      content attr(data-count)
-      width 25px
-      height 25px
-      text-align left
-      display inline-block
-      position relative
-      left -25px
-      top 5px
-    &:first-child
-      display none
-
-  #error
-    display none
-
-  nav
-    background-color $cream
-    height 25px
-    padding-top 25px
-    position relative
-    with 100%
-
-    span
-      display block
-      margin 0 auto
-      font-size 1.75rem
-      text-align center
 
   #posts
     background-color white
@@ -193,19 +101,22 @@ body
       position relative
       max-width 650px
       margin 0 auto
-      padding 60px 20px 100px 20px
+      padding 20px
+      display none
 
-      &:not(:first-of-type):after
-        bottom 100%
-        left 50%
-        border solid transparent
-        content "♠"
-        height 20px
-        width 20px
-        margin-left -10px
-        position absolute
-        pointer-events none
-        border none
+      &:first-of-type
+        display block
+
+      .up
+        position relative
+        height 150px
+        width 100%
+        text-align center
+
+        svg
+          height 100px
+          width 100px
+          pointer-events none
 
       .labels
         text-align center
@@ -226,55 +137,61 @@ body
             color $gray
 
 
-      .body
-        p
-          line-height 1.5em
-        h1
-          font-size 1.25rem
-          letter-spacing 0.05rem
-          margin 60px 20px 30px 20px
+      p
+        line-height 1.5em
 
-        a
-          font-weight normal
-          padding-bottom 1px
-          border-bottom 1px solid $gray
-          &:hover
-            border-bottom 1px solid $accent
+      h1
+        font-size 2.4rem
+        letter-spacing 0.05rem
+        // margin 60px 20px 30px 20px
 
+      code
+        background #f5f5f5
+        padding 4px
+
+      pre
         code
-          background $white
-          padding 2px
-
-        pre
-          code
-            background-color $cream
-            overflow auto
-            display block
-            padding 20px
-            line-height 1.6em
-            margin 40px 0
-
-        p
-          img
-            max-width 650px
-            width 100%
-            border 10px solid $white
-            display block
-            margin 0 auto
-            box-sizing border-box
-
-        blockquote
-          font-family $caption
-          text-transform uppercase
-          letter-spacing 0.05rem
-          text-align center
-          padding 10px 25px
-          margin 40px
+          font-family: $body
+          background-color $lightgray
+          overflow auto
+          display block
+          padding 20px
           line-height 26px
-          color $black
+          margin 40px 0
 
-        ul
-          margin 30px 0
+        textarea
+          width 100%
+          min-height 250px
+          border none
+          font-family inherit
+          font-size 14px
+          background #f5f5f5
+          padding 10px
+          outline none
+          resize none
+
+      p
+        img
+          max-width 650px
+          width 100%
+          border 10px solid $white
+          display block
+          margin 0 auto
+          box-sizing border-box
+
+      blockquote
+        text-transform uppercase
+        letter-spacing 0.05rem
+        border-left 4px solid #222627
+        padding 10px 25px
+        margin 40px 0
+        line-height 26px
+        color $black
+        font-style italic
+        font-weight 700
+
+      ul
+        margin 30px 0
 
       .summary
         position relative
