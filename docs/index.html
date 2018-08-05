@@ -11,8 +11,8 @@
     <aside>
       <h3>01 programming</h3>
 
-        <a class="link" href="#post-01-bet-on-the-web---and-web-components">
-          01 bet on the web - and web components
+        <a class="link" href="#post-01-a-little-class-for-combining-behavior,-layout-and-style">
+          01 a little class for combining behavior, layout and style
         </a>
         <br>
       
@@ -45,24 +45,24 @@
     </aside>
 
     <div id="posts" role="main">
-      <section class="post" id="post-01-bet-on-the-web---and-web-components">
-  <h1 id="bet-on-the-web-and-web-components">bet on the web - and web components</h1>
+      <section class="post" id="post-01-a-little-class-for-combining-behavior,-layout-and-style">
+  <h1 id="a-little-class-for-combining-behavior-layout-and-style">a little class for combining behavior, layout and style</h1>
 <h3 id="2018-08-02">2018-08-02</h3>
-<p>I don&#39;t use frameworks, so React appeals to me. I like how it organizes ideas.
-I like its top-down, one-way flow of data. But I also think some of its
-usefulness is debatable. It has a big island of tooling that&#39;s going in a
-very different direction than the rest of the web. Like Coffeescript or jQuery,
-in 5 years it will probably inspire standards bodies with its best features.</p>
+<p>I don&#39;t use Javascript frameworks, so React appeals to me. I like how it
+organizes ideas. I like its top-down, one-way flow of data. But I also think
+some of its usefulness is debatable. It has a big island of tooling that&#39;s going
+in a very different direction than the rest of the web. Like Coffeescript or
+jQuery, in 5 years it will probably inspire standards bodies with its best
+features.</p>
 <p>I also like Web Components, they&#39;re great because they offer true, native
 encapsulation &nbsp;&mdash;&nbsp; no hacks. They are mostly the result of
-consensus among the web&#39;s working groups. They&#39;re pretty awkward, like most of
-the web&#39;s native APIs &nbsp;&mdash;&nbsp; but a foundation to build on.</p>
+consensus among the web&#39;s working groups. But they&#39;re awkward, and already feel
+outdated. They also <a href="https://caniuse.com/#search=web%20components">only work</a> well in Chrome.</p>
 <p><img src="https://raw.githubusercontent.com/hxoht/tonic/addimage/readme-tonic.png" alt="img"></p>
-<p>I&#39;d like to introduce Tonic. It&#39;s about 125 lines of code. It&#39;s much less
-opinionated than React. It shares some of the same goals; though its main goal
-is to provide the <em>minimum</em> of what is needed to organize code, the flow of
-data and create component based architecture. Most importantly, it&#39;s built on
-the platform of the future, the web.</p>
+<p>I&#39;d like to introduce Tonic. It&#39;s about 150 lines of code. It combines some of
+the goals and ideas of React and Web Components. It works in all browsers. Its
+intented to provide the <em>minimum</em> of what is needed to organize application
+code, the flow of data and accommodate component based architecture.</p>
 <p>You can find the project <a href="https://github.com/hxoht/tonic/">here</a> on Github.</p>
 
   <div class="up">
@@ -173,7 +173,7 @@ main()
 <section class="post" id="post-01-illustrated-lamport-timestamp">
   <h1 id="illustrated-lamport-timestamp">illustrated lamport timestamp</h1>
 <p>A <em>Lamport Timestamp</em> can be used to determine the order of events in a
-distributed system. They are a useful primative when you&#39;re building
+distributed system. They are a useful primitive when you&#39;re building
 peer-to-peer applications and you want to thread together datasets from
 different sources.</p>
 <h3 id="clocks-vs-logical-clocks">Clocks vs. Logical Clocks</h3>
@@ -239,7 +239,7 @@ happened, illustrating what happens when a node is eventually synchronized.</p>
   <div data-name="b">Fire event on node B</div>
 </div>
 
-<p>This may not be the correct primative for all your use cases. For example,
+<p>This may not be the correct primitive for all your use cases. For example,
 Lamport Timestamps don&#39;t express causality, meaning, the <em>reason</em> why one
 event happened before another isn&#39;t in scope of this soluton, but that is
 something that can be achieved using a <a href="https://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>.</p>
@@ -335,6 +335,9 @@ something that can be achieved using a <a href="https://en.wikipedia.org/wiki/Ve
 
 </script>
 
+<p><br/></p>
+<p>Special thanks to <a href="https://twitter.com/indutny">Fedor Indutny</a> and <a href="https://twitter.com/feross">Feross Aboukhadijeh</a> for reviewing
+this post. &hearts;</p>
 
   <div class="up">
     <svg>

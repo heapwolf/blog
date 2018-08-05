@@ -64,11 +64,6 @@
 .hljs-strong {
   font-weight: bold;
 }
-<<<<<<< HEAD
-html,
-body {
-  height: 100%;
-=======
 #lamport-timestamp {
   height: 250px;
   width: 100%;
@@ -152,29 +147,12 @@ body {
 #node-event-links > div:hover {
   color: #4d99bf;
   border-bottom: 1px solid #4d99bf;
->>>>>>> gh-pages
 }
 body {
   background: #313131;
   font-family: 'IBM Plex Mono', monospace;
   margin: 0;
   color: #313131;
-}
-body #cv {
-  padding: 100px 20%;
-}
-body #cv h1,
-body #cv h2,
-body #cv h3 {
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-body #cv h1 {
-  text-align: left;
-}
-body #cv h2,
-body #cv h3 {
-  padding-top: 40px;
 }
 body ::-moz-selection {
   background: #4d99bf;
@@ -202,81 +180,14 @@ body a {
 body a:hover {
   color: #4d99bf;
 }
-<<<<<<< HEAD
-body h1 {
-  font-family: 'Poly';
-  text-align: center;
-}
-body header {
-  height: 100%;
-}
-body header .intro {
-  box-sizing: border-box;
-  padding: 30px;
-  width: 320px;
-  height: 410px;
-  border: 1px solid #222627;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  text-align: center;
-}
-body header .intro p:nth-child(1) {
-  font-size: 0.7rem;
-  margin: 0;
-  letter-spacing: 0.3rem;
-  text-transform: uppercase;
-}
-body header .intro p:nth-child(2) {
-  font-size: 0.75rem;
-  letter-spacing: 0.6rem;
-  text-transform: uppercase;
-  margin: 10px 10px 6px 10px;
-}
-body header .intro p.first-line {
-  margin-top: 25px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  text-align: justify;
-  letter-spacing: 0.06em;
-}
-body header .intro p:nth-child(5) {
-  font-size: 0.7rem;
-  text-align: left;
-  line-height: 0.9rem;
-}
-body header .intro h2 {
-  font-size: 0.75rem;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  line-height: 2em;
-  margin-top: 20px;
-}
-body header .intro h2:before {
-  content: " ";
-  width: 100%;
-  height: 1px;
-  background-color: #222627;
-  display: block;
-  margin: 2px 0 22px 0;
-=======
 body #posts a {
   font-weight: normal;
   padding-bottom: 1px;
   border-bottom: 1px solid #9e9ea0;
->>>>>>> gh-pages
 }
 body #posts a:hover {
   border-bottom: 1px solid #4d99bf;
 }
-<<<<<<< HEAD
-body header .intro h1 {
-  margin: 0.7em 0;
-  font-size: 3rem;
-  line-height: 1em;
-=======
 body h1 {
   font-size: 30px;
 }
@@ -287,7 +198,6 @@ body h4 {
   margin-top: 40px;
   font-weight: 700;
   text-transform: uppercase;
->>>>>>> gh-pages
 }
 body aside {
   color: #9e9ea0;
@@ -313,10 +223,7 @@ body em {
 }
 body p,
 body ul {
-  font-size: 1.1rem;
-  line-height: 1.5em;
-  letter-spacing: 0.01em;
-  font-family: Poly, monospace;
+  font-size: 1rem;
   line-height: 1.4rem;
 }
 body li {
@@ -373,17 +280,6 @@ body #posts .post h1 {
   font-size: 2.4rem;
   letter-spacing: 0.05rem;
 }
-<<<<<<< HEAD
-body #posts .post .body code {
-  background: #f4f2ea;
-  padding: 4px;
-  font-size: 14px;
-  font-family: 'Anonymous Pro', monospace;
-}
-body #posts .post .body pre code {
-  background-color: #f4f2ea;
-  font-family: 'Anonymous Pro', monospace;
-=======
 body #posts .post code {
   background: #f5f5f5;
   padding: 4px;
@@ -391,7 +287,6 @@ body #posts .post code {
 body #posts .post pre code {
   font-family: 'IBM Plex Mono', monospace;
   background-color: rgba(240,240,240,0.341);
->>>>>>> gh-pages
   overflow: auto;
   display: block;
   padding: 20px;
@@ -498,11 +393,8 @@ body #posts .post .summary a.comments_url {
   display: block;
 }
 @media (max-width: 768px) {
-  body #cv {
-    padding: 5%;
-  }
-  body #cv h1 {
-    text-align: left;
+  body header {
+    height: 600px;
   }
   body #posts .post .body blockquote {
     margin: 0;

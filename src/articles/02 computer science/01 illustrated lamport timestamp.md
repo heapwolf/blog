@@ -1,6 +1,6 @@
 # illustrated lamport timestamp
 A *Lamport Timestamp* can be used to determine the order of events in a
-distributed system. They are a useful primative when you're building
+distributed system. They are a useful primitive when you're building
 peer-to-peer applications and you want to thread together datasets from
 different sources.
 
@@ -76,7 +76,7 @@ happened, illustrating what happens when a node is eventually synchronized.
   <div data-name="b">Fire event on node B</div>
 </div>
 
-This may not be the correct primative for all your use cases. For example,
+This may not be the correct primitive for all your use cases. For example,
 Lamport Timestamps don't express causality, meaning, the *reason* why one
 event happened before another isn't in scope of this soluton, but that is
 something that can be achieved using a [Vector Clock][2].
@@ -173,6 +173,12 @@ something that can be achieved using a [Vector Clock][2].
 
 </script>
 
+<br/>
+
+Special thanks to [Fedor Indutny][3] and [Feross Aboukhadijeh][4] for reviewing
+this post. &hearts;
+
 [1]:https://en.wikipedia.org/wiki/Monotonic_function
 [2]:https://en.wikipedia.org/wiki/Vector_clock
-
+[3]:https://twitter.com/indutny
+[4]:https://twitter.com/feross
