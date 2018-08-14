@@ -22,8 +22,8 @@ const sleep = n => new Promise(r => setTimeout(r, n))
 
 However, as this example demonstrates, the code in the promise starts executing
 immediately. Promises are eager (as opposed to being *lazy*), and sometimes we
-want them to be lazy, for example, to reusable tasks. [Here][1] is a detailed
-explaination of why an eager promise may not be what you want.
+want them to be lazy. [Here][1] is a detailed explaination of why an eager
+promise may not be what you want.
 
 A then-able is lazy. It has no constructor. It's any function, object or class
 that implements a `then` method.
