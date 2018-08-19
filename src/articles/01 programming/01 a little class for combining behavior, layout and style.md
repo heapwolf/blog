@@ -12,7 +12,7 @@ features.
 I also like Web Components, they're great because they offer true, native
 encapsulation &nbsp;&mdash;&nbsp; no hacks. They are mostly the result of
 consensus among the web's working groups. But they're awkward, and already feel
-outdated. They also [only work][1] well in Chrome.
+outdated. They also [only work][0] well in Chrome.
 
 ![img](https://raw.githubusercontent.com/hxoht/tonic/addimage/readme-tonic.png)
 
@@ -21,7 +21,9 @@ the goals and ideas of React and Web Components. It works in all browsers. Its
 intented to provide the *minimum* of what is needed to organize application
 code, the flow of data and accommodate component based architecture.
 
-You can find the project [here][0] on Github.
+You can find the core library [here][1] and a collection of components [here][2]
+on Github.
 
-[0]:https://github.com/hxoht/tonic/
-[1]:https://caniuse.com/#search=web%20components
+[0]:https://caniuse.com/#search=web%20components
+[1]:https://github.com/hxoht/tonic/
+[2]:https://hxoht.github.io/components/

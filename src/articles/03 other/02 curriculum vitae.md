@@ -2,14 +2,9 @@
 
 <div class="avatar"></div>
 
+
 ## Personal
 Name: Paolo Fragomeni, Software Engineer
-
-Nationality: American
-
-Date of Birth: May 27th, 1979
-
-Languages: English (Fluent), German (Elementary), Dutch (Elementary)
 
 
 ## Contact

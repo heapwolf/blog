@@ -179,7 +179,7 @@ different sources.</p>
 <h3 id="clocks-vs-logical-clocks">Clocks vs. Logical Clocks</h3>
 <p>Why don&#39;t we use regular time stamps? Most clocks count time at different rates
 and experience failures that require resynchronization. This means they are
-reliably unreliable for determining ordering of events.</p>
+reliably unreliable for determining the order of events.</p>
 <p>Lamport Timestamps use a <em>Logical Clock</em> to keep track of the order of events
 on each node. A logical clock is not a clock that keeps track of the time, it&#39;s
 a <a href="https://en.wikipedia.org/wiki/Monotonic_function">monotonically increasing</a> counter. So, when a node in a network receives a message, it
