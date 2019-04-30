@@ -8,13 +8,13 @@ Name: Paolo Fragomeni, Software Engineer
 
 
 ## Contact
-Email: hello@hx.ht
+Email: paolo@async.ly
 
 Web: https://hx.ht
 
-Twitter: https://twitter.com/hxoht
+Twitter: https://twitter.com/heapwolf
 
-Github: https://github.com/hxoht
+Github: https://github.com/heapwolf
 
 
 ## Summary
