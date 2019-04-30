@@ -22,10 +22,24 @@
           02 what are javascript then-ables
         </a>
         <br>
-      <h3>02 computer science</h3>
+      <h3>02 distributed systems</h3>
+
+        <a class="link" href="#post-00-preamble">
+          00 preamble
+        </a>
+        <br>
+      
+
 
         <a class="link" href="#post-01-illustrated-lamport-timestamp">
           01 illustrated lamport timestamp
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-02-vector-clock-notes">
+          02 vector clock notes
         </a>
         <br>
       <h3>03 other</h3>
@@ -63,7 +77,8 @@ outdated. They also <a href="https://caniuse.com/#search=web%20components">only 
 the goals and ideas of React and Web Components. It works in all browsers. Its
 intented to provide the <em>minimum</em> of what is needed to organize application
 code, the flow of data and accommodate component based architecture.</p>
-<p>You can find the project <a href="https://github.com/hxoht/tonic/">here</a> on Github.</p>
+<p>You can find the core library <a href="https://github.com/hxoht/tonic/">here</a> and a collection of components <a href="https://hxoht.github.io/components/">here</a>
+on Github.</p>
 
   <div class="up">
     <svg>
@@ -71,7 +86,8 @@ code, the flow of data and accommodate component based architecture.</p>
     </svg>
   </div>
 </section>
-,<section class="post" id="post-02-what-are-javascript-then-ables">
+
+<section class="post" id="post-02-what-are-javascript-then-ables">
   <h1 id="what-are-javascript-then-ables">What are javascript then-ables</h1>
 <p><em>async / await</em> improves program flow and reduces the number of callbacks in
 your code. The <code>await</code> keyword can be used to pause the current code path and
@@ -138,7 +154,7 @@ main()
 <h3 id="async-then-ables">Async then-ables</h3>
 <p>Object and class methods can use the async keyword, just like functions.</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
-  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">resolve</span>) </span>{
+  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">resolve</span>)</span> {
     resolve(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
   }
 }
@@ -170,12 +186,48 @@ main()
     </svg>
   </div>
 </section>
+<section class="post" id="post-00-preamble">
+  <h1 id="preamble">preamble</h1>
+<h2 id="synopsis">synopsis</h2>
+<p>This series explores several fundamental peer-to-peer topics.</p>
+<h2 id="motivation">motivation</h2>
+<p>The distributed programming model is less widely understood than the more
+traditonal client-server programming model. But, if we can better understand
+the fundamental problems involved, we may see more contributors &mdash; a
+larger, more modular, and more usable ecosystem of code emerge.</p>
+<h2 id="description">description</h2>
+<p>This series will specifically focus on the following topics...</p>
+<ul>
+<li>Connectivity</li>
+<li>Replication</li>
+<li>State</li>
+<li>Consensus</li>
+<li>Consistency</li>
+<li>Security</li>
+</ul>
+<p>This series will also try to identify technical advantages that
+distributed systems offer over client-server systems.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
 <section class="post" id="post-01-illustrated-lamport-timestamp">
   <h1 id="illustrated-lamport-timestamp">illustrated lamport timestamp</h1>
-<p>A <em>Lamport Timestamp</em> can be used to determine the order of events in a
-distributed system. They are a useful primitive when you&#39;re building
-peer-to-peer applications and you want to thread together datasets from
-different sources.</p>
+<h2 id="problem">problem</h2>
+<p>With the client-server model, you can easily determine the order of
+events in a system because they are all maintained by a single source.
+This is critical in, for example a chat application.</p>
+<p>But with the distributed model, how do we know if an event happened
+before another? How can we thread together datasets from different
+sources in the correct order?</p>
+<h2 id="solution">solution</h2>
+<p>A <em>Lamport Timestamp</em> is one solution to determine the order of events
+in a distributed system. Although it may not solve all problems in this
+problem space, it is a useful primitive that we will explore.</p>
 <h3 id="clocks-vs-logical-clocks">Clocks vs. Logical Clocks</h3>
 <p>Why don&#39;t we use regular time stamps? Most clocks count time at different rates
 and experience failures that require resynchronization. This means they are
@@ -345,6 +397,176 @@ this post. &hearts;</p>
     </svg>
   </div>
 </section>
+
+<section class="post" id="post-02-vector-clock-notes">
+  <h1 id="vector-clocks">vector clocks</h1>
+<p>In the previous post, I wrote about how <em>Lamport Timestamps</em> (aka Logical
+Clocks) can help determine the order of events in a distributed system.</p>
+<h2 id="problem">problem</h2>
+<p>Logical clocks only offer &quot;Partial Ordering&quot;, because they can tell us the
+order of a single event, but not the <strong>total ordering</strong> of events or why
+a system arrived at its state.</p>
+<h2 id="solutions">solutions</h2>
+<p><em>Vector Clocks</em> build on the idea of Logical Clocks to help track
+<a href="https://en.wikipedia.org/wiki/Causality">causality</a> in a distributed system.</p>
+<p>Here is an example vector clock in a network where there are three
+participating nodes...</p>
+<pre><code class="lang-js">{ <span class="hljs-attribute">alice</span>: <span class="hljs-number">0</span>, bob: <span class="hljs-number">1</span>, carol: <span class="hljs-number">0</span> }
+</code></pre>
+<p>To set up a node we will give it an id and an in memory object to
+store some data.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> myId = <span class="hljs-string">'alice'</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">data</span> = {}
+</code></pre>
+<h3 id="sending-messages">sending messages</h3>
+<p>When a node writes some data, it increments its own logical clock in
+the vector and includes it as a property of a message that it will
+attempt to send. We also add the value as a property of the message.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span></span> <span class="hljs-built_in">write</span> (key, <span class="hljs-keyword">value</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-comment">!data[key]) {</span>
+    <span class="hljs-keyword">data</span>[key] = { clock: { [myId]: <span class="hljs-number">0</span> } }
+  }
+
+  <span class="hljs-keyword">data</span>[key].clock[myId] += <span class="hljs-number">1</span> 
+  <span class="hljs-keyword">data</span>[key].<span class="hljs-keyword">value</span> = [<span class="hljs-keyword">value</span>]
+
+  send(key, <span class="hljs-keyword">data</span>[key])
+}
+</code></pre>
+<blockquote>
+<p>In this case we made the <strong>value</strong> property an array. This is because we
+must anticipate the possibility of <strong>concurrent messages</strong> &mdash; that is,
+a message was received where two nodes have a logical clock with the same
+count.</p>
+<p>In this case we can push the new value onto the array and allow the the
+conflict to be resolved somehow (we&#39;ll discuss this more later).</p>
+</blockquote>
+<h3 id="receiving-messages">receiving messages</h3>
+<p>When a node receives a message it increments its own Logical Clock in
+its local copy of the vector.</p>
+<p>Then for each node in the message&#39;s vector, it compares the local
+clock count (if there is one) to the clock count in the received
+message, taking the max of the numbers.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> <span class="hljs-built_in">max</span> = arr =&gt; Math.<span class="hljs-built_in">max</span>.apply(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">Object</span>.values(arr))
+
+function receive (message) {
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">key</span> = message.<span class="hljs-built_in">key</span>
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// If this is new data, there is no need to compare anything.</span>
+  <span class="hljs-comment">// we can store it locally and return early from the function.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">if</span> (!data[<span class="hljs-built_in">key</span>]) {
+    data[<span class="hljs-built_in">key</span>] = message
+    data.clock[myId] = <span class="hljs-built_in">max</span>(message.clock) + <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// We have received the message, update our clock</span>
+  <span class="hljs-comment">//</span>
+  data[<span class="hljs-built_in">key</span>].clock[myId] += <span class="hljs-number">1</span>
+
+  <span class="hljs-keyword">const</span> localClock = data[<span class="hljs-built_in">key</span>].clock
+  <span class="hljs-keyword">const</span> messageClock = message.clock
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// For each node in the vector of the message</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id in <span class="hljs-keyword">Object</span>.keys(messageClock)) {
+    <span class="hljs-keyword">const</span> a = localClock[id] || <span class="hljs-number">0</span>
+    <span class="hljs-keyword">const</span> b = messageClock[id]
+
+    <span class="hljs-keyword">const</span> isConcurrent = a === b
+
+    <span class="hljs-keyword">if</span> (isConcurrent) {
+      data[<span class="hljs-built_in">key</span>].conflict = <span class="hljs-keyword">true</span>
+      data[<span class="hljs-built_in">key</span>].value.push(message.value)
+      <span class="hljs-keyword">continue</span>
+    }
+
+    <span class="hljs-keyword">const</span> happenedBefore = a &lt; b
+
+    <span class="hljs-keyword">if</span> (happenedBefore) {
+      data[<span class="hljs-built_in">key</span>].value = [message.value]
+    }
+
+    localClock[id] = Math.<span class="hljs-built_in">max</span>(a, b)
+  }
+}
+</code></pre>
+<h3 id="handling-concurrent-messages">handling concurrent messages</h3>
+<p>Two messages that are received at the same time and have the same logical clock
+count are &quot;concurrent&quot;.</p>
+<p>To understand what to do with this type of data, we need to create a <strong>resolution
+function</strong>. This function may be the only way to determine what data is either a
+descendant or which data comes-before.</p>
+<ol>
+<li><p>Reject the data and send it back to the clients asking for it to be resolved.
+This might mean asking them to manually merge or discard some of the data.</p>
+</li>
+<li><p><strong>Last-Writer-Wins</strong> uses time-based timestamps. If you consider clock-drift
+(mentioned in the first post), there is a high probability of losing data with
+this strategy.</p>
+</li>
+</ol>
+<h3 id="research-timeline">research timeline</h3>
+<p>When discussing Vector Clocks we should consider some other closely related
+research...</p>
+<div class="clock-timeline">
+  <a href="https://amturing.acm.org/p558-lamport.pdf" class="item">
+    <span class="title">Lamport Timestamp</span>
+    <span class="year">1978</span>
+  </a>
+  <a href="https://zoo.cs.yale.edu/classes/cs422/2013/bib/parker83detection.pdf" class="item">
+    <span class="title">Version Vector</span>
+    <span class="year">1983</span>
+  </a>
+  <a href="https://zoo.cs.yale.edu/classes/cs426/2012/lab/bib/fidge88timestamps.pdf" class="item">
+    <span class="title">Vector Clock</span>
+    <span class="year">1988</span>
+  </a>
+  <a href="https://www.researchgate.net/publication/221233664_Bounded_Version_Vectors" class="item">
+    <span class="title">Bound Version Vector</span>
+    <span class="year">2004</span>
+  </a>
+  <a href="http://gsd.di.uminho.pt/members/cbm/ps/itc2008.pdf" class="item">
+    <span class="title">Interval Tree Clock</span>
+    <span class="year">2008</span>
+  </a>
+  <a href="https://arxiv.org/pdf/1011.5808.pdf" class="item">
+    <span class="title">Dotted Version Vectors</span>
+    <span class="year">2010</span>
+  </a>
+</div>
+
+<p><em>Version Vectors</em> also build on the idea of Lamport Timestamps, but are
+specifically meant to track changes to data in distributed systems. They
+are also the basis for <a href="https://en.wikipedia.org/wiki/Optimistic_replication">optimistic replication</a>.</p>
+<h3 id="disadvantages">disadvantages</h3>
+<p>Each message sent by a node contains a vector clock that has all the node
+names (and their corresponding clock counts) who want to write to the same
+field of data.</p>
+<p>This can be a problem since a data structure that can grow to an unbound size
+can be a problem in larger networks with more frequent writes. Strategies for
+dealing with this are often based on what suits your use-cases best, for
+example, two possible solutions are...</p>
+<ol>
+<li><p>If a network has a finite number of nodes, a message that has reached
+all nodes can be considered &quot;complete&quot;, could be marked as such and have
+it&#39;s historic information removed.</p>
+</li>
+<li><p>If a network has an acceptable threshold of nodes that once a message has
+reached, the message can be considered complete and can then be cleaned up.</p>
+</li>
+</ol>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
 <section class="post" id="post-01-code">
   <h1 id="code">CODE</h1>
 <h2 id="github">GITHUB</h2>
@@ -362,15 +584,14 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+akORhccxOBxXHKTb3p1CEIUg+/rFxcckARqZ2F3q
     </svg>
   </div>
 </section>
-,<section class="post" id="post-02-curriculum-vitae">
+
+<section class="post" id="post-02-curriculum-vitae">
   <h1 id="curriculum-vitae">Curriculum Vitae</h1>
 <div class="avatar"></div>
 
+
 <h2 id="personal">Personal</h2>
 <p>Name: Paolo Fragomeni, Software Engineer</p>
-<p>Nationality: American</p>
-<p>Date of Birth: May 27th, 1979</p>
-<p>Languages: English (Fluent), German (Elementary), Dutch (Elementary)</p>
 <h2 id="contact">Contact</h2>
 <p>Email: <a href="mailto:hello@hx.ht">hello@hx.ht</a></p>
 <p>Web: <a href="https://hx.ht">https://hx.ht</a></p>

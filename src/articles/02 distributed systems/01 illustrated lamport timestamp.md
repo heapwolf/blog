@@ -1,8 +1,18 @@
 # illustrated lamport timestamp
-A *Lamport Timestamp* can be used to determine the order of events in a
-distributed system. They are a useful primitive when you're building
-peer-to-peer applications and you want to thread together datasets from
-different sources.
+
+## problem
+With the client-server model, you can easily determine the order of
+events in a system because they are all maintained by a single source.
+This is critical in, for example a chat application.
+
+But with the distributed model, how do we know if an event happened
+before another? How can we thread together datasets from different
+sources in the correct order?
+
+## solution
+A *Lamport Timestamp* is one solution to determine the order of events
+in a distributed system. Although it may not solve all problems in this
+problem space, it is a useful primitive that we will explore.
 
 ### Clocks vs. Logical Clocks
 Why don't we use regular time stamps? Most clocks count time at different rates

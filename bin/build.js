@@ -46,7 +46,7 @@ function main () {
     posts += files.map((file, index) => {
       const content = marked(read(`/articles/${dir}/${file}`))
       return templatePost({ content, id: `post-${name(file, '-')}` })
-    })
+    }).join('\n')
   })
 
   const content = templateIndex({ posts, index })
