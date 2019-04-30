@@ -201,6 +201,9 @@
     left: 50px;
   }
 }
+body #posts .post p img.dat-logo {
+  width: 50%;
+}
 body {
   background: #313131;
   font-family: 'IBM Plex Mono', monospace;
