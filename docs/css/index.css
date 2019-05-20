@@ -204,6 +204,27 @@
 body #posts .post p img.dat-logo {
   width: 50%;
 }
+.logos {
+  display: flex;
+}
+.logos .logo {
+  display: flex;
+  border: none !important;
+}
+.logos .logo:hover {
+  border: none !important;
+}
+.logos .logo img.sponsor {
+  margin: auto;
+  width: 100%;
+}
+.logos .logo img.sponsor.pl {
+  height: 40%;
+  width: 60%;
+}
+.logos .logo img.sponsor.wireline {
+  width: 70%;
+}
 body {
   background: #313131;
   font-family: 'IBM Plex Mono', monospace;
