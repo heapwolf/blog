@@ -667,16 +667,16 @@ better internet for everyone.</p>
 <h2 id="why">WHY?</h2>
 <p>Because learning is fun.</p>
 <h2 id="which-linux">WHICH LINUX?</h2>
-<p>There are thousands of posts about which linux is the best. There isn&#39;t one
-right answer. For me it&#39;s a distribution that reflects my values. I like to keep
-things simple.</p>
+<p>There are thousands of posts about which Linux is the best. There isn&#39;t one
+right answer. For me it&#39;s a distribution that reflects my own values. I like
+to keep things simple.</p>
 <h3 id="hello-arch-linux">HELLO, ARCH LINUX.</h3>
 <img src="/images/linuxbookpro.jpg" alt="laptop" class="half-width-frame">
 
 <p>You can see from the output that Arch Linux is running on MacBook Pro
 hardware. That&#39;s a screenshot of the terminal running <em>ZSH</em> and <em>TMUX</em>.
 MacOS aka <em>Darwin</em>, is a BSD variant, and it&#39;s Unix-ish. So transitioning
-to linux is easy and familiar.</p>
+to Linux is easy and familiar.</p>
 <br/>
 
 <h3 id="gnome-desktop">GNOME DESKTOP</h3>
@@ -697,22 +697,22 @@ a few gigabytes they are cheap.</p>
 <p>This wont be a complete guide. I don&#39;t think a complete guide exists. You&#39;ll
 need to do some searches to find solutions for issues specific to your machine.
 Also, this could brick your computer. So don&#39;t do any of this unless you really
-know how to <em>yolo</em>, k?</p>
+know how to <em>yolo</em>. If you&#39;re a part-time nerd, check out this <a href="https://www.ubuntu.com">link</a>.</p>
 <h3 id="other-guides">OTHER GUIDES</h3>
 <p>The two best resources I found were <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">this</a> and <a href="https://gist.github.com/roadrunner2/1289542a748d9a104e7baec6a92f9cd7">this</a>. And of course the
 <a href="https://wiki.archlinux.org/index.php/Mac">arch wiki</a> was incredibly helpful. I got here by analyzing these resources
 and doing some searches.</p>
 <h3 id="boot-from-usb">BOOT FROM USB</h3>
-<p>Start by downloading the <code>ISO</code> from <a href="https://www.archlinux.org/download">here</a>, pick a linke with <em>http</em>!
+<p>Start by downloading the <code>ISO</code> from <a href="https://www.archlinux.org/download">here</a>, pick a link with <em>http</em>!
 After you download it, <a href="https://sparewotw.wordpress.com/2012/10/31/how-to-verify-signature-using-sig-file">verify the signature</a>.</p>
-<p>You can use <a href="https://www.balena.io/etcher">this</a> app to make the USB bootable from the downloaded iso.</p>
+<p>You can use <a href="https://www.balena.io/etcher">this</a> app to make the USB bootable from the downloaded <code>iso</code>.</p>
 <p>Plug everything in and turn your computer on while holding down the <em>command</em>
 key. When the menu pops up, select your USB drive and continue booting it. Say
 goodbye to MacOS, you&#39;re about to install Arch.</p>
 <h3 id="first-boot">FIRST BOOT</h3>
 <p>You&#39;ll see some logs and then you&#39;ll get dropped into a command line. The first
-thing we&#39;re going to partition and format the disk. Your prompt is going to look
-like <code>root@archiso ~ #</code>, the first command we&#39;re going to run is <code>lsblk</code>.</p>
+thing we&#39;re going to do is partition and format the disk. Your prompt is going
+to look like <code>root@archiso ~ #</code>, the command we&#39;re going to run is <code>lsblk</code>.</p>
 <pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># lsblk</span></code></pre><p>You&#39;ll see a list of bulk devices, mine looks like this but yours will look
 different. I don&#39;t have a USB drive plugged in. You need to figure out which one
 is your storage device and which one is your USB device. You can probably
@@ -730,42 +730,105 @@ the following command.</p>
 <pre><code>mkpart ESP fat32 <span class="hljs-number">1049</span>kB <span class="hljs-number">538</span>MB
 <span class="hljs-keyword">set</span> <span class="hljs-number">1</span> boot on</code></pre><blockquote>
 <p>&quot;Take the size of your hard disk, that you noted yourself earlier, and
-substract the size of your RAM from it. I’ve got 8GB of RAM, so for <code>SIZE</code>
-I’ve put in: 243GB (251GB minus 8GB).&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
+subtract the size of your RAM from it. I&#39;ve got 8GB of RAM, so for <code>SIZE</code>
+I&#39;ve put in: 243GB (251GB minus 8GB).&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
 </blockquote>
 <p>You might have to adjust these values, but try something like this to start.</p>
 <pre><code>mkpart primary ext4 <span class="hljs-number">538</span>MB <span class="hljs-number">243</span>GB
 mkpart primary linux-swap <span class="hljs-number">243</span>GB <span class="hljs-number">100</span>%
 quit</code></pre><h2 id="format">FORMAT</h2>
 <p>Next we&#39;re going to format the partitions. Run <code>lsblk</code> again to see the new
-partitions you made, replace <code>foo</code> with your actual devicename.</p>
+partitions you made, replace <code>foo</code> with your actual device name.</p>
 <pre><code>mkfs.vfat -F32 <span class="hljs-regexp">/dev/</span>foo1
 mkfs.ext4 <span class="hljs-regexp">/dev/</span>foo2
 mkswap <span class="hljs-regexp">/dev/</span>foo3
 swapon <span class="hljs-regexp">/dev/</span>foo3</code></pre><p>If you get the error <code>Not enough clusters for a 32 bit FAT!</code>, try increasing the
 size of your partition as discussed <a href="https://bbs.archlinux.org/viewtopic.php?id=168014">here</a>.</p>
 <h2 id="bootstrap">BOOTSTRAP</h2>
-<p>Next we need to get the OS onto your newly partitoned and formatted device and
+<p>Next we need to get the OS onto your newly partitioned and formatted device and
 configure it.</p>
-<h3 id="mount">MOUNT</h3>
+<h3 id="mount-the-devices">MOUNT THE DEVICES</h3>
 <p>Let&#39;s mount the partitions, replacing <code>foo</code> with your actual device name.</p>
 <pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo2 /mnt</span>
 
 root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mkdir -p /mnt/boot</span>
-root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo1 /mnt/boot</span></code></pre><h3 id="install">INSTALL</h3>
-<p>Select thr right mirror by moving it to the top of the list.</p>
-<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /etc/pacman.d/mirrorlist</span></code></pre><p>Run the <code>pacstrap</code> command to copy the OS onto your device.</p>
-<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># pacstrap /mnt base base-devel</span></code></pre><h3 id="configure">CONFIGURE</h3>
+root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo1 /mnt/boot</span></code></pre><h3 id="install-the-base-system">INSTALL THE BASE SYSTEM</h3>
+<p>Select the right mirror by moving it to the top of the list.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /etc/pacman.d/mirrorlist</span></code></pre><p>Run the <code>pacstrap</code> command to copy the OS onto your device. I needed to install
+not only the <code>base</code> and the <code>base-devel</code> packages, but also the wireless
+networking packages so that I could get on the Wifi. Later I realized that after
+installing the <code>gnome</code> package, network connectivity is handled really well by
+the <a href="https://wiki.archlinux.org/index.php/NetworkManager">networkmanager</a> package.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># pacstrap /mnt base base-devel dialog wireless_tools netcfg wpa_supplicant</span></code></pre><h3 id="configure-the-file-system">CONFIGURE THE FILE SYSTEM</h3>
 <p>Generate your <a href="https://en.wikipedia.org/wiki/Fstab">File System Table</a> with this command.</p>
 <pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span></code></pre><p>Open it with <code>vi</code>, there are some changes you&#39;ll need to make...</p>
 <blockquote>
-<p>&quot;Make sure that the line of the ext4 partition ends with a <code>2</code>, the swap
+<p>&quot;Make sure that the line of the <code>ext4</code> partition ends with a <code>2</code>, the swap
 partition’s line ends with a <code>0</code>, and the boot partition’s line ends with a
 <code>1</code>. This configures the partition checking on boot.&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
 </blockquote>
-<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /mnt/etc/fstab</span></code></pre><h2 id="configure-1">CONFIGURE</h2>
-<p>Now change the root and configure the OS.</p>
-<pre><code>arch-chroot <span class="hljs-string">/mnt</span></code></pre>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /mnt/etc/fstab</span></code></pre><h2 id="configure-the-os">CONFIGURE THE OS</h2>
+<p>Now change the root and configure the OS. </p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># arch-chroot /mnt</span></code></pre><h3 id="password">PASSWORD</h3>
+<p>After you log run <code>arch-chroot</code>, the prompt will change slightly. Type in the
+following command to pick a new password for the root user. Write this down.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># passwd</span></code></pre><h3 id="keyboard">KEYBOARD</h3>
+<p>Let&#39;s get your keyboard and trackpad working. Use <a href="https://wiki.archlinux.org/index.php/pacman">pacman</a> (the Arch package
+manager) to install some things.</p>
+<pre><code><span class="hljs-attribute">pacman -S git kernel-devel dkms</span></code></pre><p>Now edit the keyboard configuration file.</p>
+<pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# vi /</span>etc<span class="hljs-regexp">/dracut.conf.d/</span>keyboard.conf</code></pre><p>Add the following line.</p>
+<pre><code>add_drivers+=<span class="hljs-string">"applespi intel_lpss_pci spi_pxa2xx_platform apple-ib-tb"</span></code></pre><p>Now make the system aware of our new modules</p>
+<pre><code>vi <span class="hljs-regexp">/etc/i</span>nitramfs-tools<span class="hljs-regexp">/modules</span></code></pre><p>Add the following lines</p>
+<pre><code>applespi
+apple-ib-tb
+<span class="hljs-built_in">int</span>el_lpss_pci
+spi_pxa2xx_platform</code></pre><p>Now get and build the drivers. If you have a touch-bar, check out the branch
+for that using <code>git checkout touchbar-driver-hid-driver</code> after you clone.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># git clone https://github.com/roadrunner2/macbook12-spi-driver.git</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># cd macbook12-spi-driver</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># ln -s `pwd` /usr/src/applespi-0.1</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># dkms install applespi/0.1</span></code></pre><p>There are some tweaks you can do, but at this point you should have a working
+keyboard and trackpad!</p>
+<pre><code><span class="hljs-attribute">reboot</span></code></pre><h3 id="locale">LOCALE</h3>
+<p>Open the <code>locale.gen</code> file and uncomment the line with <code>en_US.UTF-8 UTF-8</code>.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># vi /etc/locale.gen</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># locale-gen</span></code></pre><pre><code>[root@archiso /]# echo <span class="hljs-attribute">LANG</span>=en_US.UTF-8 &gt; /etc/locale.conf
+[root@archiso /]# <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LANG</span>=en_US.UTF-8</code></pre><h3 id="clock--timezone">CLOCK &amp; TIMEZONE</h3>
+<p>Set the timezone. To get a list of time zones, use <code>timedatectl list-timezones</code>.</p>
+<pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# ln -s /</span>usr<span class="hljs-regexp">/share/</span>zoneinfo<span class="hljs-regexp">/Zone/</span>SubZone <span class="hljs-regexp">/etc/</span>localtime</code></pre><p>Set the hardware clock.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># hwclock --systohc --utc</span></code></pre><h3 id="kernel-modules">KERNEL MODULES</h3>
+<p>Add kernel modules by opening or creating the following file.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># vi /etc/modules</span></code></pre><p>Add the following two lines.</p>
+<pre><code><span class="hljs-attribute">coretemp
+applesmc</span></code></pre><h3 id="hostname">HOSTNAME</h3>
+<p>Set your host name, replace <code>foo</code> with your actual hostname.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># echo foo &gt; /etc/hostname</span></code></pre><h3 id="hostfile">HOSTFILE</h3>
+<pre><code>127<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.1</span>   <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-class">.localdomain</span> <span class="hljs-selector-tag">foo</span>
+<span class="hljs-selector-pseudo">::1</span>         <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-class">.localdomain</span> <span class="hljs-selector-tag">foo</span></code></pre><h3 id="network">NETWORK</h3>
+<p>Install and enable the <code>DHCP</code> daemon.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># pacman -S dhcpcd</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># systemctl enable dhcpcd</span></code></pre><h3 id="bootloader">BOOTLOADER</h3>
+<p>Install EFI tools and use them to install <code>systemd-boot</code> on your boot partition.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># pacman -S dosfstools</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># bootctl --path=/boot install</span></code></pre><pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# vi /</span>boot<span class="hljs-regexp">/loader/</span>entries/arch.conf</code></pre><p>Add the following lines and replace <code>foo</code> with the name of your storage device.</p>
+<pre><code>title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options <span class="hljs-attribute">root</span>=/dev/foo2 rw <span class="hljs-attribute">elevator</span>=deadline quiet splash <span class="hljs-attribute">resume</span>=/dev/sda3 <span class="hljs-attribute">nmi_watchdog</span>=0</code></pre><p>Now tell the bootloader about your new bootable option.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># echo <span class="hljs-string">"default arch"</span> &gt; /boot/loader/loader.conf</span></code></pre><p>Exit <code>arch-chroot</code>, unplug all those USBs and reboot your system.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># exit</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># reboot</span></code></pre><p>After this you should get dropped into a command line again. But this time you
+will be running your new OS and you will have keyboard and mouse support. After
+that you may or may not have some more work to do if any of your devices aren&#39;t
+working (audio either works or can be tricky to get working).</p>
+<p>There are also configuration things to do but it depends on how you want to use
+your computer. Most of the code in the official repository is seen by a lot of
+eyes. But personally I try to stay away from the AUR if I can. I try to audit
+the packages I install.</p>
+<p>You should read the <a href="https://wiki.archlinux.org/index.php/Security">Security</a> section of the Arch Wiki.</p>
+<p>Good luck or congratulations depending on where you are. Hit me up on either
+Twitter (<code>@heapwolf</code>) or Freenode IRC <code>heapwowlf</code> if you have questions.</p>
+
   <div class="up">
     <svg>
       <use xlink:href="/images/sprite.svg#up">
