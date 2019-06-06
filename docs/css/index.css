@@ -225,6 +225,9 @@ body #posts .post p img.dat-logo {
 .logos .logo img.sponsor.wireline {
   width: 70%;
 }
+.half-width-frame {
+  width: 100%;
+}
 body {
   background: #313131;
   font-family: 'IBM Plex Mono', monospace;

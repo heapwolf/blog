@@ -56,7 +56,13 @@
           04 dtn recap
         </a>
         <br>
-      <h3>03 other</h3>
+      <h3>03 systems</h3>
+
+        <a class="link" href="#post-00-linux-on-macbook-pro">
+          00 linux on macbook pro
+        </a>
+        <br>
+      <h3>08 other</h3>
 
         <a class="link" href="#post-01-code">
           01 code
@@ -103,17 +109,15 @@ on Github.</p>
 <p><em>async / await</em> improves program flow and reduces the number of callbacks in
 your code. The <code>await</code> keyword can be used to pause the current code path and
 wait for an async function to return a value without blocking the <a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">event loop</a>.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'started'</span>)
   <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">100</span>)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'finished'</span>)
 }
 
-main()
-</code></pre>
+main()</code></pre>
 <p>An implementation for the <code>sleep</code> function might look like this...</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> setTimeout(r, n))
-</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> setTimeout(r, n))</code></pre>
 <p>However, as this example demonstrates, the code in the promise starts executing
 immediately. Promises are eager (as opposed to being <em>lazy</em>), and sometimes we
 want them to be lazy. <a href="https://staltz.com/promises-are-not-neutral-enough.html">Here</a> is a detailed explaination of why an eager
@@ -122,7 +126,7 @@ promise may not be what you want.</p>
 that implements a <code>then</code> method.</p>
 <h3 id="await-able-classes">Await-able Classes</h3>
 <p>To create an async class, implement a <code>then</code> method on it!</p>
-<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
   then (resolve, reject) {
     resolve(<span class="hljs-number">42</span>)
   }
@@ -132,13 +136,12 @@ that implements a <code>then</code> method.</p>
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo()
   <span class="hljs-comment">// answer === 42</span>
 }
-main()
-</code></pre>
+main()</code></pre>
 <h3 id="await-able-objects">Await-able Objects</h3>
 <p>You can do the same thing with an object. You can name the callback
 functions whatever you want. Also, you aren&#39;t required to use or care
 about the <code>rejection</code> callback.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = {
   then (resolve) {
     setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(<span class="hljs-number">42</span>), <span class="hljs-number">1024</span>)
   }
@@ -148,10 +151,9 @@ about the <code>rejection</code> callback.</p>
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo
   <span class="hljs-comment">// answer === 42</span>
 }
-main()
-</code></pre>
+main()</code></pre>
 <h3 id="await-able-object-factories">Await-able object factories</h3>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> ({
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> ({
   then (resolve) {
     setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(num), <span class="hljs-number">1024</span>)
   }
@@ -160,18 +162,16 @@ main()
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo(<span class="hljs-number">42</span>)
 }
-main()
-</code></pre>
+main()</code></pre>
 <h3 id="async-then-ables">Async then-ables</h3>
 <p>Object and class methods can use the async keyword, just like functions.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> Foo = {
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = {
   <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">resolve</span>)</span> {
     resolve(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
   }
-}
-</code></pre>
+}</code></pre>
 <p>Destructuring assignments provide a way to return multiple values...</p>
-<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
   then (resolve) {
     request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; resolve({ err, res }))
   }
@@ -188,8 +188,7 @@ main()
   <span class="hljs-comment">// Destructured values can also be aliased.</span>
   <span class="hljs-keyword">const</span> { <span class="hljs-attr">err</span>: namedError, <span class="hljs-attr">res</span>: namedResponse } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
 }
-main()
-</code></pre>
+main()</code></pre>
 
   <div class="up">
     <svg>
@@ -247,7 +246,7 @@ re-synchronizes its counter (its clock) with the node that sent the message.</p>
 something meaningful, like when it creates some data. When node <code>A</code>
 eventually sends its payload over the network, it will include the current
 value of its clock.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> clock = <span class="hljs-number">0</span>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> clock = <span class="hljs-number">0</span>
 
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// A thread-safe, monotonically increasing function.</span>
@@ -270,21 +269,19 @@ value of its clock.</p>
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// Eventually send the data to the network.</span>
 <span class="hljs-comment">//</span>
-sendToNetworkQueue(doSomething({ ... }))
-</code></pre>
+sendToNetworkQueue(doSomething({ ... }))</code></pre>
 <p>When node <code>B</code> receives a message from node <code>A</code>, it will decide how to set
 its own clock. If the clock value in the message is greater than its own
 value, it will use the value in the message. Otherwise it will use its own
 value. In either case, it will also increment its own clock by <code>1</code>.</p>
-<pre><code class="lang-js">let clock = <span class="hljs-number">0</span>
+<pre><code class="language-js">let clock = <span class="hljs-number">0</span>
 
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// Eventually receive some data from the network.</span>
 <span class="hljs-comment">//</span>
 receiveFromNetworkQueue (<span class="hljs-class"><span class="hljs-keyword">message</span>) {</span>
   clock = Math.max(<span class="hljs-class"><span class="hljs-keyword">message</span>.<span class="hljs-title">clock</span>, clock) + 1
-}</span>
-</code></pre>
+}</span></code></pre>
 <p>Here we semi-randomly fail to always tell the other node about the event that
 happened, illustrating what happens when a node is eventually synchronized.</p>
 <div id="lamport-timestamp">
@@ -393,7 +390,8 @@ something that can be achieved using a <a href="https://en.wikipedia.org/wiki/Ve
 
 </script>
 
-<p><br/></p>
+<br/>
+
 <p>Special thanks to <a href="https://twitter.com/indutny">Fedor Indutny</a> and <a href="https://twitter.com/feross">Feross Aboukhadijeh</a> for reviewing
 this post. &hearts;</p>
 
@@ -417,28 +415,25 @@ a system arrived at its state.</p>
 <a href="https://en.wikipedia.org/wiki/Causality">causality</a> in a distributed system.</p>
 <p>Here is an example vector clock in a network where there are three
 participating nodes...</p>
-<pre><code class="lang-js">{ <span class="hljs-attribute">alice</span>: <span class="hljs-number">0</span>, bob: <span class="hljs-number">1</span>, carol: <span class="hljs-number">0</span> }
-</code></pre>
+<pre><code class="language-js">{ <span class="hljs-attribute">alice</span>: <span class="hljs-number">0</span>, bob: <span class="hljs-number">1</span>, carol: <span class="hljs-number">0</span> }</code></pre>
 <p>To set up a node we will give it an id and an in memory object to
 store some data.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> myId = <span class="hljs-string">'alice'</span>
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">data</span> = {}
-</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> myId = <span class="hljs-string">'alice'</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">data</span> = {}</code></pre>
 <h3 id="sending-messages">sending messages</h3>
 <p>When a node writes some data, it increments its own logical clock in
 the vector and includes it as a property of a message that it will
 attempt to send. We also add the value as a property of the message.</p>
-<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span></span> <span class="hljs-built_in">write</span> (key, <span class="hljs-keyword">value</span>) {
-  <span class="hljs-keyword">if</span> (<span class="hljs-comment">!data[key]) {</span>
-    <span class="hljs-keyword">data</span>[key] = { clock: { [myId]: <span class="hljs-number">0</span> } }
+<pre><code class="language-js"><span class="hljs-keyword">function</span> write <span class="hljs-built_in">(key</span>, <span class="hljs-keyword">value</span>) {
+  <span class="hljs-keyword">if</span> (!data<span class="hljs-built_in">[key</span>]) {
+    data<span class="hljs-built_in">[key</span>] = { clock: { [myId]: <span class="hljs-number">0</span> } }
   }
 
-  <span class="hljs-keyword">data</span>[key].clock[myId] += <span class="hljs-number">1</span> 
-  <span class="hljs-keyword">data</span>[key].<span class="hljs-keyword">value</span> = [<span class="hljs-keyword">value</span>]
+  data<span class="hljs-built_in">[key</span>].clock[myId] += <span class="hljs-number">1</span> 
+  data<span class="hljs-built_in">[key</span>].<span class="hljs-keyword">value</span> = [<span class="hljs-keyword">value</span>]
 
-  send(key, <span class="hljs-keyword">data</span>[key])
-}
-</code></pre>
+  send<span class="hljs-built_in">(key</span>, data<span class="hljs-built_in">[key</span>])
+}</code></pre>
 <blockquote>
 <p>In this case we made the <strong>value</strong> property an array. This is because we
 must anticipate the possibility of <strong>concurrent messages</strong> &mdash; that is,
@@ -453,7 +448,7 @@ its local copy of the vector.</p>
 <p>Then for each node in the message&#39;s vector, it compares the local
 clock count (if there is one) to the clock count in the received
 message, taking the max of the numbers.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> <span class="hljs-built_in">max</span> = arr =&gt; Math.<span class="hljs-built_in">max</span>.apply(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">Object</span>.values(arr))
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-built_in">max</span> = arr =&gt; Math.<span class="hljs-built_in">max</span>.apply(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">Object</span>.values(arr))
 
 function receive (message) {
   <span class="hljs-keyword">const</span> <span class="hljs-built_in">key</span> = message.<span class="hljs-built_in">key</span>
@@ -499,8 +494,7 @@ function receive (message) {
 
     localClock[id] = Math.<span class="hljs-built_in">max</span>(a, b)
   }
-}
-</code></pre>
+}</code></pre>
 <h3 id="handling-concurrent-messages">handling concurrent messages</h3>
 <p>Two messages that are received at the same time and have the same logical clock
 count are &quot;concurrent&quot;.</p>
@@ -578,7 +572,8 @@ reached, the message can be considered complete and can then be cleaned up.</p>
   <h1 id="implementing-dat">implementing dat</h1>
 <p>In my spare time I am implementing <a href="https://datproject.org/">dat</a> by following <a href="https://datprotocol.github.io/how-dat-works/">this</a>,
 <a href="https://www.datprotocol.com/">this</a> and <a href="https://github.com/datprotocol/DEPs">this</a> as references.</p>
-<p><img src="/images/dat.png" alt="dat-logo-variant" class="dat-logo"></p>
+<img src="/images/dat.png" alt="dat-logo-variant" class="dat-logo">
+
 <p>You can follow this post and <a href="https://github.com/datcxx">this</a> github org for updates and information.</p>
 
   <div class="up">
@@ -602,7 +597,8 @@ should do another one and it made sense! After all, many of the projects we
 discussed in 2015 were just ideas (<a href="https://github.com/libp2p/js-libp2p/commit/e770ce782278d5be139201560bb101682458ed06">libp2p</a>), still in the prototyping
 phase (<a href="https://github.com/datproject/dat/tree/8c9f80841e717ba30bd02953ba5d425ddabd24dd">dat</a>) or didn&#39;t exist at all (<a href="https://filecoin.io/">filecoin</a>,
 <a href="https://github.com/ssbc/patchwork/tree/572440feaf959755763efb726087066a6f5b29db">patchwork</a>). It happened!</p>
-<p><img src="/images/dtn.png" alt="dtn-logo-variant" class="dtn-logo"></p>
+<img src="/images/dtn.png" alt="dtn-logo-variant" class="dtn-logo">
+
 <p>This event works for a few reasons.</p>
 <ol>
 <li><p>Zero profit. 100% of what we earn gets spent on the conference &mdash;
@@ -619,8 +615,9 @@ interested in the best outcome. Things like programming languages are trivial
 details.</p>
 </li>
 </ol>
-<p><br/></p>
-<h2 id="what-happened-">What happened?</h2>
+<br/>
+
+<h2 id="what-happened">What happened?</h2>
 <p>Over 2 days about 150 people attended. We recorded about 12 hours of video from
 12 speakers. We had 12 formal talks and several impromptu lightning talks. I&#39;ll
 be posting the videos online once they are processed.</p>
@@ -629,7 +626,7 @@ fundamental primitives that help people build a more distributed and
 decentralized internet. We shared language agnostic patterns for building
 solutions but also many concrete solutions &mdash; actual code that illustrates
 what problems we&#39;re solving today.</p>
-<h2 id="how-did-you-do-it-">How did you do it?</h2>
+<h2 id="how-did-you-do-it">How did you do it?</h2>
 <p>I have no idea. It wasn&#39;t easy. Unexpected things happened. People are hard to
 organize. I&#39;m not an event organizer. I have no idea what I&#39;m doing. I almost
 broke-even though. Ultimately it was a lot of fun. And the lesson here is that
@@ -637,11 +634,11 @@ anyone can do this. If you want help putting on your own event, I&#39;m happy to
 discuss what I know! My handle is <em>heapwolf</em> most places on the internet. If
 you&#39;re not on any decentralized networks yet, you can even reach me on
 <a href="https://twitter.com/heapwolf">twitter</a>.</p>
-<h2 id="what-s-next-">What&#39;s next?</h2>
+<h2 id="whats-next">What&#39;s next?</h2>
 <p>Let&#39;s do it again! Many of the projects we met to discuss are moving faster,
 more people are involved, so let&#39;s not make it a 4 year gap this time. Should we
 do the same dates? Different Location? Let&#39;s talk.</p>
-<h2 id="thank-you-">Thank you!</h2>
+<h2 id="thank-you">Thank you!</h2>
 <p>If you bought a ticket, you were a sponsor! So I want to thank all the sponsors,
 especially those who bought high value tickets. You are helping to build a
 better internet for everyone.</p>
@@ -658,6 +655,117 @@ better internet for everyone.</p>
 </div>
 
 
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+<section class="post" id="post-00-linux-on-macbook-pro">
+  <h1 id="linux-on-macbook-pro">Linux on MacBook Pro</h1>
+<p>I recently switched from <em>MacOS</em> to <em>Linux</em>.</p>
+<h2 id="why">WHY?</h2>
+<p>Because learning is fun.</p>
+<h2 id="which-linux">WHICH LINUX?</h2>
+<p>There are thousands of posts about which linux is the best. There isn&#39;t one
+right answer. For me it&#39;s a distribution that reflects my values. I like to keep
+things simple.</p>
+<h3 id="hello-arch-linux">HELLO, ARCH LINUX.</h3>
+<img src="/images/linuxbookpro.jpg" alt="laptop" class="half-width-frame">
+
+<p>You can see from the output that Arch Linux is running on MacBook Pro
+hardware. That&#39;s a screenshot of the terminal running <em>ZSH</em> and <em>TMUX</em>.
+MacOS aka <em>Darwin</em>, is a BSD variant, and it&#39;s Unix-ish. So transitioning
+to linux is easy and familiar.</p>
+<br/>
+
+<h3 id="gnome-desktop">GNOME DESKTOP</h3>
+<p>There are other desktop options, but <em>Gnome</em> basically gives you an improved
+version of MacOS. I added some <a href="https://www.gnome-look.org/p/1210856">MacOS icons</a> to make the transition more
+seamless.</p>
+<img src="/images/desktop.png" alt="laptop" class="half-width-frame">
+
+<h2 id="hardware-prerequisites">HARDWARE PREREQUISITES</h2>
+<p>Before you do anything, you&#39;ll need a USB-C to USB hub. You can buy a cheap
+keyboard and mouse to plug into it. You&#39;ll also need a USB drive. Get one with
+a few gigabytes they are cheap.</p>
+<img src="/images/inputs.jpg" alt="laptop" class="half-width-frame">
+
+
+<h2 id="getting-started">GETTING STARTED</h2>
+<h3 id="disclaimer">DISCLAIMER</h3>
+<p>This wont be a complete guide. I don&#39;t think a complete guide exists. You&#39;ll
+need to do some searches to find solutions for issues specific to your machine.
+Also, this could brick your computer. So don&#39;t do any of this unless you really
+know how to <em>yolo</em>, k?</p>
+<h3 id="other-guides">OTHER GUIDES</h3>
+<p>The two best resources I found were <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">this</a> and <a href="https://gist.github.com/roadrunner2/1289542a748d9a104e7baec6a92f9cd7">this</a>. And of course the
+<a href="https://wiki.archlinux.org/index.php/Mac">arch wiki</a> was incredibly helpful. I got here by analyzing these resources
+and doing some searches.</p>
+<h3 id="boot-from-usb">BOOT FROM USB</h3>
+<p>Start by downloading the <code>ISO</code> from <a href="https://www.archlinux.org/download">here</a>, pick a linke with <em>http</em>!
+After you download it, <a href="https://sparewotw.wordpress.com/2012/10/31/how-to-verify-signature-using-sig-file">verify the signature</a>.</p>
+<p>You can use <a href="https://www.balena.io/etcher">this</a> app to make the USB bootable from the downloaded iso.</p>
+<p>Plug everything in and turn your computer on while holding down the <em>command</em>
+key. When the menu pops up, select your USB drive and continue booting it. Say
+goodbye to MacOS, you&#39;re about to install Arch.</p>
+<h3 id="first-boot">FIRST BOOT</h3>
+<p>You&#39;ll see some logs and then you&#39;ll get dropped into a command line. The first
+thing we&#39;re going to partition and format the disk. Your prompt is going to look
+like <code>root@archiso ~ #</code>, the first command we&#39;re going to run is <code>lsblk</code>.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># lsblk</span></code></pre><p>You&#39;ll see a list of bulk devices, mine looks like this but yours will look
+different. I don&#39;t have a USB drive plugged in. You need to figure out which one
+is your storage device and which one is your USB device. You can probably
+determine that by the sizes of things.</p>
+<pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+nvme0n1     <span class="hljs-number">259</span>:<span class="hljs-number">0</span>    <span class="hljs-number">0</span> <span class="hljs-number">233.8</span>G  <span class="hljs-number">0</span> disk
+├─nvme0n1p1 <span class="hljs-number">259</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>   <span class="hljs-number">489</span>M  <span class="hljs-number">0</span> part /boot
+├─nvme0n1p2 <span class="hljs-number">259</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">222.6</span>G  <span class="hljs-number">0</span> part /
+└─nvme0n1p3 <span class="hljs-number">259</span>:<span class="hljs-number">3</span>    <span class="hljs-number">0</span>  <span class="hljs-number">10.3</span>G  <span class="hljs-number">0</span> part [SWAP]</code></pre><h2 id="partition">PARTITION</h2>
+<p>After you figure out your device&#39;s name, write it down, we&#39;re going to need it
+again. Now, let&#39;s edit it. For example, if I was to edit my device, I would run
+the following command.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># parted /dev/nvme01</span></code></pre><p>You&#39;re in the partition editor. Next, destroy everything on the device.</p>
+<pre><code><span class="hljs-attribute">mklabel gpt</span></code></pre><p>Then with the next two commands create the boot partition.</p>
+<pre><code>mkpart ESP fat32 <span class="hljs-number">1049</span>kB <span class="hljs-number">538</span>MB
+<span class="hljs-keyword">set</span> <span class="hljs-number">1</span> boot on</code></pre><blockquote>
+<p>&quot;Take the size of your hard disk, that you noted yourself earlier, and
+substract the size of your RAM from it. I’ve got 8GB of RAM, so for <code>SIZE</code>
+I’ve put in: 243GB (251GB minus 8GB).&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
+</blockquote>
+<p>You might have to adjust these values, but try something like this to start.</p>
+<pre><code>mkpart primary ext4 <span class="hljs-number">538</span>MB <span class="hljs-number">243</span>GB
+mkpart primary linux-swap <span class="hljs-number">243</span>GB <span class="hljs-number">100</span>%
+quit</code></pre><h2 id="format">FORMAT</h2>
+<p>Next we&#39;re going to format the partitions. Run <code>lsblk</code> again to see the new
+partitions you made, replace <code>foo</code> with your actual devicename.</p>
+<pre><code>mkfs.vfat -F32 <span class="hljs-regexp">/dev/</span>foo1
+mkfs.ext4 <span class="hljs-regexp">/dev/</span>foo2
+mkswap <span class="hljs-regexp">/dev/</span>foo3
+swapon <span class="hljs-regexp">/dev/</span>foo3</code></pre><p>If you get the error <code>Not enough clusters for a 32 bit FAT!</code>, try increasing the
+size of your partition as discussed <a href="https://bbs.archlinux.org/viewtopic.php?id=168014">here</a>.</p>
+<h2 id="bootstrap">BOOTSTRAP</h2>
+<p>Next we need to get the OS onto your newly partitoned and formatted device and
+configure it.</p>
+<h3 id="mount">MOUNT</h3>
+<p>Let&#39;s mount the partitions, replacing <code>foo</code> with your actual device name.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo2 /mnt</span>
+
+root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mkdir -p /mnt/boot</span>
+root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo1 /mnt/boot</span></code></pre><h3 id="install">INSTALL</h3>
+<p>Select thr right mirror by moving it to the top of the list.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /etc/pacman.d/mirrorlist</span></code></pre><p>Run the <code>pacstrap</code> command to copy the OS onto your device.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># pacstrap /mnt base base-devel</span></code></pre><h3 id="configure">CONFIGURE</h3>
+<p>Generate your <a href="https://en.wikipedia.org/wiki/Fstab">File System Table</a> with this command.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span></code></pre><p>Open it with <code>vi</code>, there are some changes you&#39;ll need to make...</p>
+<blockquote>
+<p>&quot;Make sure that the line of the ext4 partition ends with a <code>2</code>, the swap
+partition’s line ends with a <code>0</code>, and the boot partition’s line ends with a
+<code>1</code>. This configures the partition checking on boot.&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
+</blockquote>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /mnt/etc/fstab</span></code></pre><h2 id="configure-1">CONFIGURE</h2>
+<p>Now change the root and configure the OS.</p>
+<pre><code>arch-chroot <span class="hljs-string">/mnt</span></code></pre>
   <div class="up">
     <svg>
       <use xlink:href="/images/sprite.svg#up">
@@ -704,7 +812,7 @@ I have worked in the infosec space.</p>
 engineering, concurrent and distributed programming, metaprogramming,
 functional programming and ECMAScript (Javascript). Key-Value store</p>
 <h2 id="experience">Experience</h2>
-<h3 id="cto-cofounder-at-voltra-co-">CTO, Cofounder at Voltra Co.</h3>
+<h3 id="cto-cofounder-at-voltra-co">CTO, Cofounder at Voltra Co.</h3>
 <p>January 2016 - Augest 2018 (2.5 years)</p>
 <p>Voltra Co. was a cloud storage service and set of audio products. Voltra&#39;s
 desktop and mobile players sync so you can stream your music from anywhere.
