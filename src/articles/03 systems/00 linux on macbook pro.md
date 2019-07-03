@@ -83,9 +83,9 @@ determine that by the sizes of things.
 ```
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 nvme0n1     259:0    0 233.8G  0 disk
-├─nvme0n1p1 259:1    0   489M  0 part /boot
-├─nvme0n1p2 259:2    0 222.6G  0 part /
-└─nvme0n1p3 259:3    0  10.3G  0 part [SWAP]
+|- nvme0n1p1 259:1    0   489M  0 part /boot
+|- nvme0n1p2 259:2    0 222.6G  0 part /
+ \ nvme0n1p3 259:3    0  10.3G  0 part [SWAP]
 ```
 
 ## PARTITION

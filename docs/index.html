@@ -81,21 +81,34 @@
     <div id="posts" role="main">
       <section class="post" id="post-01-a-little-class-for-combining-behavior,-layout-and-style">
   <h1 id="a-little-class-for-combining-behavior-layout-and-style">a little class for combining behavior, layout and style</h1>
-<h3 id="2019-04-30">2019-04-30</h3>
+<h3 id="2018-7-30">2018-7-30</h3>
 <p>I like some of what React offers. I also think it&#39;s bloated, over-hyped,
 over-engineered and it sees the web as a compile target rather than a
 development platform.</p>
 <p>I like most of what Web Components offer, they&#39;re a part of the
-<a href="https://en.wikipedia.org/wiki/Web_platform">web platform</a>. They offer true component encapsulation &nbsp;&mdash;&nbsp;
-without hacks. They are the result of consensus among the web&#39;s working groups.
-And like most APIs designed by consensus, they are a little awkward.</p>
+<a href="https://en.wikipedia.org/wiki/Web_platform">web platform</a>. They offer real encapsulation &nbsp;&mdash;&nbsp; for css.
+And like most web APIs designed by consensus, they&#39;re awkward.</p>
 <p><img src="https://raw.githubusercontent.com/heapwolf/tonic/master/readme-tonic.png" alt="img"></p>
 <p>Tonic is about 250 lines of code. It borrows goals and ideas from React but is
-built on native Web Components. It works in all browsers. It&#39;s the <em>minimum</em> of
-what is needed to organize application code, the flow of data and accommodate
-component based architecture.</p>
+built on native Web Components. It works in all browsers. It&#39;s stable. It&#39;s the
+<em>minimum</em> of what is needed to organize application code, the flow of data and
+accommodate component based architecture.</p>
 <p>You can find the core library <a href="https://github.com/heapwolf/tonic/">here</a> and a collection of components <a href="https://heapwolf.github.io/components/">here</a>
 on Github.</p>
+<h3 id="2019-7-3-update">2019-7-3 Update</h3>
+<p>Tonic is about a year old. To celebrate a year without any new features, let&#39;s
+add a new feature...</p>
+<p>Your render function can now be <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><code>async</code></a> or an <a href="https://github.com/tc39/proposal-async-iteration#async-generator-functions"><code>async generator</code></a>. This
+provides a declaritive way to express the intent of your render method. For
+example...</p>
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tonic</span> </span>{
+  async * render () {
+
+    <span class="hljs-keyword">yield</span> loadingState()
+
+    <span class="hljs-keyword">return</span> await getStuff()
+  }
+}</code></pre>
 
   <div class="up">
     <svg>
@@ -719,9 +732,9 @@ is your storage device and which one is your USB device. You can probably
 determine that by the sizes of things.</p>
 <pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 nvme0n1     <span class="hljs-number">259</span>:<span class="hljs-number">0</span>    <span class="hljs-number">0</span> <span class="hljs-number">233.8</span>G  <span class="hljs-number">0</span> disk
-├─nvme0n1p1 <span class="hljs-number">259</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>   <span class="hljs-number">489</span>M  <span class="hljs-number">0</span> part /boot
-├─nvme0n1p2 <span class="hljs-number">259</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">222.6</span>G  <span class="hljs-number">0</span> part /
-└─nvme0n1p3 <span class="hljs-number">259</span>:<span class="hljs-number">3</span>    <span class="hljs-number">0</span>  <span class="hljs-number">10.3</span>G  <span class="hljs-number">0</span> part [SWAP]</code></pre><h2 id="partition">PARTITION</h2>
+|- nvme0n1p1 <span class="hljs-number">259</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>   <span class="hljs-number">489</span>M  <span class="hljs-number">0</span> part /boot
+|- nvme0n1p2 <span class="hljs-number">259</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">222.6</span>G  <span class="hljs-number">0</span> part /
+ \ nvme0n1p3 <span class="hljs-number">259</span>:<span class="hljs-number">3</span>    <span class="hljs-number">0</span>  <span class="hljs-number">10.3</span>G  <span class="hljs-number">0</span> part [SWAP]</code></pre><h2 id="partition">PARTITION</h2>
 <p>After you figure out your device&#39;s name, write it down, we&#39;re going to need it
 again. Now, let&#39;s edit it. For example, if I was to edit my device, I would run
 the following command.</p>
@@ -814,7 +827,7 @@ applesmc</span></code></pre><h3 id="hostname">HOSTNAME</h3>
 <pre><code>title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options <span class="hljs-attribute">root</span>=/dev/foo2 rw <span class="hljs-attribute">elevator</span>=deadline quiet splash <span class="hljs-attribute">resume</span>=/dev/sda3 <span class="hljs-attribute">nmi_watchdog</span>=0</code></pre><p>Now tell the bootloader about your new bootable option.</p>
+options <span class="hljs-attribute">root</span>=/dev/foo2 rw <span class="hljs-attribute">elevator</span>=deadline quiet splash <span class="hljs-attribute">resume</span>=/dev/foo3 <span class="hljs-attribute">nmi_watchdog</span>=0</code></pre><p>Now tell the bootloader about your new bootable option.</p>
 <pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># echo <span class="hljs-string">"default arch"</span> &gt; /boot/loader/loader.conf</span></code></pre><p>Exit <code>arch-chroot</code>, unplug all those USBs and reboot your system.</p>
 <pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># exit</span>
 [root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># reboot</span></code></pre><p>After this you should get dropped into a command line again. But this time you
