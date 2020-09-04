@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "highlight.js": "^9.4.0",
-    "marked": "^0.6.2",
+    "marked": "^1.1.1",
     "scrolltoy": "github:voltraco/scrolltoy",
     "txl": "^1.0.0"
   },
