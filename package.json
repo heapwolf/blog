@@ -1,0 +1,23 @@
+{
+  "name": "heapwolf",
+  "version": "1.0.0",
+  "description": "blog",
+  "scripts": {
+    "dev": "npm run build && ./bin/server",
+    "build": "npm test && node ./bin/build.js && npm run build:js && npm run build:styl",
+    "build:js": "browserify ./docs/index.js > ./docs/bundle.js",
+    "build:styl": "stylus ./src/styles/index.styl -o ./docs/css",
+    "test": "standard"
+  },
+  "author": "Paolo Fragomeni <hello@heapwolf.com>",
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "browserify": "^16.2.2",
+    "send": "^0.16.2",
+    "standard": "^10.0.3",
+    "stylus": "^0.54.5"
+  }
+}

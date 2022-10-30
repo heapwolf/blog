@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="./css/index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,700" rel="stylesheet">
+    <!-- link href="https://fonts.googleapis.com/css?family=Merriweather|Poly" rel="stylesheet" -->
+  </head>
+
+  <body>
+    <aside>
+      <h3>01 web development</h3>
+
+        <a class="link" href="#post-01-a-little-class-for-combining-behavior,-layout-and-style">
+          01 a little class for combining behavior, layout and style
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-02-what-are-javascript-then-ables">
+          02 what are javascript then-ables
+        </a>
+        <br>
+      <h3>02 distributed systems</h3>
+
+        <a class="link" href="#post-00-preamble">
+          00 preamble
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-01-illustrated-lamport-timestamp">
+          01 illustrated lamport timestamp
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-02-vector-clock-notes">
+          02 vector clock notes
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-03-implementing-dat">
+          03 implementing dat
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-04-dtn-recap">
+          04 dtn recap
+        </a>
+        <br>
+      <h3>03 systems</h3>
+
+        <a class="link" href="#post-00-linux-on-macbook-pro">
+          00 linux on macbook pro
+        </a>
+        <br>
+      <h3>08 other</h3>
+
+        <a class="link" href="#post-01-code">
+          01 code
+        </a>
+        <br>
+      
+
+
+        <a class="link" href="#post-02-curriculum-vitae">
+          02 curriculum vitae
+        </a>
+        <br>
+      
+    </aside>
+
+    <div id="posts" role="main">
+      <section class="post" id="post-01-a-little-class-for-combining-behavior,-layout-and-style">
+  <h1 id="a-little-class-for-combining-behavior-layout-and-style">a little class for combining behavior, layout and style</h1>
+<h3 id="2018-7-30">2018-7-30</h3>
+<p>I like some of what React offers. I also think it&#39;s bloated, over-hyped,
+over-engineered and it sees the web as a compile target rather than a
+development platform.</p>
+<p>I like most of what Web Components offer, they&#39;re a part of the
+<a href="https://en.wikipedia.org/wiki/Web_platform">web platform</a>. They offer real encapsulation &nbsp;&mdash;&nbsp; for css.
+And like most web APIs designed by consensus, they&#39;re awkward.</p>
+<p><img src="https://raw.githubusercontent.com/heapwolf/tonic/master/readme-tonic.png" alt="img"></p>
+<p>Tonic is about 250 lines of code. It borrows goals and ideas from React but is
+built on native Web Components. It works in all browsers. It&#39;s stable. It&#39;s the
+<em>minimum</em> of what is needed to organize application code, the flow of data and
+accommodate component based architecture.</p>
+<p>You can find the core library <a href="https://github.com/heapwolf/tonic/">here</a> and a collection of components <a href="https://heapwolf.github.io/components/">here</a>
+on Github.</p>
+<h3 id="2019-7-3-update">2019-7-3 Update</h3>
+<p>Tonic is about a year old. To celebrate a year without any new features, let&#39;s
+add a new feature...</p>
+<p>Your render function can now be <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><code>async</code></a> or an <a href="https://github.com/tc39/proposal-async-iteration#async-generator-functions"><code>async generator</code></a>. This
+provides a declaritive way to express the intent of your render method. For
+example...</p>
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tonic</span> </span>{
+  async * render () {
+
+    <span class="hljs-keyword">yield</span> loadingState()
+
+    <span class="hljs-keyword">return</span> await getStuff()
+  }
+}</code></pre>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-02-what-are-javascript-then-ables">
+  <h1 id="what-are-javascript-then-ables">What are javascript then-ables</h1>
+<p><em>async / await</em> improves program flow and reduces the number of callbacks in
+your code. The <code>await</code> keyword can be used to pause the current code path and
+wait for an async function to return a value without blocking the <a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">event loop</a>.</p>
+<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'started'</span>)
+  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">100</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'finished'</span>)
+}
+
+main()</code></pre>
+<p>An implementation for the <code>sleep</code> function might look like this...</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> setTimeout(r, n))</code></pre>
+<p>However, as this example demonstrates, the code in the promise starts executing
+immediately. Promises are eager (as opposed to being <em>lazy</em>), and sometimes we
+want them to be lazy. <a href="https://staltz.com/promises-are-not-neutral-enough.html">Here</a> is a detailed explaination of why an eager
+promise may not be what you want.</p>
+<p>A then-able is lazy. It has no constructor. It&#39;s any function, object or class
+that implements a <code>then</code> method.</p>
+<h3 id="await-able-classes">Await-able Classes</h3>
+<p>To create an async class, implement a <code>then</code> method on it!</p>
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+  then (resolve, reject) {
+    resolve(<span class="hljs-number">42</span>)
+  }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo()
+  <span class="hljs-comment">// answer === 42</span>
+}
+main()</code></pre>
+<h3 id="await-able-objects">Await-able Objects</h3>
+<p>You can do the same thing with an object. You can name the callback
+functions whatever you want. Also, you aren&#39;t required to use or care
+about the <code>rejection</code> callback.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = {
+  then (resolve) {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(<span class="hljs-number">42</span>), <span class="hljs-number">1024</span>)
+  }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo
+  <span class="hljs-comment">// answer === 42</span>
+}
+main()</code></pre>
+<h3 id="await-able-object-factories">Await-able object factories</h3>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> ({
+  then (resolve) {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(num), <span class="hljs-number">1024</span>)
+  }
+})
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> answer = <span class="hljs-keyword">await</span> Foo(<span class="hljs-number">42</span>)
+}
+main()</code></pre>
+<h3 id="async-then-ables">Async then-ables</h3>
+<p>Object and class methods can use the async keyword, just like functions.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Foo = {
+  <span class="hljs-function"><span class="hljs-keyword">async</span> <span class="hljs-title">then</span> (<span class="hljs-params">resolve</span>)</span> {
+    resolve(<span class="hljs-keyword">await</span> request(<span class="hljs-string">'https://foo.com'</span>))
+  }
+}</code></pre>
+<p>Destructuring assignments provide a way to return multiple values...</p>
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+  then (resolve) {
+    request(<span class="hljs-string">'https://foo.com'</span>, (err, res) =&gt; resolve({ err, res }))
+  }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+
+  <span class="hljs-comment">// More than one err? Const is block-scoped!</span>
+  {
+    <span class="hljs-keyword">const</span> { err, res } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+  }
+
+  <span class="hljs-comment">// Destructured values can also be aliased.</span>
+  <span class="hljs-keyword">const</span> { <span class="hljs-attr">err</span>: namedError, <span class="hljs-attr">res</span>: namedResponse } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> Foo
+}
+main()</code></pre>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+<section class="post" id="post-00-preamble">
+  <h1 id="preamble">preamble</h1>
+<h2 id="synopsis">synopsis</h2>
+<p>This is a collection of notes that explore peer-to-peer topics.</p>
+<h2 id="description">description</h2>
+<p>Rhis collection focuses on the following topics...</p>
+<ul>
+<li>Connectivity</li>
+<li>Replication</li>
+<li>State</li>
+<li>Consensus</li>
+<li>Consistency</li>
+<li>Security</li>
+</ul>
+<p>These notes are not complete and don&#39;t advocate any particular approachs.
+They are related to my work on <a href="https://github.com/datcxx">dat-cxx</a>.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-01-illustrated-lamport-timestamp">
+  <h1 id="illustrated-lamport-timestamp">illustrated lamport timestamp</h1>
+<h2 id="problem">problem</h2>
+<p>With the client-server model, you can easily determine the order of
+events in a system because they are all maintained by a single source.
+This is critical in, for example a chat application.</p>
+<p>But with the distributed model, how do we know if an event happened
+before another? How can we thread together datasets from different
+sources in the correct order?</p>
+<h2 id="solution">solution</h2>
+<p>A <em>Lamport Timestamp</em> is one solution to determine the order of events
+in a distributed system. Although it may not solve all problems in this
+problem space, it is a useful primitive that we will explore.</p>
+<h3 id="clocks-vs-logical-clocks">Clocks vs. Logical Clocks</h3>
+<p>Why don&#39;t we use regular time stamps? Most clocks count time at different rates
+and experience failures that require resynchronization. This means they are
+reliably unreliable for determining the order of events.</p>
+<p>Lamport Timestamps use a <em>Logical Clock</em> to keep track of the order of events
+on each node. A logical clock is not a clock that keeps track of the time, it&#39;s
+a <a href="https://en.wikipedia.org/wiki/Monotonic_function">monotonically increasing</a> counter. So, when a node in a network receives a message, it
+re-synchronizes its counter (its clock) with the node that sent the message.</p>
+<h3 id="example">Example</h3>
+<p>Node <code>A</code> increments its clock before each event that hapens. An event is
+something meaningful, like when it creates some data. When node <code>A</code>
+eventually sends its payload over the network, it will include the current
+value of its clock.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> clock = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// A thread-safe, monotonically increasing function.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createTimeStamp</span> (<span class="hljs-params"></span>) </span>{
+  clock += <span class="hljs-number">1</span>
+  <span class="hljs-keyword">return</span> clock 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span> (<span class="hljs-params">data</span>) </span>{
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// Do something with some data.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">return</span> {
+    data,
+    <span class="hljs-attr">clock</span>: createTimeStamp()
+  }
+}
+
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Eventually send the data to the network.</span>
+<span class="hljs-comment">//</span>
+sendToNetworkQueue(doSomething({ ... }))</code></pre>
+<p>When node <code>B</code> receives a message from node <code>A</code>, it will decide how to set
+its own clock. If the clock value in the message is greater than its own
+value, it will use the value in the message. Otherwise it will use its own
+value. In either case, it will also increment its own clock by <code>1</code>.</p>
+<pre><code class="language-js">let clock = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Eventually receive some data from the network.</span>
+<span class="hljs-comment">//</span>
+receiveFromNetworkQueue (<span class="hljs-class"><span class="hljs-keyword">message</span>) {</span>
+  clock = Math.max(<span class="hljs-class"><span class="hljs-keyword">message</span>.<span class="hljs-title">clock</span>, clock) + 1
+}</span></code></pre>
+<p>Here we semi-randomly fail to always tell the other node about the event that
+happened, illustrating what happens when a node is eventually synchronized.</p>
+<div id="lamport-timestamp">
+  <div id="timeline-node-a" class="timeline"></div>
+  <div id="timeline-node-b" class="timeline"></div>
+</div>
+
+<div id="node-event-links">
+  <div data-name="a">Fire event on node A</div>
+  <div data-name="b">Fire event on node B</div>
+</div>
+
+<p>This may not be the correct primitive for all your use cases. For example,
+Lamport Timestamps don&#39;t express causality, meaning, the <em>reason</em> why one
+event happened before another isn&#39;t in scope of this soluton, but that is
+something that can be achieved using a <a href="https://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>.</p>
+<script>
+
+  function ready () {
+    const timelineA = document.getElementById('timeline-node-a')
+    timelineA.dataset.name = "node a"
+
+    const timelineB = document.getElementById('timeline-node-b')
+    timelineB.dataset.name = "node b"
+
+    let clockA = 0
+    let clockB = 0
+
+    function reset () {
+      clockA = 0
+      clockB = 0
+      while(timelineA.firstChild) timelineA.firstChild.remove()
+      while(timelineB.firstChild) timelineB.firstChild.remove()
+    }
+
+    let timer = null
+
+    function createEvent (timeline, clock) {
+      if (clock === 25) {
+        clock = 1
+        reset()
+      }
+
+      [...timeline.querySelectorAll('.clock')].map(el => {
+        el.classList.remove('show')
+      })
+
+      const event = document.createElement('div')
+      event.classList.add('event')
+
+      const tooltip = document.createElement('div')
+      tooltip.className = 'clock show'
+      tooltip.textContent = `Clock = ${clock}`
+
+      event.style.left = `${clock * 25}px`
+      event.appendChild(tooltip)
+
+      timeline.appendChild(event)
+      timer = setTimeout(() => {
+        tooltip.classList.remove('show')
+      }, 2048)
+    }
+
+    function nodeA (n) {
+      if (n > 0) {
+        clockA = Math.max(n, clockA) + 1
+      } else {
+        clockA++
+
+        if (Math.floor(Math.random() * 100) % 2 === 0) {
+          nodeB(clockA)
+        }
+      }
+      createEvent(timelineA, clockA)
+    }
+
+    function nodeB (n) {
+      if (n > 0) {
+        clockB = Math.max(n, clockB) + 1
+      } else {
+        clockB++
+
+        if (Math.floor(Math.random() * 100) % 2 === 0) {
+          nodeA(clockB)
+        }
+      }
+
+      createEvent(timelineB, clockB)
+    }
+
+    const links = document.getElementById('node-event-links')
+
+    links.addEventListener('click', ({ target }) => {
+      switch (target.dataset.name) {
+        case 'a':
+          nodeA()
+          break;
+        case 'b':
+          nodeB()
+          break;
+      }
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', ready)
+
+</script>
+
+<br/>
+
+<p>Special thanks to <a href="https://twitter.com/indutny">Fedor Indutny</a> and <a href="https://twitter.com/feross">Feross Aboukhadijeh</a> for reviewing
+this post. &hearts;</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-02-vector-clock-notes">
+  <h1 id="vector-clocks">vector clocks</h1>
+<p>In the previous post, I wrote about how <em>Lamport Timestamps</em> (aka Logical
+Clocks) can help determine the order of events in a distributed system.</p>
+<h2 id="problem">problem</h2>
+<p>Logical clocks only offer &quot;Partial Ordering&quot;, because they can tell us the
+order of a single event, but not the <strong>total ordering</strong> of events or why
+a system arrived at its state.</p>
+<h2 id="solutions">solutions</h2>
+<p><em>Vector Clocks</em> build on the idea of Logical Clocks to help track
+<a href="https://en.wikipedia.org/wiki/Causality">causality</a> in a distributed system.</p>
+<p>Here is an example vector clock in a network where there are three
+participating nodes...</p>
+<pre><code class="language-js">{ <span class="hljs-attribute">alice</span>: <span class="hljs-number">0</span>, bob: <span class="hljs-number">1</span>, carol: <span class="hljs-number">0</span> }</code></pre>
+<p>To set up a node we will give it an id and an in memory object to
+store some data.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> myId = <span class="hljs-string">'alice'</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">data</span> = {}</code></pre>
+<h3 id="sending-messages">sending messages</h3>
+<p>When a node writes some data, it increments its own logical clock in
+the vector and includes it as a property of a message that it will
+attempt to send. We also add the value as a property of the message.</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> write <span class="hljs-built_in">(key</span>, <span class="hljs-keyword">value</span>) {
+  <span class="hljs-keyword">if</span> (!data<span class="hljs-built_in">[key</span>]) {
+    data<span class="hljs-built_in">[key</span>] = { clock: { [myId]: <span class="hljs-number">0</span> } }
+  }
+
+  data<span class="hljs-built_in">[key</span>].clock[myId] += <span class="hljs-number">1</span> 
+  data<span class="hljs-built_in">[key</span>].<span class="hljs-keyword">value</span> = [<span class="hljs-keyword">value</span>]
+
+  send<span class="hljs-built_in">(key</span>, data<span class="hljs-built_in">[key</span>])
+}</code></pre>
+<blockquote>
+<p>In this case we made the <strong>value</strong> property an array. This is because we
+must anticipate the possibility of <strong>concurrent messages</strong> &mdash; that is,
+a message was received where two nodes have a logical clock with the same
+count.</p>
+<p>In this case we can push the new value onto the array and allow the the
+conflict to be resolved somehow (we&#39;ll discuss this more later).</p>
+</blockquote>
+<h3 id="receiving-messages">receiving messages</h3>
+<p>When a node receives a message it increments its own Logical Clock in
+its local copy of the vector.</p>
+<p>Then for each node in the message&#39;s vector, it compares the local
+clock count (if there is one) to the clock count in the received
+message, taking the max of the numbers.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-built_in">max</span> = arr =&gt; Math.<span class="hljs-built_in">max</span>.apply(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">Object</span>.values(arr))
+
+function receive (message) {
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">key</span> = message.<span class="hljs-built_in">key</span>
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// If this is new data, there is no need to compare anything.</span>
+  <span class="hljs-comment">// we can store it locally and return early from the function.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">if</span> (!data[<span class="hljs-built_in">key</span>]) {
+    data[<span class="hljs-built_in">key</span>] = message
+    data.clock[myId] = <span class="hljs-built_in">max</span>(message.clock) + <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// We have received the message, update our clock</span>
+  <span class="hljs-comment">//</span>
+  data[<span class="hljs-built_in">key</span>].clock[myId] += <span class="hljs-number">1</span>
+
+  <span class="hljs-keyword">const</span> localClock = data[<span class="hljs-built_in">key</span>].clock
+  <span class="hljs-keyword">const</span> messageClock = message.clock
+
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">// For each node in the vector of the message</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> id in <span class="hljs-keyword">Object</span>.keys(messageClock)) {
+    <span class="hljs-keyword">const</span> a = localClock[id] || <span class="hljs-number">0</span>
+    <span class="hljs-keyword">const</span> b = messageClock[id]
+
+    <span class="hljs-keyword">const</span> isConcurrent = a === b
+
+    <span class="hljs-keyword">if</span> (isConcurrent) {
+      data[<span class="hljs-built_in">key</span>].conflict = <span class="hljs-keyword">true</span>
+      data[<span class="hljs-built_in">key</span>].value.push(message.value)
+      <span class="hljs-keyword">continue</span>
+    }
+
+    <span class="hljs-keyword">const</span> happenedBefore = a &lt; b
+
+    <span class="hljs-keyword">if</span> (happenedBefore) {
+      data[<span class="hljs-built_in">key</span>].value = [message.value]
+    }
+
+    localClock[id] = Math.<span class="hljs-built_in">max</span>(a, b)
+  }
+}</code></pre>
+<h3 id="handling-concurrent-messages">handling concurrent messages</h3>
+<p>Two messages that are received at the same time and have the same logical clock
+count are &quot;concurrent&quot;.</p>
+<p>To understand what to do with this type of data, we need to create a <strong>resolution
+function</strong>. This function may be the only way to determine what data is either a
+descendant or which data comes-before.</p>
+<ol>
+<li><p>Reject the data and send it back to the clients asking for it to be resolved.
+This might mean asking them to manually merge or discard some of the data.</p>
+</li>
+<li><p><strong>Last-Writer-Wins</strong> uses time-based timestamps. If you consider clock-drift
+(mentioned in the first post), there is a high probability of losing data with
+this strategy.</p>
+</li>
+</ol>
+<h3 id="research-timeline">research timeline</h3>
+<p>When discussing Vector Clocks we should consider some other closely related
+research...</p>
+<div class="clock-timeline">
+  <a href="https://amturing.acm.org/p558-lamport.pdf" class="item">
+    <span class="title">Lamport Timestamp</span>
+    <span class="year">1978</span>
+  </a>
+  <a href="https://zoo.cs.yale.edu/classes/cs422/2013/bib/parker83detection.pdf" class="item">
+    <span class="title">Version Vector</span>
+    <span class="year">1983</span>
+  </a>
+  <a href="https://zoo.cs.yale.edu/classes/cs426/2012/lab/bib/fidge88timestamps.pdf" class="item">
+    <span class="title">Vector Clock</span>
+    <span class="year">1988</span>
+  </a>
+  <a href="https://www.researchgate.net/publication/221233664_Bounded_Version_Vectors" class="item">
+    <span class="title">Bound Version Vector</span>
+    <span class="year">2004</span>
+  </a>
+  <a href="http://gsd.di.uminho.pt/members/cbm/ps/itc2008.pdf" class="item">
+    <span class="title">Interval Tree Clock</span>
+    <span class="year">2008</span>
+  </a>
+  <a href="https://arxiv.org/pdf/1011.5808.pdf" class="item">
+    <span class="title">Dotted Version Vectors</span>
+    <span class="year">2010</span>
+  </a>
+</div>
+
+<p><em>Version Vectors</em> also build on the idea of Lamport Timestamps, but are
+specifically meant to track changes to data in distributed systems. They
+are also the basis for <a href="https://en.wikipedia.org/wiki/Optimistic_replication">optimistic replication</a>.</p>
+<h3 id="disadvantages">disadvantages</h3>
+<p>Each message sent by a node contains a vector clock that has all the node
+names (and their corresponding clock counts) who want to write to the same
+field of data.</p>
+<p>This can be a problem since a data structure that can grow to an unbound size
+can be a problem in larger networks with more frequent writes. Strategies for
+dealing with this are often based on what suits your use-cases best, for
+example, two possible solutions are...</p>
+<ol>
+<li><p>If a network has a finite number of nodes, a message that has reached
+all nodes can be considered &quot;complete&quot;, could be marked as such and have
+it&#39;s historic information removed.</p>
+</li>
+<li><p>If a network has an acceptable threshold of nodes that once a message has
+reached, the message can be considered complete and can then be cleaned up.</p>
+</li>
+</ol>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-03-implementing-dat">
+  <h1 id="implementing-dat">implementing dat</h1>
+<p>In my spare time I am implementing <a href="https://datproject.org/">dat</a> by following <a href="https://datprotocol.github.io/how-dat-works/">this</a>,
+<a href="https://www.datprotocol.com/">this</a> and <a href="https://github.com/datprotocol/DEPs">this</a> as references.</p>
+<img src="/images/dat.png" alt="dat-logo-variant" class="dat-logo">
+
+<p>You can follow this post and <a href="https://github.com/datcxx">this</a> github org for updates and information.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-04-dtn-recap">
+  <h1 id="dtn-recap">DTN recap</h1>
+<h2 id="history">History</h2>
+<p>Over the last 10 years I&#39;ve been a part of various meet-ups, IRC channels and p2p
+networks that are interested in building distributed systems. In <a href="https://dtn.is/2015.html">2015</a>
+I pulled together a lot of the leaders and contributors from the projects that I
+found interesting for an event we called DTN, aka <em>Data Terra Nemo</em>,
+<em>Decentralize The Network</em>, <em>Don&#39;t Think Normal</em>. It went well!</p>
+<h2 id="2019">2019</h2>
+<p>About 6 months ago <a href="https://github.com/feross">Feross</a>, <a href="https://github.com/mikeal">Mikeal</a> and <a href="https://github.com/jbenet">Juan</a> convinced me I
+should do another one and it made sense! After all, many of the projects we
+discussed in 2015 were just ideas (<a href="https://github.com/libp2p/js-libp2p/commit/e770ce782278d5be139201560bb101682458ed06">libp2p</a>), still in the prototyping
+phase (<a href="https://github.com/datproject/dat/tree/8c9f80841e717ba30bd02953ba5d425ddabd24dd">dat</a>) or didn&#39;t exist at all (<a href="https://filecoin.io/">filecoin</a>,
+<a href="https://github.com/ssbc/patchwork/tree/572440feaf959755763efb726087066a6f5b29db">patchwork</a>). It happened!</p>
+<img src="/images/dtn.png" alt="dtn-logo-variant" class="dtn-logo">
+
+<p>This event works for a few reasons.</p>
+<ol>
+<li><p>Zero profit. 100% of what we earn gets spent on the conference &mdash;
+no exceptions. All funds go towards flights, hotels, food, A/V, etc.</p>
+</li>
+<li><p>We curate speakers who are hard working, highly motivated, implementers but
+also kind, empathetic people. <em>Software is nothing without the people who work
+together to make it</em>.</p>
+</li>
+<li><p>One of the most important reasons this works is that it&#39;s <em>collaborative and
+not competitive</em>. We&#39;re sharing fundamental ideas. And while we&#39;re taking
+different approaches to solving some of the same problems, we&#39;re all
+interested in the best outcome. Things like programming languages are trivial
+details.</p>
+</li>
+</ol>
+<br/>
+
+<h2 id="what-happened">What happened?</h2>
+<p>Over 2 days about 150 people attended. We recorded about 12 hours of video from
+12 speakers. We had 12 formal talks and several impromptu lightning talks. I&#39;ll
+be posting the videos online once they are processed.</p>
+<p>We discussed the technical (and some social) challenges in coding
+fundamental primitives that help people build a more distributed and
+decentralized internet. We shared language agnostic patterns for building
+solutions but also many concrete solutions &mdash; actual code that illustrates
+what problems we&#39;re solving today.</p>
+<h2 id="how-did-you-do-it">How did you do it?</h2>
+<p>I have no idea. It wasn&#39;t easy. Unexpected things happened. People are hard to
+organize. I&#39;m not an event organizer. I have no idea what I&#39;m doing. I almost
+broke-even though. Ultimately it was a lot of fun. And the lesson here is that
+anyone can do this. If you want help putting on your own event, I&#39;m happy to
+discuss what I know! My handle is <em>heapwolf</em> most places on the internet. If
+you&#39;re not on any decentralized networks yet, you can even reach me on
+<a href="https://twitter.com/heapwolf">twitter</a>.</p>
+<h2 id="whats-next">What&#39;s next?</h2>
+<p>Let&#39;s do it again! Many of the projects we met to discuss are moving faster,
+more people are involved, so let&#39;s not make it a 4 year gap this time. Should we
+do the same dates? Different Location? Let&#39;s talk.</p>
+<h2 id="thank-you">Thank you!</h2>
+<p>If you bought a ticket, you were a sponsor! So I want to thank all the sponsors,
+especially those who bought high value tickets. You are helping to build a
+better internet for everyone.</p>
+<div class="logos">
+  <a href="https://www.passportcapital.com/" class="logo">
+    <img src="https://dtn.is/images/passport-capital.svg" alt="passport-logo" class="sponsor pc">
+  </a>
+  <a href="https://protocol.ai/" class="logo">
+    <img src="https://dtn.is/images/protocol-labs.png" alt="pl-logo" class="sponsor pl">
+  </a>
+  <a href="https://wireline.io/" class="logo">
+    <img src="https://dtn.is/images/wireline.svg" alt="wireline-logo" class="sponsor wireline">
+  </a>
+</div>
+
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+<section class="post" id="post-00-linux-on-macbook-pro">
+  <h1 id="linux-on-macbook-pro">Linux on MacBook Pro</h1>
+<p>I recently switched from <em>MacOS</em> to <em>Linux</em>.</p>
+<h2 id="why">WHY?</h2>
+<p>Because learning is fun.</p>
+<h2 id="which-linux">WHICH LINUX?</h2>
+<p>There are thousands of posts about which Linux is the best. There isn&#39;t one
+right answer. For me it&#39;s a distribution that reflects my own values. I like
+to keep things simple.</p>
+<h3 id="hello-arch-linux">HELLO, ARCH LINUX.</h3>
+<img src="/images/linuxbookpro.jpg" alt="laptop" class="half-width-frame">
+
+<p>You can see from the output that Arch Linux is running on MacBook Pro
+hardware. That&#39;s a screenshot of the terminal running <em>ZSH</em> and <em>TMUX</em>.
+MacOS aka <em>Darwin</em>, is a BSD variant, and it&#39;s Unix-ish. So transitioning
+to Linux is easy and familiar.</p>
+<br/>
+
+<h3 id="gnome-desktop">GNOME DESKTOP</h3>
+<p>There are other desktop options, but <em>Gnome</em> basically gives you an improved
+version of MacOS. I added some <a href="https://www.gnome-look.org/p/1210856">MacOS icons</a> to make the transition more
+seamless.</p>
+<img src="/images/desktop.png" alt="laptop" class="half-width-frame">
+
+<h2 id="hardware-prerequisites">HARDWARE PREREQUISITES</h2>
+<p>Before you do anything, you&#39;ll need a USB-C to USB hub. You can buy a cheap
+keyboard and mouse to plug into it. You&#39;ll also need a USB drive. Get one with
+a few gigabytes they are cheap.</p>
+<img src="/images/inputs.jpg" alt="laptop" class="half-width-frame">
+
+
+<h2 id="getting-started">GETTING STARTED</h2>
+<h3 id="disclaimer">DISCLAIMER</h3>
+<p>This wont be a complete guide. I don&#39;t think a complete guide exists. You&#39;ll
+need to do some searches to find solutions for issues specific to your machine.
+Also, this could brick your computer. So don&#39;t do any of this unless you really
+know how to <em>yolo</em>. If you&#39;re a part-time nerd, check out this <a href="https://www.ubuntu.com">link</a>.</p>
+<h3 id="other-guides">OTHER GUIDES</h3>
+<p>The two best resources I found were <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">this</a> and <a href="https://gist.github.com/roadrunner2/1289542a748d9a104e7baec6a92f9cd7">this</a>. And of course the
+<a href="https://wiki.archlinux.org/index.php/Mac">arch wiki</a> was incredibly helpful. I got here by analyzing these resources
+and doing some searches.</p>
+<h3 id="boot-from-usb">BOOT FROM USB</h3>
+<p>Start by downloading the <code>ISO</code> from <a href="https://www.archlinux.org/download">here</a>, pick a link with <em>http</em>!
+After you download it, <a href="https://sparewotw.wordpress.com/2012/10/31/how-to-verify-signature-using-sig-file">verify the signature</a>.</p>
+<p>You can use <a href="https://www.balena.io/etcher">this</a> app to make the USB bootable from the downloaded <code>iso</code>.</p>
+<p>Plug everything in and turn your computer on while holding down the <em>command</em>
+key. When the menu pops up, select your USB drive and continue booting it. Say
+goodbye to MacOS, you&#39;re about to install Arch.</p>
+<h3 id="first-boot">FIRST BOOT</h3>
+<p>You&#39;ll see some logs and then you&#39;ll get dropped into a command line. The first
+thing we&#39;re going to do is partition and format the disk. Your prompt is going
+to look like <code>root@archiso ~ #</code>, the command we&#39;re going to run is <code>lsblk</code>.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># lsblk</span></code></pre><p>You&#39;ll see a list of bulk devices, mine looks like this but yours will look
+different. I don&#39;t have a USB drive plugged in. You need to figure out which one
+is your storage device and which one is your USB device. You can probably
+determine that by the sizes of things.</p>
+<pre><code>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+nvme0n1     <span class="hljs-number">259</span>:<span class="hljs-number">0</span>    <span class="hljs-number">0</span> <span class="hljs-number">233.8</span>G  <span class="hljs-number">0</span> disk
+|- nvme0n1p1 <span class="hljs-number">259</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>   <span class="hljs-number">489</span>M  <span class="hljs-number">0</span> part /boot
+|- nvme0n1p2 <span class="hljs-number">259</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">222.6</span>G  <span class="hljs-number">0</span> part /
+ \ nvme0n1p3 <span class="hljs-number">259</span>:<span class="hljs-number">3</span>    <span class="hljs-number">0</span>  <span class="hljs-number">10.3</span>G  <span class="hljs-number">0</span> part [SWAP]</code></pre><h2 id="partition">PARTITION</h2>
+<p>After you figure out your device&#39;s name, write it down, we&#39;re going to need it
+again. Now, let&#39;s edit it. For example, if I was to edit my device, I would run
+the following command.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># parted /dev/nvme01</span></code></pre><p>You&#39;re in the partition editor. Next, destroy everything on the device.</p>
+<pre><code><span class="hljs-attribute">mklabel gpt</span></code></pre><p>Then with the next two commands create the boot partition.</p>
+<pre><code>mkpart ESP fat32 <span class="hljs-number">1049</span>kB <span class="hljs-number">538</span>MB
+<span class="hljs-keyword">set</span> <span class="hljs-number">1</span> boot on</code></pre><blockquote>
+<p>&quot;Take the size of your hard disk, that you noted yourself earlier, and
+subtract the size of your RAM from it. I&#39;ve got 8GB of RAM, so for <code>SIZE</code>
+I&#39;ve put in: 243GB (251GB minus 8GB).&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
+</blockquote>
+<p>You might have to adjust these values, but try something like this to start.</p>
+<pre><code>mkpart primary ext4 <span class="hljs-number">538</span>MB <span class="hljs-number">243</span>GB
+mkpart primary linux-swap <span class="hljs-number">243</span>GB <span class="hljs-number">100</span>%
+quit</code></pre><h2 id="format">FORMAT</h2>
+<p>Next we&#39;re going to format the partitions. Run <code>lsblk</code> again to see the new
+partitions you made, replace <code>foo</code> with your actual device name.</p>
+<pre><code>mkfs.vfat -F32 <span class="hljs-regexp">/dev/</span>foo1
+mkfs.ext4 <span class="hljs-regexp">/dev/</span>foo2
+mkswap <span class="hljs-regexp">/dev/</span>foo3
+swapon <span class="hljs-regexp">/dev/</span>foo3</code></pre><p>If you get the error <code>Not enough clusters for a 32 bit FAT!</code>, try increasing the
+size of your partition as discussed <a href="https://bbs.archlinux.org/viewtopic.php?id=168014">here</a>.</p>
+<h2 id="bootstrap">BOOTSTRAP</h2>
+<p>Next we need to get the OS onto your newly partitioned and formatted device and
+configure it.</p>
+<h3 id="mount-the-devices">MOUNT THE DEVICES</h3>
+<p>Let&#39;s mount the partitions, replacing <code>foo</code> with your actual device name.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo2 /mnt</span>
+
+root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mkdir -p /mnt/boot</span>
+root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># mount /dev/foo1 /mnt/boot</span></code></pre><h3 id="install-the-base-system">INSTALL THE BASE SYSTEM</h3>
+<p>Select the right mirror by moving it to the top of the list.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /etc/pacman.d/mirrorlist</span></code></pre><p>Run the <code>pacstrap</code> command to copy the OS onto your device. I needed to install
+not only the <code>base</code> and the <code>base-devel</code> packages, but also the wireless
+networking packages so that I could get on the Wifi. Later I realized that after
+installing the <code>gnome</code> package, network connectivity is handled really well by
+the <a href="https://wiki.archlinux.org/index.php/NetworkManager">networkmanager</a> package.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># pacstrap /mnt base base-devel dialog wireless_tools netcfg wpa_supplicant</span></code></pre><h3 id="configure-the-file-system">CONFIGURE THE FILE SYSTEM</h3>
+<p>Generate your <a href="https://en.wikipedia.org/wiki/Fstab">File System Table</a> with this command.</p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span></code></pre><p>Open it with <code>vi</code>, there are some changes you&#39;ll need to make...</p>
+<blockquote>
+<p>&quot;Make sure that the line of the <code>ext4</code> partition ends with a <code>2</code>, the swap
+partition’s line ends with a <code>0</code>, and the boot partition’s line ends with a
+<code>1</code>. This configures the partition checking on boot.&quot; - <a href="https://medium.com/@philpl/arch-linux-running-on-my-macbook-2ea525ebefe3">Phil</a></p>
+</blockquote>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># vi /mnt/etc/fstab</span></code></pre><h2 id="configure-the-os">CONFIGURE THE OS</h2>
+<p>Now change the root and configure the OS. </p>
+<pre><code>root<span class="hljs-symbol">@archiso</span> ~ <span class="hljs-meta"># arch-chroot /mnt</span></code></pre><h3 id="password">PASSWORD</h3>
+<p>After you log run <code>arch-chroot</code>, the prompt will change slightly. Type in the
+following command to pick a new password for the root user. Write this down.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># passwd</span></code></pre><h3 id="keyboard">KEYBOARD</h3>
+<p>Let&#39;s get your keyboard and trackpad working. Use <a href="https://wiki.archlinux.org/index.php/pacman">pacman</a> (the Arch package
+manager) to install some things.</p>
+<pre><code><span class="hljs-attribute">pacman -S git kernel-devel dkms</span></code></pre><p>Now edit the keyboard configuration file.</p>
+<pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# vi /</span>etc<span class="hljs-regexp">/dracut.conf.d/</span>keyboard.conf</code></pre><p>Add the following line.</p>
+<pre><code>add_drivers+=<span class="hljs-string">"applespi intel_lpss_pci spi_pxa2xx_platform apple-ib-tb"</span></code></pre><p>Now make the system aware of our new modules</p>
+<pre><code>vi <span class="hljs-regexp">/etc/i</span>nitramfs-tools<span class="hljs-regexp">/modules</span></code></pre><p>Add the following lines</p>
+<pre><code>applespi
+apple-ib-tb
+<span class="hljs-built_in">int</span>el_lpss_pci
+spi_pxa2xx_platform</code></pre><p>Now get and build the drivers. If you have a touch-bar, check out the branch
+for that using <code>git checkout touchbar-driver-hid-driver</code> after you clone.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># git clone https://github.com/roadrunner2/macbook12-spi-driver.git</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># cd macbook12-spi-driver</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># ln -s `pwd` /usr/src/applespi-0.1</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># dkms install applespi/0.1</span></code></pre><p>There are some tweaks you can do, but at this point you should have a working
+keyboard and trackpad!</p>
+<pre><code><span class="hljs-attribute">reboot</span></code></pre><h3 id="locale">LOCALE</h3>
+<p>Open the <code>locale.gen</code> file and uncomment the line with <code>en_US.UTF-8 UTF-8</code>.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># vi /etc/locale.gen</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># locale-gen</span></code></pre><pre><code>[root@archiso /]# echo <span class="hljs-attribute">LANG</span>=en_US.UTF-8 &gt; /etc/locale.conf
+[root@archiso /]# <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LANG</span>=en_US.UTF-8</code></pre><h3 id="clock--timezone">CLOCK &amp; TIMEZONE</h3>
+<p>Set the timezone. To get a list of time zones, use <code>timedatectl list-timezones</code>.</p>
+<pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# ln -s /</span>usr<span class="hljs-regexp">/share/</span>zoneinfo<span class="hljs-regexp">/Zone/</span>SubZone <span class="hljs-regexp">/etc/</span>localtime</code></pre><p>Set the hardware clock.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># hwclock --systohc --utc</span></code></pre><h3 id="kernel-modules">KERNEL MODULES</h3>
+<p>Add kernel modules by opening or creating the following file.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># vi /etc/modules</span></code></pre><p>Add the following two lines.</p>
+<pre><code><span class="hljs-attribute">coretemp
+applesmc</span></code></pre><h3 id="hostname">HOSTNAME</h3>
+<p>Set your host name, replace <code>foo</code> with your actual hostname.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># echo foo &gt; /etc/hostname</span></code></pre><h3 id="hostfile">HOSTFILE</h3>
+<pre><code>127<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.1</span>   <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-class">.localdomain</span> <span class="hljs-selector-tag">foo</span>
+<span class="hljs-selector-pseudo">::1</span>         <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-class">.localdomain</span> <span class="hljs-selector-tag">foo</span></code></pre><h3 id="network">NETWORK</h3>
+<p>Install and enable the <code>DHCP</code> daemon.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># pacman -S dhcpcd</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># systemctl enable dhcpcd</span></code></pre><h3 id="bootloader">BOOTLOADER</h3>
+<p>Install EFI tools and use them to install <code>systemd-boot</code> on your boot partition.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># pacman -S dosfstools</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># bootctl --path=/boot install</span></code></pre><pre><code>[root<span class="hljs-meta">@archiso</span> <span class="hljs-regexp">/]# vi /</span>boot<span class="hljs-regexp">/loader/</span>entries/arch.conf</code></pre><p>Add the following lines and replace <code>foo</code> with the name of your storage device.</p>
+<pre><code>title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options <span class="hljs-attribute">root</span>=/dev/foo2 rw <span class="hljs-attribute">elevator</span>=deadline quiet splash <span class="hljs-attribute">resume</span>=/dev/foo3 <span class="hljs-attribute">nmi_watchdog</span>=0</code></pre><p>Now tell the bootloader about your new bootable option.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># echo <span class="hljs-string">"default arch"</span> &gt; /boot/loader/loader.conf</span></code></pre><p>Exit <code>arch-chroot</code>, unplug all those USBs and reboot your system.</p>
+<pre><code>[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># exit</span>
+[root<span class="hljs-symbol">@archiso</span> /]<span class="hljs-meta"># reboot</span></code></pre><p>After this you should get dropped into a command line again. But this time you
+will be running your new OS and you will have keyboard and mouse support. After
+that you may or may not have some more work to do if any of your devices aren&#39;t
+working (audio either works or can be tricky to get working).</p>
+<p>There are also configuration things to do but it depends on how you want to use
+your computer. Most of the code in the official repository is seen by a lot of
+eyes. But personally I try to stay away from the AUR if I can. I try to audit
+the packages I install.</p>
+<p>You should read the <a href="https://wiki.archlinux.org/index.php/Security">Security</a> section of the Arch Wiki.</p>
+<p>Good luck or congratulations depending on where you are. Hit me up on either
+Twitter (<code>@heapwolf</code>) or Freenode IRC <code>heapwowlf</code> if you have questions.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+<section class="post" id="post-01-code">
+  <h1 id="code">CODE</h1>
+<h2 id="github">GITHUB</h2>
+<p><a href="https://github.com/heapwolf">https://github.com/heapwolf</a></p>
+<h2 id="public-key">PUBLIC KEY</h2>
+<pre>
+<textarea spellcheck="false" disabled resize="false">
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+akORhccxOBxXHKTb3p1CEIUg+/rFxcckARqZ2F3qBOpYzUEPII7aGWwnexgnTLtuaLb0pujFcawne+z/c8mFFnrxc99gG76cRKUsDLcdNXEa3kCBrQG3dXf+J8mIbzIFaabreP0fQAqwI9hbM/SUFwrPbCbfTcZcpn4pgbCSDxLXC0qb1Zh9UkcV4RP3A9r8sy92PrmtUmJTXWdZE043eAXpgerhRkHC38BL2JsmVf6/nOonlHfJiue7nowUaA7bvaA8GGlJRFaNhoFfTYIkMv9pOGaNpTtdK+UpOOO1U8MBlWPI86VOY/0VQj1pZOc8r0hqd3o+ALg9TKtkZKfSgZs4JQRRul4Zvmmc/mJfVJ9x/2rLdSnR19swSkJkyXZh/Q2/4u/Zp1J0+JuWMugLQzkJIfYMEeOm6Z3dk8O3Br1aMA+HPiDLgJjeV5SZm6is+DXdPA9s6CyQ2F3oazD1g1k/34W2p3+dnpAQU6W/73sxzyteUo7FNkGw7uGi7a5Gowmn6VtcoBDyY8QUUduUoCx747DZ61UTFPtesDc2HvPoemH8PYXjduA93CGtdh8ir7HsO9J0uzhC1FqrGskRpjNVZWWo6jERYamnbzYUs4VVy7qxcBy7skAe9JtGq3+MMjt6mvt9doxOAazUiAd/I9YWBCkWk/gwvy1qHa7R/w== hi@hx.ht
+</textarea>
+</pre>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+<section class="post" id="post-02-curriculum-vitae">
+  <h1 id="curriculum-vitae">Curriculum Vitae</h1>
+<div class="avatar"></div>
+
+
+<h2 id="personal">Personal</h2>
+<p>Name: Paolo Fragomeni, Software Engineer</p>
+<h2 id="contact">Contact</h2>
+<p>Email: <a href="mailto:paolo@async.ly">paolo@async.ly</a></p>
+<p>Web: <a href="https://hx.ht">https://hx.ht</a></p>
+<p>Twitter: <a href="https://twitter.com/heapwolf">https://twitter.com/heapwolf</a></p>
+<p>Github: <a href="https://github.com/heapwolf">https://github.com/heapwolf</a></p>
+<h2 id="summary">Summary</h2>
+<p>I Left MIT in 2010 to co-found Nodejitsu (a PaaS, since integrated with
+GoDaddy). Most recently I founded Voltra Co. (entertainment software) which
+joined Conductor Lab. In addition to being a technical founder, CTO and engineer
+I have worked in the infosec space.</p>
+<h2 id="expertise">Expertise</h2>
+<p>Computer Science Research. Software Engineering: programming design and
+engineering, concurrent and distributed programming, metaprogramming,
+functional programming and ECMAScript (Javascript). Key-Value store</p>
+<h2 id="experience">Experience</h2>
+<h3 id="cto-cofounder-at-voltra-co">CTO, Cofounder at Voltra Co.</h3>
+<p>January 2016 - Augest 2018 (2.5 years)</p>
+<p>Voltra Co. was a cloud storage service and set of audio products. Voltra&#39;s
+desktop and mobile players sync so you can stream your music from anywhere.
+The only ad-free fully hi-res platform. On this project I worked with
+Electron, JavaScript, Node.js, C++, CSS3, HTML5, Stylus, Jade, Webpack,
+React, React-Native, and Amazon Web Services. Voltra joined Conductor Lab
+in Augest 2018.</p>
+<h3 id="vp-of-engineering-at-now-secure">VP of Engineering at Now Secure</h3>
+<p>November 2014 - January 2016 (1 year 3 months)</p>
+<p>Built engineering and security research teams. Coordinated engineering and
+research teams. Set technical goals, worked hands on on lots of projects.
+On this project I worked primarily with C, C++, JavaScript, Node.js, HTML5.</p>
+<h3 id="engineer-cto-at-mic">Engineer, CTO at Mic</h3>
+<p>January 2014 - November 2014 (11 months)</p>
+<p>Hereishow.to joined mic.com where I served as CTO. Built an engineering team
+and integrated components of Here Is How into existing products. On this
+project I worked with Amazon Web Services, Node.js JavaScript, HTML5, CSS3.</p>
+<h3 id="engineer-cto-cofounder-at-here-is-how">Engineer, CTO, Cofounder at Here Is How</h3>
+<p>November 2012 - January 2014 (1 year 3 months)</p>
+<p>A CMS for technical writing, a web based interface similar to Medium.com.
+This project was acqui-hired by mic.com On this project I worked with Docker,
+JavaScript, Node.js, Websockets, C, C++, HTML5, CSS3.</p>
+<h3 id="engineer-cto-cofounder-at-nodejitsu">Engineer, CTO, Cofounder at Nodejitsu</h3>
+<p>September 2010 - December 2012 (2 years 4 months)</p>
+<p>Co-Founder, Chief Technology Officer. Lots of R&amp;D. Conceptualized and
+implemented products that simplify and manage application deployments
+for the node.js platform.</p>
+
+  <div class="up">
+    <svg>
+      <use xlink:href="/images/sprite.svg#up">
+    </svg>
+  </div>
+</section>
+
+    </div>
+
+    <script src="./bundle.js"></script>
+
+  </body>
+</html>

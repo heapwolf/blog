@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <symbol id="up" viewBox="0 0 100 100">
+    <g><line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel" stroke-miterlimit="10" x1="50" y1="65.4" x2="50" y2="34.6"></line><line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel" stroke-miterlimit="10" x1="50" y1="34.6" x2="59.2" y2="43.9"></line><line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel" stroke-miterlimit="10" x1="50" y1="34.6" x2="40.8" y2="43.9"></line></g>
+  </symbol>
+</svg>

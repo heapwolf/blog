@@ -1,0 +1,50 @@
+.clock-timeline
+  display flex
+  margin 38px 0 80px
+  font-size 12px
+
+  a:hover .year:before
+    border-left 1px solid $accent
+
+  .year
+    display flex
+    position absolute
+    margin-top 18px
+
+    &:before
+      content ' '
+      width 10px
+      height 10px
+      position absolute
+      border-left 1px solid black
+      top -16px
+      left 14px
+
+  .title
+    display inline-block
+    margin-bottom 10px
+
+@media (max-width: 600px)
+  .clock-timeline
+    min-width 450px
+    flex-direction column
+  
+    a.item
+      border-left 1px solid black
+      border-bottom 0 !important
+      padding-left 15px
+      margin-left 100px
+
+      .year
+        margin-top 0
+        left 55px
+
+        &:before
+          content ' '
+          width 15px
+          height 1px
+          position absolute
+          border 0
+          border-bottom 1px solid #000
+          top 8px
+          left 50px

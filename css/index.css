@@ -1,0 +1,177 @@
+@font-face {
+  font-family: 'h';
+  src: url('../fonts/h.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: 'body';
+  src: url('../fonts/body.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'code';
+  src: url('../fonts/code.ttf') format('truetype');
+}
+
+* {
+  color: #222;
+  box-sizing: border-box;
+}
+
+b {
+  font-family: 'h';
+}
+
+a:hover,
+a:visited,
+a {
+  text-decoration: none;
+}
+
+main a {
+  border-bottom: 1px dotted;
+  padding-bottom: 1px;
+}
+
+h1, h2, h3 {
+  font-family: 'h', sans-serif;
+  text-transform: uppercase;
+  line-height: 34px;
+}
+
+h1 {
+  font-size: 52px;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 42px;
+  margin-bottom: 4px;
+}
+
+h3 {
+  margin-top: 40px;
+  line-height: 32px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.tweet {
+  max-width: 65%;
+  border: 1px solid #000;
+  display: inline-block;
+  box-shadow: 0px 6px 0 black;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+header {
+  margin: 200px 25%;
+}
+
+cite {
+  margin-top: 20px;
+  display: block;
+  font-size: 12px;
+}
+
+body {
+  line-height: 1.5em;
+  font-size: 1.1em;
+  font-family: 'body', sans-serif;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+pre {
+  display: block;
+}
+
+code {
+  font-family: 'code';
+  line-height: 22px;
+  display: inline-block;
+  white-space: pre-wrap;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  padding: 0px 4px;
+  margin: 0 2px;
+  border-radius: 2px;
+}
+
+article {
+  margin: 150px 25%;
+  max-width: 750px;
+}
+
+blockquote {
+  border-left: 4px solid;
+  padding: 10px 20px;
+  margin-left: 18px;
+  font-style: italic;
+  color: #888;
+}
+
+blockquote * {
+  color: #888;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  background-image: url("https://avatars2.githubusercontent.com/u/136109");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  border-radius: 99em;
+  margin-bottom: 100px;
+}
+
+footer {
+  background: #222;
+  color: #aaa;
+  padding: 100px 25%;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+footer a {
+  display: inline-block;
+  margin: 8px 0;
+  color: white;
+  border-bottom: 1px solid transparent;
+}
+
+footer a:hover {
+  border-bottom: 1px dotted;
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+    header,
+    article {
+      margin: 50px 10%;
+    }
+
+    .tweet {
+      max-width: 100%;
+    }
+
+    footer {
+      padding: 100px 10%;
+    }
+}

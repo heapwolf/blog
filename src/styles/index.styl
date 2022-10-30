@@ -1,0 +1,285 @@
+
+$body = 'IBM Plex Mono', monospace; // 'Merriweather', serif; //'Averia Serif Libre', cursive
+$display = 'Poly'; // 'FortescuePro-Bold', serif
+$caption = 'transcript_bold', sans-serif
+
+// Colours
+
+$black = #313131
+$gray = #9E9EA0
+$lightgray = #f0f0f057
+$white = #FFFFFF
+$accent = #4d99bf
+
+@require './hljs.styl'
+@require './src/articles/**/*.styl'
+
+// Styling
+
+body
+  background $black
+  font-family $body
+  margin 0
+  color $black
+
+  ::-moz-selection
+    background $accent
+    color $white
+  ::selection
+    background $accent
+    color $white
+
+  .avatar
+    width 200px
+    height 200px
+    background-image url('https://avatars2.githubusercontent.com/u/136109')
+    background-size contain
+    background-position center
+    background-repeat no-repeat
+    filter grayscale(1)
+
+  a
+    outline none
+    color $black
+    text-decoration none
+    transition all 0.2s
+
+    &:hover
+      color $accent
+
+  #posts
+    a
+      font-weight normal
+      padding-bottom 1px
+      border-bottom 1px solid $gray
+
+      &:hover
+        border-bottom 1px solid $accent
+
+  h1
+    font-size 30px
+
+  h1, h2, h3, h4
+    margin-top 40px
+    font-weight 700
+    text-transform uppercase
+
+  h3
+    color #666
+
+  aside
+    color $gray
+    position relative
+    max-width 650px
+    margin 0 auto
+    margin-bottom 100px
+    padding 20px
+    padding-top 100px
+
+    a
+      color $gray
+      display inline-block
+      margin-bottom 10px
+
+      &:hover
+        color white
+
+  em
+    background #444
+    color white
+    padding 2px 6px
+
+  p, ul
+    font-size 1rem
+    line-height 1.4rem
+
+  li
+    margin-bottom 8px
+
+  #posts
+    background-color white
+    padding-bottom 100px
+
+    .post
+      position relative
+      max-width 650px
+      margin 0 auto
+      padding 20px
+      display none
+
+      &:first-of-type
+        display block
+
+      .up
+        position relative
+        height 150px
+        width 100%
+        text-align center
+
+        svg
+          height 100px
+          width 100px
+          pointer-events none
+
+      .labels
+        text-align center
+        margin 50px 0
+
+        span
+          padding 5px 10px 4px 10px
+          border 2px solid $black
+          margin 5px
+          font-family $caption
+          text-transform uppercase
+          font-size .7rem
+          letter-spacing .09rem
+          transition all 0.2s
+          cursor default
+          &:hover
+            border 2px solid $gray
+            color $gray
+
+
+      p
+        line-height 1.5em
+
+      h1
+        font-size 2.4rem
+        letter-spacing 0.05rem
+        // margin 60px 20px 30px 20px
+
+      code
+        background #f5f5f5
+        padding 4px
+
+      pre
+        code
+          font-family: $body
+          background-color $lightgray
+          overflow auto
+          display block
+          padding 20px
+          line-height 26px
+          margin 40px 0
+
+        textarea
+          width 100%
+          min-height 250px
+          border none
+          font-family inherit
+          font-size 14px
+          background #f5f5f5
+          padding 10px
+          outline none
+          resize none
+
+      p
+        img
+          max-width 650px
+          width 100%
+          border 10px solid $white
+          display block
+          margin 0 auto
+          box-sizing border-box
+
+      blockquote
+        text-transform uppercase
+        letter-spacing 0.05rem
+        border-left 4px solid #222627
+        padding 10px 25px
+        margin 40px 0
+        line-height 26px
+        color $black
+        font-style italic
+        font-weight 700
+
+      ul
+        margin 30px 0
+
+      .summary
+        position relative
+        border 1px solid $black
+        margin-top 50px
+        margin-bottom 40px
+        height 160px
+
+        figure, .info
+          display inline-table
+          vertical-align middle
+
+        figure
+          text-align center
+          border-right 1px solid $black
+          margin 0
+          height 160px
+          width 160px
+
+        .info
+          span
+            display inline-table
+
+        .comment_box
+          position absolute
+          right 0px
+          top 0px
+          border-left 1px solid $black
+          display inline-table
+          height 160px
+          width 160px
+          padding-top 60px
+          text-align center
+          box-sizing border-box
+
+        .user
+          .avatar
+            background-size cover
+            width 95px
+            height 95px
+            border-radius 99em
+            margin-top 20px
+
+        .created_at, .updated_at
+          margin 22px
+
+        .created_at:before
+          content "Date Created"
+          display block
+          font-family $caption
+          text-transform uppercase
+          font-size 0.8rem
+          letter-spacing 0.05rem
+          margin 10px
+
+        .updated_at:before
+          content "Date Updated"
+          display block
+          font-family $caption
+          text-transform uppercase
+          font-size 0.8rem
+          letter-spacing 0.05rem
+          margin 10px
+
+        a.comments_url
+          display block
+
+@media (max-width: 768px)
+  body
+    header
+      height 600px
+    #posts .post
+      .body
+        blockquote
+          margin 0
+      .summary
+        border none
+        margin-top 0px
+        margin-bottom 0px
+        height 50px
+        .info
+          width 100%
+          text-align center
+          margin-top 20px
+          span
+            margin 12px
+        .user, .comment_box, .reactions
+          display none

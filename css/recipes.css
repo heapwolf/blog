@@ -1,0 +1,124 @@
+body#recipes {
+  background: #f6f8f6;
+}
+
+.instagram {
+  width: 36px;
+  position: absolute;
+  top: 28px;
+  left: 364px;
+  cursor: pointer;
+}
+
+body#recipes article img {
+  width: 100%;
+  /* box-shadow: 10px 10px 0 #fff, -10px -10px 0 #fff, -10px 10px 0 #fff, 10px -10px 0 #fff; */
+  margin: 40px 0;
+  /* border: 4px solid; */
+  border: 1px solid #ececec;
+}
+
+body#recipes header input {
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid;
+  outline: none;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  font-family: code;
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  height: 34px;
+  text-transform: uppercase;
+}
+
+body#recipes header {
+  margin: 0;
+  background: white;
+  height: 90px;
+  border-bottom: 1px solid #ececec;
+}
+
+body#recipes header h1 {
+  margin-left: 30px;
+  line-height: 90px;
+  display: inline;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+    .instagram {
+      left: unset;
+      right: 20px;
+    }
+
+    body#recipes header {
+      line-height: 0;
+      padding: 50px 10%;
+      height: auto;
+    }
+
+    body#recipes header h1 {
+      line-height: 40px;
+      margin: 0;
+      margin-top: 30px;
+    }
+
+    body#recipes header input {
+      margin-top: 40px;
+      width: 100%;
+      position: relative;
+      top: initial;
+      left: 0;
+      transform: unset;
+      font-size: 24px;
+    }
+}
+
+body#recipes header input::placeholder {
+  color: #e0e0e0;
+  transition: font-size .2s ease;
+}
+
+body#recipes header input:focus::placeholder {
+  color: #e0e0e0;
+  font-size: 0px;
+}
+
+.recipe {
+  border: 4px solid;
+  font-family: code;
+  box-shadow: 10px 10px 0 #fff, -10px -10px 0 #fff, -10px 10px 0 #fff, 10px -10px 0 #fff;
+  background: #fff;
+  margin: 40px 0;
+}
+
+.recipe h2 {
+  margin: 0;
+  font-family: code;
+  border-bottom: 4px solid;
+  padding: 10px;
+}
+
+.recipe p {
+  padding: 10px;
+  margin: 0;
+}
+
+.recipe hr {
+  border: none;
+  border-bottom: 1px dashed;
+  margin: 10px;
+}
+
+.recipe ul {
+  padding: 0;
+  list-style: disc;
+  margin: 20px 60px;
+  display: inline-block;
+}

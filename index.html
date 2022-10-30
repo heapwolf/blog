@@ -1,0 +1,587 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/index.css"></link>
+    <link rel="stylesheet" href="css/clocks.css"></link>
+    <link rel="stylesheet" href="css/networks.css"></link>
+    <link rel="stylesheet" href="css/web3.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=no">
+
+    <meta name="description" content="Heapwolf Blog">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hx.ht/">
+    <meta property="og:site_name" content="Heapwolf">
+    <meta property="og:title" content="Heapwolf Blog">
+    <meta property="og:description" content="Distributed Systems, Programming, and Recipes">
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/136109">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@heapwolf">
+    <meta name="twitter:title" content="Distributed Systems, Programming, and Recipes">
+    <meta name="twitter:image" content="https://avatars2.githubusercontent.com/u/136109">
+  <body>
+
+    <header>
+      <h1>Heapwolf</h1>
+    </header>
+
+    <main>
+      <article>
+        <a id="is-web3-a-crypto-cult" href="#is-web3-a-crypto-cult" class="title">
+          <h2>Is web 3.0 here?</h2>
+        </a>
+        <time>2021-10-11</time>
+        <p>
+          Is bitcoin a ponzi-scheme? Are NFTs a <a href="https://twitter.com/smdiehl/status/1445795667826208770">star naming market</a>? Are
+          ledgers just slow databases? There is some contention among web
+          developers whether Web 3 is just marketing jargon or an <a href="https://future.a16z.com/why-web3-matters/">actual
+          inflection point</a>.
+        <p>
+        </p>
+          This essay examines the legitimacy of the Web 3.0 moniker though the
+          lens of my 20+ years experience as a computer science researcher,
+          software engineer, and startup founder.
+        </p>
+
+        <h3>Before the Web</h3>
+        <p>
+          Before the Web there were <a href="https://www.youtube.com/playlist?list=PLgE-9Sxs2IBVgJkY-1ZMj0tIFxsJ-vOkv">BBSes</a>. A BBS is just a computer running some
+          software that allows you to connect to it using a phone and a
+          <a href="https://en.wikipedia.org/wiki/Modem">modem</a>. In the 90's,
+          there were thousands of these. And a lot of the time a BBS was just a
+          computer in someone's home. You could find huge lists of BBSes, dial
+          into them, download files, chat with other users, they even had
+          federated messages like email.
+        </p>
+        <p>
+          I ran a BBS. I had a few modems, a few phone lines. Only one
+          connection per phone line was possible, so sometimes all the lines
+          would be busy, and you'd need to try calling later. At one point I
+          maxed out on the number of phone lines you're allowed to have in a
+          residential building. BBSes were the first platforms that focused on
+          hosting open source code. They were incredible hacker communities.
+        </p>
+        <p>
+          BBSes had clear limitations though. Notably concurrency. Also it
+          was text based, and users wanted graphical interfaces. There
+          was no concept of hyper-linking. And toward the end of the 90's,
+          The Web was emerging. OSes started shipping with a browser
+          pre-installed, and a shortcut on the desktop by default. It was easy.
+          You entered an address and saw a website. It was highly concurrent.
+          It was graphical. It appealed to a every day people as much as hackers.
+          The turning point was HTTPS, cryptography made it possible to do
+          business online. BBSes started to die.
+        </p>
+        <p>
+          The thing is... BBS users were extremely skeptical of the
+          Web &mdash; browsers were young. BBS software was mature.
+          BBSes had advanced, real-time mutli-user interactions!
+        </p>
+
+        <h3>The Information Super Highway</h3>
+        <p>
+          No one called the internet "Web 1.0". It had a lot of dumb nicknames.
+          Very few people were excited about it. And as more people learned
+          about it, they all described it differently, doubting it in different
+          ways.
+        </p>
+        <p>
+          I started Web development professionally in the late 90s. Working on a
+          computer as a job was the absolute opposite of being a rock-star. I
+          didn't always tell people what I did for a living. Using computers
+          still came with a social stigma.
+        </p>
+        <blockquote>
+          Everyone was thinking the Web was going to be similar to what we did
+          on paper, but on a screen &mdash; very boring and mostly for business.
+        </blockquote>
+        <p>
+          The early Web was objectively terrible. It was terrible because all
+          the processing happened on a server. Most people had poor internet
+          connections, so pages felt huge and slow. If you wanted to do some
+          kind of interaction, you had to request a completely new page from the
+          server, even if the smallest amount of data had changed. Also, at that
+          point, JavaScript was a niche thing that no one wanted to touch. You
+          had Flash. DOM APIs were slow. Memory leaks were a nightmare. It was
+          hard to debug and tooling was non-existent. But businesses were optimistic.
+        </p>
+        <p>
+          Toward the end of 2000 people we're going bananas about the Web. The <a href="https://en.wikipedia.org/wiki/Dot-com_bubble">Dot Com Bubble</a>
+          , about to burst, was rife with get-rich-quick schemes, vaporware,
+          monumental frauds, and mindless speculaors.
+        </p>
+
+        <h3>Web 2.0 &mdash; A literal breakthough</h3>
+
+        <p>
+          Then in 1999, Microsoft shipped <b><a href="https://en.wikipedia.org/wiki/XMLHttpRequest">XmlHttpRequest</a></b>.
+          And it was an incredible JavaScript API. Because you could fetch
+          small bits of new data in the background without the whole page
+          reloading!
+        </p>
+        <p>
+          The kinds of things people started building with xmlHttpRequest were
+          impressive for the time. For example, Google Maps and Gmail.
+
+          These Web pages were so different and the value they provided was so
+          dramatically improved, we needed a new way to classify them. The term
+          we used was "Web 2.0". For years skeptics warned Web 2.0
+          was just going to be a replay of the Dot Com Bubble. We were surrounded
+          by new scams &mdash; grifters love a catchy moniker. Web 2.0 projects were
+          just as over valuated as they were in the Dot Com Bubble. Over the next
+          5 or 6 years you heard about Web 2.0 everywhere. Recruiters wanted to
+          see it on your resume. It lost any and all meaning.
+        </p>
+        <p>
+          The take-away is, 1. There was a vital technical capability added,
+          and 2. equally as important &mdash; all browser makers followed suit.
+        </p>
+
+        <h3>The Web ate a lot of software</h3>
+
+        <p>
+          By 2010 Web development had much better tooling and JavaScript was
+          evolving. Computing was being distributed out toward the edge and
+          onto the client, and replacing a lot of traditional desktop software.
+        </p>
+
+        <blockquote>
+          The killer value proposition of the Web was how it distributed software.
+          You entered an address in a browser, and the most up to date software was loaded.
+          Your intellectual property could be hidden in the cloud, behind a service.
+        </blockquote>
+
+        <p>
+          We saw Ruby and Python introduce Web frameworks that made it easy for
+          developers to ramp up fast and ship things that users wanted.
+          <a href="https://www.wired.com/2013/03/github/">Github</a> made
+          sharing code as easy as Twitter made sharing ideas. Node.js came along
+          and popularized
+          <a href="https://en.wikipedia.org/wiki/Asynchronous_I/O">asynchronous I/O</a>.
+          I thought Node was so important, I even <a href="https://www.crunchbase.com/organization/nodejitsu">founded a PaaS</a> for it.
+        </p>
+
+        <p>
+          Something else remarkable about the early 10s was The NoSQL vs SQL
+          wars... this was a pretty famous battle. It made people's blood boil.
+          After some time though, people realized that this is just about
+          understanding trade-offs. These days it's easy to say that NoSQL is a
+          great choice when you have well-known access patterns and most people
+          won't murder you for saying it.
+        </p>
+
+        <p>
+          A lot of truly significant things have pushed the Web forward since
+          1999. Some very contentious technologies have come and gone, others
+          have found their place, and co-exist with what came before them. But
+          nothing emerged where we all agreed we should declare "Web 3.0".
+          We were still building client-server Web apps.
+        </p>
+
+        <h3>The Web started eating itself</h3>
+        <p>
+          Big companies are the majority contributors of money, time
+          and resources driving the Web forward. This can be a problem for
+          lots of reasons. Innovation for example...
+        </p>
+        <p>
+          Google wants the Web to be successful so their ad business can be
+          successful. But Google isn't incentivized to create the best Web, they're
+          incentivized to create the Web that is best for their ad-tech. Google
+          also maintains the incumbent browser with approximately 66% market
+          share. It's difficult to get market share with a browser. It's also
+          difficult to contribute to a browser, they're open source, but they're
+          among the most complex codebases in the world. Understandably,
+          maintainers want to make it hard to introduce bugs and vulnerabilities.
+          One does not casually open a Pull Request on Github for a significant
+          feature.
+        </p>
+        <p>
+          On the other end of the spectrum you have Apple. Apple's Safari has a
+          relatively large market share at approximately <a href="https://startuptalky.com/web-browsers-market-share/">16%</a>. Yet Apple is
+          incentivized to make its native platform successful, and they have
+          strong influence on Webkit's direction with <a href="https://198crowdfundingnews.com/2021/10/05/webkit-contributors-meeting-igalia-2021-2022-updates-and-plans/">76.9%</a> of commits
+          (as of 2021) and the largest number of reviewers. There are a number
+          of browsers with a sliver of the market share, they appeal to early
+          adopters, and they are happy to build-in experimental features.
+        </p>
+        <p>
+          Ultimately, the Web, innovation on it, and its potential as a
+          platform, is limited by the incumbent businesses and banks that
+          control it. So, where is this all heading?
+        </p>
+
+        <h3>Decentralization</h3>
+
+        <p>
+          Since the start of computing, there's been a series of small
+          revolutions that pressured us to design our systems in either a
+          centralized or <b><a href="https://en.wikipedia.org/wiki/Decentralization">decentralized</a></b>
+          way.
+        </p>
+
+        <div class="eras">
+          <div class="era web3-era-1 centralized">
+            <h4>60s-70s</h4>
+            <i>Mainframes</i>
+          </div>
+          <div class="era web3-era-2 decentralized">
+            <h4>80s</h4>
+            <i>The PC</i>
+          </div>
+          <div class="era web3-era-3 centralized">
+            <h4>90s</h4>
+            <i>Client-Server</i>
+          </div>
+          <div class="era web3-era-4 decentralized">
+            <h4>90s</h4>
+            <i>P2P</i>
+          </div>
+          <div class="era web3-era-5 centralized">
+            <h4>10s</h4>
+            <i>Streaming</i>
+          </div>
+          <div class="era web3-era-6 decentralized">
+            <h4>20s</h4>
+            <i>Edge</i>
+          </div>
+        </div>
+
+        <p>
+          First we had <b><a href="https://en.wikipedia.org/wiki/Mainframe_computer">Mainframes</a></b>. They filled entire rooms with vacuum tubes
+          and blinking lights. Entirely centralized for obvious reasons.
+          Then the <b><a href="https://en.wikipedia.org/wiki/History_of_personal_computers">Personal Computer</a></b>
+          happened, this was entirely decentralized.
+          Then came <b><a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model">Client-Server</a></b>
+          &mdash; services meant co-dependent consumers, also the cloud is
+          perfect at hiding IP, bad-code, and even worse behavior &mdash;
+          everything went back toward centralization.
+
+          Meanwhile, <b><a href="https://en.wikipedia.org/wiki/Peer-to-peer">p2p</a></b> networks were becoming
+          mainstream, <a href="https://en.wikipedia.org/wiki/Gnutella">Gnutella</a>, <a href="https://en.wikipedia.org/wiki/FastTrack">FastTrak</a>, and <a href="https://en.wikipedia.org/wiki/Napster">Napster</a> networks had tons of clients, they
+          were almost as easy to use as browsers.
+        </p>
+
+        <p>
+          <b>Streaming</b> services like Spotify and Nextflix were a hard swing
+          back toward centralization. Luminaries like
+          the <a href="https://en.wikipedia.org/wiki/Sean_Parker">founder of Napster</a>
+          (who later founded Spotify) realized how hard it was to capitalize on a
+          market where consumers expected everything for free. Improving the UX
+          made your average consumer happy. Centralizing and protecting the
+          content made copyright holders happy.
+        </p>
+
+        <p>
+          But here we are today, and we've been talking about the this thing called
+          the <b><a href="https://a16z.com/2016/12/16/the-end-of-cloud-computing/">edge</a></b>
+          for years. The edge just a term that describes all the compute and
+          storage that's outside the data-center.
+          It's growing at an insane pace. The edge has already utterly dwarfed
+          the compute power of the data-center. Not only that but all these
+          computers in your pocket, on your desk, <a href="https://www.statista.com/chart/8018/connected-car-data-generation/">in a car</a>, on the airplane,
+          etc. They are all generating more data, <a href="https://www.youtube.com/watch?v=Hhobq4fs87w">more quickly than ever before</a>.
+          Streaming, or makeing any kind of requests to and from a server for
+          computing makes very little sense in terms of cost and performance.
+        </p>
+
+        <blockquote>
+          Web 3.0, is ulitmately about (re)decentralization. It's about
+          addressing the back-pressure of data. And it's pushing us toward
+          designing hybrid systems that embrace p2p protocols.
+        </blockquote>
+
+        <p>
+          Companies are already doing this. A good example is Microsoft.
+          Think about how many Windows users there are, and how many Windows
+          updates there are. That's a lot of data. That's a lot of bandwidth.
+          Cumulativly it's a huge cost. So Windows 10 introduced a feature called
+          <b><a href="https://docs.microsoft.com/en-us/windows/deployment/update/waas-delivery-optimization">Delivery Optimization</a></b>,
+          where updates are downloaded peer-to-peer instead of downloading them
+          from Microsoft's servers.
+        </p>
+
+        <h3>Web 3.0 &mdash; Peer Pressure</h3>
+        <p>
+          In the past, p2p protocols were developed by enthusiasts, a tiny group
+          compared to the number of people working on protocols like http.
+          Unfortunately this was always a highly fragmented group. But over the
+          last 10 years services like Github and Gitlab have brought these people
+          together.
+          Conference-culture also <a href="https://dtn.is">helped</a>.
+          There's more people than ever working together in this space, and
+          now we're starting to see a large number
+          of high-quality solutions for problems like
+          <a href="https://en.wikipedia.org/wiki/Peer-to-peer#Routing_and_resource_discovery">Peer Discovery</a>
+          and <a href="https://en.wikipedia.org/wiki/Hole_punching_%28networking%29">Hole Punching</a>.
+          We're seeing developer friendly frameworks like <a href="https://github.com/libp2p">libp2p</a>,
+          <a href="https://github.com/hypercore-protocol">hypercore-protocol</a>,
+          and <a href="https://github.com/hyperswarm/hyperswarm">hyperswarm</a>.
+          We're even seeing a nice decentralized competitor to Github called
+          <a href="https://radicle.xyz/">Radicle</a>.
+        </p>
+
+        <p>
+          But Web 3.0 isn't just about p2p projects becoming viable, or easier
+          for the average developer to build with. There's potential for building
+          things differently, discovering new value, and escaping current flaws.
+          <a href="https://twitter.com/naval">Naval Ravikant</a> summerized his
+          thoughts rather nicely, ironically on Twitter.
+        </p>
+
+        <blockquote>
+          Web 2.0: Users are the data, corporations are the platform. The code is closed.
+          Web 3.0: Users own the data, contributors own the platform. The code is open.
+        </blockquote>
+
+        <p>
+          There are going to be things branded as Web 3.0 that we laugh at.
+          There are going to be a lot of platforms that claim their platform is
+          the base primitive for all things to be built on (these are the most
+          suspicious, I won't name names). There's going to be a ton of
+          vaporware. Loads of scams and get-rich-quick schemes. But <b>this is
+          how it's always been</b>.
+        </p>
+        <p>Fortunately, at it's core, Web 3.0 is a push to decentralize. To
+          incrementally embrace p2p architecture, to redistribute ownership and
+          execution. Web 3.0 offers us a chance to improve availabilty and
+          reduce costs. And with this, there's a lot to be cautiously optimistic
+          about.
+        </p>
+      </article>
+      <article>
+        <a id="cxx-modules" href="#cxx-modules" class="title">
+          <h2>C++20 Modules</h2>
+        </a>
+        <time>2021-04-29</time>
+        <p>
+          I started digging into <b>C++ 20 Modules</b>.
+          If you're not familar,
+          <a href="https://meetingcpp.com/mcpp/slides/2019/modules-the-beginners-guide-meetingcpp2019.pdf">here</a>
+          is a good introduction.
+          Compared to other languages like Rust, I found official references and examples sparse or <a href="https://en.cppreference.com/w/cpp/language/modules">incomplete</a>.
+          Microsoft has a <a href="https://docs.microsoft.com/en-us/cpp/cpp/modules-cpp?view=msvc-160">short intro</a>. I found these
+          <a href="https://vector-of-bool.github.io/2019/03/10/modules-1.html">Vector of Bool</a>
+          posts insightful, although the writer has seemed to receive C++ Modules with a <a href="https://vector-of-bool.github.io/2019/01/27/modules-doa.html">high degree of criticism</a>.
+          I find the <a href="https://clang.llvm.org/docs/Modules.html">Clang docs</a> unclear about a
+          number of important things. Things are slightly different with <a href="https://gcc.gnu.org/wiki/cxx-modules">GCC</a>.
+        <p>
+          First of all, with Clang 12, you need to opt-in to modules with <code>-fmodules</code>. I'm not sure why
+          <code>-Xclang -emit-module-interface</code> is a front-end option still. It seems obscure,
+          you can only find it from running <code>clang -cc1 --help</code>. But you need it because you're expected to
+          precompile the module (I made a gist that demonstrates the work flow). Then when you build the
+          file that imports the module, you need to specify where the prebuilt module is located.
+        <p>
+          It's awkward that the compiler wants to know the module names. Your compiled module's file name
+          must match the module name or you can provide a special flag that maps the module name to an arbitrary file
+          (ie <code>-fmodule-file=name=./file.pcm</code>).
+
+        <script src="https://gist.github.com/heapwolf/5a33659fd65c0bbe7bc43baa2c362b86.js"></script>
+
+        <p>
+        C++ Modules are literally an after-thought, and they have the <b>DX</b> of one. They get
+          a lot more complex than this, I will spare you the rather painful details. Honestly,
+          I'm not sure if they're going to appeal to anyone who's got a large C++ codebase.
+          But for new projects they seem to be an improvement.
+      </article>
+
+
+
+
+      <article>
+        <a id="falsifiability" href="#falsifiability" class="title">
+          <h2>Falsifiability</h2>
+        </a>
+        <time>2020-11-06</time>
+        <p>
+          In his 1934 book entited <b>Logik der Forschung</b>,
+          <a href="https://en.wikipedia.org/wiki/Karl_Popper">Karl Popper</a> argued for
+          <b>falsifiability</b> over verifiability.
+
+        <blockquote>
+          Verifying the claim "All swans are white" would require assessment of all swans,
+          which is not possible, the single observation of a black swan is sufficient to falsify it.
+          <cite>
+            Citation &mdash; <a href="https://en.wikipedia.org/wiki/Falsifiability#cite_note-blackswanimpossible-1">Falsifiability</a>
+          </cite>
+        </blockquote>
+      </article>
+
+      <article>
+        <a id="small-world-networks" href="#small-world-networks" class="title">
+          <h2>Small-world networks</h2>
+        </a>
+        <time>2020-05-31</time>
+        <p>
+          The <a href="http://worrydream.com/refs/Watts-CollectiveDynamicsOfSmallWorldNetworks.pdf">Watts-Strogatz</a> model of the <a href="https://en.wikipedia.org/wiki/Small-world_network">small-world network</a>
+          have a large <a href="https://en.wikipedia.org/wiki/Clustering_coefficient">clustering coefficient</a>
+          and paths from node a to b that are on average short.
+        <p>
+          This means the typical number of steps between two randomly chosen nodes grows
+          proportionally to the logarithm of the number of nodes in the network. The simplicity
+          of this approach makes it a nice starting point for decentralized search.
+        <p>
+        <blockquote>
+          "It is possible to prove that in the model of a d-dimensional lattice with uniformly
+          random shortcuts, no decentralized algorithm can find short paths [...]. Exploring
+          further, though, we find that a subtle variant of the Watts-Strogatz network
+          will in fact support efficient search: Rather than adding the long-range shortcuts
+          uniformly at random, we add links between nodes of this network with a probability that
+          decays like the dth power of their distance (in d dimensions)."
+          <cite>
+            Jon Kleinberg &mdash; <a href="http://mathaware.org/mam/04/essays/smallworld.pdf">The Small-World Phenomenon and Decentralized Search</a>
+          </cite>
+        </blockquote>
+        <p>
+        <!-- Pelechrinis explores the <a href="https://www.pitt.edu/~kpele/distributed_net_search.html#comments">uniformity of distribution</a>
+          in Kleinberg's model. But instead of geographic distribution, we should consider latency.
+        <p>
+          How many nodes in how many clusters need to be traversed to find a subset of randomly seeded nodes.
+          And do randomly connected clusters provide better than
+
+          Given <b id="replication-value">40</b>% replication across <b id="cluster-value">8</b> nodes in <b id="clusters-value">4</b> clusters with
+          an average connection latency of <b id="nv-latency">40</b>ms. A query may find a match in <b id="nv-time">62</b>ms.
+
+          <div class="grid" id="network-simulation">
+            <canvas id="networks-canvas" width="250px" height="250px"></canvas>
+            <div class="network-values">
+              <div>
+                <input type="range" min="1" max="16" value="4" id="clusters-control">
+                <label>Clusters</label>
+              </div>
+
+              <div>
+                <input type="range" min="2" max="128" value="8" id="cluster-control">
+                <label>Cluster Size</label>
+              </div>
+
+              <div>
+                <input type="range" min="0" max="101" value="5" id="connection-randomization">
+                <label>Randomization (%)</label>
+              </div>
+
+              <div>
+                <input type="range" min="0" max="101" value="0" id="node-failure">
+                <label>Node Failure (%)</label>
+              </div>
+
+              <div>
+                <input type="range" min="1" max="100" value="40" id="connection-latency">
+                <label>Avg. Latency (ms)</label>
+              </div>
+
+              <div>
+                <input type="range" min="1" max="100" value="20" id="replication-control">
+                <label>Replication (%)</label>
+              </div>
+            </div>
+          </div>
+        -->
+
+        <!-- https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.137.5675&rep=rep1&type=pdf -->
+        <!-- https://wwnorton.com/books/9780393325423 -->
+      </article>
+
+      <article>
+        <a id="a-blockchain-is-just-a-list" href="#a-blockchain-is-just-a-list" class="title">
+          <h2>A blockchain is just a data structure</h2>
+        </a>
+        <time>2020-05-30</time>
+        <p>
+          It has no moving parts. It's just a list of items. And each item has
+          some properties. The defining characteristics though, are that each
+          item has 1. a property that acts like a finger print, and 2. a property
+          that points to the item that came before it. A secure
+          <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">hash</a>
+          function creates the finger print using the item's properties as input.
+          A correct and complete blockchain can be implemented in fewer than 50 lines
+          of code.
+        <p>
+          A blockchain is most likely the least interesting part of any system that
+          is built with one. <b>Networking</b>, <b>consensus</b> and <b>replication</b>,
+          for example, are discrete and non-trivial problem domains that can form a
+          foundation for maing a blockchain useful.
+      </article>
+
+      <article>
+        <a id="cut-and-paste-cults" href="#cut-and-paste-cults" class="title">
+          <h2>Cut And Paste Cults</h2>
+        </a>
+        <time>2020-05-27</time>
+        <p>
+          The most remarkable feature of most frameworks is their ability to manage mediocre developers.
+      </article>
+
+      <article>
+        <a id="min" href="#min" class="title">
+          <h2>On Minimalism</h2>
+        </a>
+        <time>2020-05-01</time>
+        <p>
+          Constraints provide meaning.
+      </article>
+
+      <article>
+        <a id="min" href="#min" class="title">
+          <h2>Clocks</h2>
+        </a>
+        <time>2020-04-02</time>
+        <p>
+          Some papers on logical and vector clocks.
+        <div class="clock-timeline">
+          <a href="https://amturing.acm.org/p558-lamport.pdf" class="item">
+            <span class="title">Lamport Timestamp</span>
+            <span class="year">1978</span>
+          </a>
+          <a href="https://zoo.cs.yale.edu/classes/cs422/2013/bib/parker83detection.pdf" class="item">
+            <span class="title">Version Vector</span>
+            <span class="year">1983</span>
+          </a>
+          <a href="https://zoo.cs.yale.edu/classes/cs426/2012/lab/bib/fidge88timestamps.pdf" class="item">
+            <span class="title">Vector Clock</span>
+            <span class="year">1988</span>
+          </a>
+          <a href="https://www.researchgate.net/publication/221233664_Bounded_Version_Vectors" class="item">
+            <span class="title">Bound Version Vector</span>
+            <span class="year">2004</span>
+          </a>
+          <a href="http://gsd.di.uminho.pt/members/cbm/ps/itc2008.pdf" class="item">
+            <span class="title">Interval Tree Clock</span>
+            <span class="year">2008</span>
+          </a>
+          <a href="https://arxiv.org/pdf/1011.5808.pdf" class="item">
+            <span class="title">Dotted Version Vectors</span>
+            <span class="year">2010</span>
+          </a>
+        </div>
+      </article>
+
+      <article>
+        <a id="min" href="#min" class="title">
+          <h2>Lamport Timestamps</h2>
+        </a>
+        <time>2020-03-01</time>
+        <p>
+          Interactive logical timestamps.
+        <div id="lamport-timestamp">
+          <div id="timeline-node-a" class="timeline"></div>
+          <div id="timeline-node-b" class="timeline"></div>
+        </div>
+
+        <div id="node-event-links">
+          <a href="#" data-name="a">Fire node A</a>
+          <a href="#" data-name="b">Fire node B</a>
+        </div>
+      </article>
+
+    </main>
+    <footer>
+      <ul>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="https://github.com/heapwolf">Github</a></li>
+        <li><a href="https://twitter.com/heapwolf">Twitter</a></li>
+      </ul>
+    </footer>
+
+    <script src="js/timestamps.js"></script>
+    <script src="js/networks.js"></script>

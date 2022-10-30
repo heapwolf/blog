@@ -1,0 +1,18 @@
+#networks-canvas {
+  margin: auto;
+}
+
+#network-simulation {
+  margin: 40px 0;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+#network-simulation input[type="range"] {
+  vertical-align: sub;
+}
+
+
+#network-simulation .network-values {
+  display: grid;
+}

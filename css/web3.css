@@ -1,0 +1,118 @@
+.eras {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px;
+  gap: 10px;
+  margin: 50px auto;
+  justify-content: space-around;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.era {
+  border: 1px solid;
+  border-radius: 99em;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  padding-top: 34px;
+  position: relative;
+}
+
+.era:nth-child(1n) {
+  grid-row-start: 1;
+  grid-area: 1 / span 2;
+}
+
+.era:nth-child(2n) {
+  grid-row-start: 2;
+  grid-area: 2 / span 2;
+}
+
+.era.web3-era-2 { grid-column-start: 2; }
+.era.web3-era-4 { grid-column-start: 4; }
+.era.web3-era-6 { grid-column-start: 6; }
+
+.era.decentralized {
+  background: black;
+}
+
+.era.decentralized i, .era.decentralized h4 {
+  color: white;
+}
+
+.era.decentralized:before,
+.era.centralized:before {
+  content: ' ';
+  position: absolute;
+  width: 40px;
+  height: 1px;
+  border-top: 1px dashed;
+  bottom: 0;
+  right: 0;
+  transform: rotate(45deg) translate(30px, -20px);
+}
+
+.era.decentralized:before {
+  right: unset;
+  bottom: unset;
+  top: 0;
+  transform: rotate(-45deg) translate(34px, 24px)
+}
+
+.era.decentralized:last-of-type:before {
+  border: none;
+}
+
+.era h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 900;
+  font-family: 'h';
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+    .eras {
+      grid-template-columns: 100px 100px;
+      grid-template-rows: 100px 100px 100px 100px 100px;
+    }
+
+    .era:nth-child(1n) {
+      grid-row-start: unset;
+      grid-column-start: 1;
+    }
+
+    .era:nth-child(2n) {
+      grid-row-start: unset;
+      grid-column-start: 2;
+    }
+
+    .era.web3-era-2 { grid-row-start: 2; }
+    .era.web3-era-3 { grid-row-start: 3; }
+    .era.web3-era-4 { grid-row-start: 4; }
+    .era.web3-era-5 { grid-row-start: 5; }
+    .era.web3-era-6 { grid-row-start: 6; }
+
+    .era.decentralized:before,
+    .era.centralized:before {
+      content: ' ';
+      position: absolute;
+      width: 50px;
+      height: 1px;
+      bottom: 0;
+      right: 0;
+      transform: rotate(45deg) translate(40px, -35px);
+    }
+
+    .era.decentralized:before {
+      right: unset;
+      left: 0;
+      transform: rotate(-45deg) translate(-110px, 32px);
+    }
+}
